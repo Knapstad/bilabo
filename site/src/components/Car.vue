@@ -27,13 +27,11 @@ div {
   width: 100%;
   margin: auto;
 }
-.home {
-  width: 100%;
-}
 .column {
   float: right;
   width: 50%;
   margin: auto;
+  min-height: 160px;
 }
 img {
   width: 100%;

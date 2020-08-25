@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <div class="carcontainer">
-      <div v-for="(car, index) in Object.values(cars).flat()" :key="index">
-        <Car :car="car" />
+      <div class="car" v-for="(car, index) in Object.values(cars).flat()" :key="index">
+        <Car class :car="car" />
       </div>
     </div>
   </div>
@@ -35,17 +35,25 @@ export default {
 };
 </script>
 <style>
+.home {
+  /* align-items: center; */
+  /* margin: auto; */
+}
 .carcontainer {
   display: inline-grid;
   grid-template-columns: 30% 30% 30%;
   padding: 30px;
-  margin: 10px;
+  margin: auto;
+  /* align-: center; */
 }
 .car {
   /* background-color: rgba(255, 255, 255, 0.8); */
-  border: 1px solid;
+  /* border: 1px solid; */
   /* padding: 20px; */
   /* font-size: 30px; */
   /* text-align: center; */
+  box-shadow: 2px 2px 3px #000;
+  border-radius: 2px;
+  margin: 5px;
 }
 </style>
