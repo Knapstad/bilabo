@@ -8,7 +8,7 @@ class Swap:
 
     @classmethod
     def get_cars(cls, postalcode=None):
-        base = "https://swapcar.no"
+        base = "https://swapacar.no"
         api = "https://swapacar.no/start"
         response = requests.get(f"{api}")
         tries = 0
@@ -24,6 +24,7 @@ class Swap:
             details = car.find("div", {"class": "fcar-sdesc"}).text.split("|")
             available.append(
                 {
+                    "site": "swap",
                     "name": car.find("div", {"class": "fcar-title"}).text,
                     "make": car.find("div", {"class": "fcar-title"}).text.split()[0],
                     "model": " ".join(
