@@ -31,6 +31,7 @@ class Fleks:
         for car in cars["data"]:
             cleanCars.append(
                 {
+                    "site": "fleks",
                     "name": car["attributes"]["modelDescription"],
                     "make": car["attributes"]["make"],
                     "model": car["attributes"]["model"],
@@ -38,7 +39,7 @@ class Fleks:
                     "year": car["attributes"]["year"],
                     "seats": car["attributes"]["seats"],
                     "transmission": car["attributes"]["transmission"],
-                    "price": car["attributes"]["transmission"],
+                    "price": car["attributes"]["price"],
                     "range": car["attributes"]["range"],
                     "location": ["Oslo"],
                     "availability": car["attributes"]["availabilityStatus"],
