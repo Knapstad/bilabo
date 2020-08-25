@@ -37,6 +37,7 @@ class Swap:
                     "availability": "Available",
                     "order": f'{base}{car.find("div", {"class": "fcar-btn"}).a["href"]}',
                     "img": car.find("img")["src"],
+                    "cargoVolume": "",
                 }
             )
         return (available, None)
