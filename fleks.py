@@ -11,7 +11,7 @@ class Fleks:
         api = "https://api.fleks.no/vehicletypes"
         response = requests.get(f"{api}")
         tries = 0
-        while "20" not in response:
+        while "20" not in str(response.status_code):
             response = requests.get(f"{api}", timeout=(2, 60))
             tries += 1
             if tries > 3:
@@ -27,9 +27,9 @@ class Fleks:
             else:
                 price = str(price)[1] + str(price)[2:-1]
             car["attributes"]["price"] = price
-        cleancars = []
+        cleanCars = []
         for car in cars["data"]:
-            cleancars.append(
+            cleanCars.append(
                 {
                     "name": car["attributes"]["modelDescription"],
                     "make": car["attributes"]["make"],
@@ -39,24 +39,15 @@ class Fleks:
                     "seats": car["attributes"]["seats"],
                     "transmission": car["attributes"]["transmission"],
                     "price": car["attributes"]["transmission"],
-                    "distance": car["attributes"]["range"],
-                    "location": "Oslo",
+                    "range": car["attributes"]["range"],
+                    "location": ["Oslo"],
                     "availability": car["attributes"]["availabilityStatus"],
                     "order": f"{base}{car['attributes']['slug']}",
                     "img": car["attributes"]["imageUrl"],
-                    "cargoVolume": car["attributes"]["cagoVolume"],
+                    "cargoVolume": car["attributes"]["cargoVolume"],
                 }
             )
 
-        available = [
-            car["attributes"]
-            for car in cars["data"]
-            if car["attributes"]["availabilityStatus"] == "available"
-        ]
-        unavailable = [
-            car["attributes"]
-            for car in cars["data"]
-            if car["attributes"]["availabilityStatus"] != "available"
-        ]
+        available = [car for car in cleanCars if car["availability"] == "available"]
+        unavailable = [car for car in cleanCars if car["availability"] != "available"]
         return (available, unavailable)
-
