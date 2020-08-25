@@ -39,7 +39,7 @@ class Fleks:
                     "year": car["attributes"]["year"],
                     "seats": car["attributes"]["seats"],
                     "transmission": car["attributes"]["transmission"],
-                    "price": car["attributes"]["price"],
+                    "price": car["attributes"]["transmission"],
                     "range": car["attributes"]["range"],
                     "location": ["Oslo"],
                     "availability": car["attributes"]["availabilityStatus"],
