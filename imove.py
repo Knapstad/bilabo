@@ -1,5 +1,4 @@
 import requests
-from Bot import Bot
 from bs4 import BeautifulSoup as BS
 import json
 
@@ -30,6 +29,7 @@ class Imove:
         for car in cars:
             cleanCars.append(
                 {
+                    "site": "imove",
                     "name": f"{car['make']} {car['model']}",
                     "make": car["make"],
                     "model": car["model"],
