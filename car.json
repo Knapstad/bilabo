@@ -7,9 +7,10 @@
   "seats": int,
   "transmission": str,
   "price": int,
-  "distance": str,
-  "location": str,
+  "range": str,
+  "location": [str],
   "availability": str,
   "order": str,
-  "img": str
+  "img": str,
+  "cargoVolume": int
 }
