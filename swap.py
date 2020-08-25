@@ -12,7 +12,7 @@ class Swap:
         api = "https://swapacar.no/start"
         response = requests.get(f"{api}")
         tries = 0
-        while "20" not in response:
+        while "20" not in str(response.status_code):
             response = requests.get(f"{api}", timeout=(2, 60))
             tries += 1
             if tries > 3:
@@ -26,19 +26,21 @@ class Swap:
                 {
                     "name": car.find("div", {"class": "fcar-title"}).text,
                     "make": car.find("div", {"class": "fcar-title"}).text.split()[0],
-                    "model": car.find("div", {"class": "fcar-title"}).text.split()[1:],
+                    "model": " ".join(
+                        car.find("div", {"class": "fcar-title"}).text.split()[1:]
+                    ),
                     "drive": details[2],
                     "year": details[0],
                     "seats": details[1],
                     "transmission": details[3],
                     "price": car.__dict__["attrs"]["data-price"],
-                    "distance": details[-1],
-                    "location": "Oslo",
+                    "range": details[-1],
+                    "location": ["Oslo"],
                     "availability": "Available",
                     "order": f'{base}{car.find("div", {"class": "fcar-btn"}).a["href"]}',
                     "img": car.find("img")["src"],
                     "cargoVolume": "",
                 }
             )
-        return (available, None)
+        return (available,)
 
