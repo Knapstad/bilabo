@@ -1,11 +1,7 @@
 <template>
   <div class="home">
     <div class="carcontainer">
-      <div
-        class="car"
-        v-for="(car, index) in Object.values(cars).flat()"
-        :key="index"
-      >
+      <div class="car" v-for="(car, index) in flatCars.sort(compare)" :key="index">
         <Car class :car="car" />
       </div>
     </div>
@@ -13,7 +9,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import Car from '@/components/Car.vue';
 import cars from '../../../mycars.json';
 
@@ -27,7 +22,6 @@ export default {
       cars,
     };
   },
-  computed: {},
   metaInfo: {
     title: 'Bilabonnemet - Bilabonnement samlet på en side',
     meta: [
@@ -39,6 +33,24 @@ export default {
       },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     ],
+  },
+  methods: {
+    compare: function(a, b) {
+      const carA = a.price;
+      const carB = b.price;
+      if (carA < carB) {
+        return -1;
+      }
+      if (carA > carB) {
+        return 1;
+      }
+      return 0;
+    },
+  },
+  computed: {
+    flatCars: function() {
+      return Object.values(this.cars).flat();
+    },
   },
 };
 </script>
