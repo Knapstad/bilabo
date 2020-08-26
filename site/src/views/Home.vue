@@ -23,15 +23,7 @@ export default {
       cars
     };
   },
-  computed: {
-    flatcars: function() {
-      var flatcars = [];
-      for (const value in Object.entries(cars)) {
-        flatcars.push(value);
-      }
-      return flatcars;
-    }
-  }
+  computed: {}
 };
 </script>
 <style>
