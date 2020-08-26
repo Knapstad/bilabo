@@ -14,7 +14,7 @@
 
 <script>
 import Car from '@/components/Car.vue';
-import cars from '../../../mycars.json';
+import cars from '../../../cloudFuctions/mycars.json';
 
 export default {
   name: 'Home',
