@@ -1,24 +1,24 @@
 <template>
   <div class="wrap">
+    <h3>{{ car.name }}</h3>
     <div class="hello">
       <div class="column">
-        <h3>{{ car.name }}</h3>
         <!-- <p>{{ car.site }}</p> -->
         <p>Pris: {{ car.price }}</p>
         <p>km: {{ car.range }}</p>
       </div>
       <div class="column">
         <svg
-          v-if="car.site==='imove'"
+          v-if="car.site === 'imove'"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
           version="1.1"
           id="Capa_1"
           x="0px"
           y="0px"
-          width="98%"
+          width=""
           height="auto"
-          viewBox="0 0 98.967 98.967"
+          viewBox="0 10 100 65"
           style="enable-background:new 0 0 98.967 98.967;"
           xml:space="preserve"
         >
@@ -51,7 +51,7 @@
           <g />
           <g />
         </svg>
-        <img v-else :src="car.img.replace(' ','-')" />
+        <img v-else :src="car.img.replace(' ', '-')" />
       </div>
     </div>
     <a :href="car.order" target="_blank" class="button">
@@ -62,11 +62,11 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: 'HelloWorld',
   props: {
     car: Object,
-    site: String
-  }
+    site: String,
+  },
 };
 </script>
 
@@ -80,10 +80,11 @@ export default {
 .column {
   flex: 50%;
   margin: auto;
-  /* height: 100%; */
 }
 h3 {
   padding-left: 7px;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 p {
   padding-left: 7px;
@@ -93,8 +94,8 @@ button {
   width: 100%;
   border: 0;
   height: 30px;
-}
-a.button {
+  color: white;
+  background: var(--main-medium-dark);
 }
 img {
   width: 100%;
@@ -104,6 +105,7 @@ img {
 svg {
   width: 98%;
   padding-top: 3px;
+  fill: var(--main-medium-dark);
 }
 .wrap {
   display: flex;
