@@ -37,13 +37,14 @@ class Imove:
                     "year": car["year"],
                     "seats": car["numberOfSeats"],
                     "transmission": "",
-                    "price": car["pricePerMonth"],
+                    "price": int(car["pricePerMonth"]),
                     "range": car["range"],
+                    "kmMonth": "",
                     "location": [
                         district["description"] for district in car["districts"]
                     ],
                     "availability": "available" if car["isReserved"] else "unavailable",
-                    "order": f'{base}{car["id"]}',
+                    "order": f'{base}/{car["id"]}',
                     "img": f'{base}{car["images"][0]["url"]}' if car["images"] else "",
                     "cargoVolume": car["trunkCapacityInLiters"],
                 }
