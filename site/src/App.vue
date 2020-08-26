@@ -20,11 +20,12 @@ body,
 html,
 #app {
   background: var(--main-light);
-  font-family: consolas, "Franklin Gothic Medium", Arial, sans-serif;
+  font-family: consolas, 'Franklin Gothic Medium', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   height: auto;
+  overflow-x: hidden;
 }
 
 h1 {
