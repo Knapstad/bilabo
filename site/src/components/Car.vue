@@ -71,6 +71,7 @@ export default {
 </script>
 
 <style scoped>
+
 .hello {
   flex: 90%;
   display: flex;

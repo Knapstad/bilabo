@@ -56,4 +56,14 @@ export default {
   margin: 5px;
   position: relative;
 }
+@media only screen and (max-width: 900px) {
+  .carcontainer {
+    grid-template-columns: 45% 45%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .carcontainer {
+    grid-template-columns: 90%;
+  }
+}
 </style>
