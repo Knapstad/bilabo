@@ -35,7 +35,10 @@ export default {
         content:
           'En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste',
       },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1, min-scale=1',
+      },
     ],
   },
   methods: {
