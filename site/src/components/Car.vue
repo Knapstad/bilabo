@@ -5,7 +5,7 @@
       <div class="column">
         <!-- <p>{{ car.site }}</p> -->
         <p>Pris: {{ car.price }}</p>
-        <p>km: {{ car.range }}</p>
+        <p>{{ car.drive }}</p>
       </div>
       <div class="column">
         <svg
@@ -16,8 +16,8 @@
           id="Capa_1"
           x="0px"
           y="0px"
-          width=""
-          height="auto"
+          width="100%"
+          height="100%"
           viewBox="0 10 100 65"
           style="enable-background:new 0 0 98.967 98.967;"
           xml:space="preserve"
@@ -62,16 +62,15 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
     car: Object,
-    site: String,
-  },
+    site: String
+  }
 };
 </script>
 
 <style scoped>
-
 .hello {
   flex: 90%;
   display: flex;
