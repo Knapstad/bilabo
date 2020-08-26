@@ -1,7 +1,11 @@
 <template>
   <div class="home">
     <div class="carcontainer">
-      <div class="car" v-for="(car, index) in flatCars.sort(compare)" :key="index">
+      <div
+        class="car"
+        v-for="(car, index) in flatCars.sort(this.compare)"
+        :key="index"
+      >
         <Car class :car="car" />
       </div>
     </div>
@@ -36,8 +40,8 @@ export default {
   },
   methods: {
     compare: function(a, b) {
-      const carA = a.price;
-      const carB = b.price;
+      const carA = parseInt(a.price);
+      const carB = parseInt(b.price);
       if (carA < carB) {
         return -1;
       }
