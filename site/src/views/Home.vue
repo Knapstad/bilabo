@@ -36,24 +36,20 @@ export default {
 </script>
 <style>
 .home {
-  /* align-items: center; */
-  /* margin: auto; */
+  justify-items: center;
 }
 .carcontainer {
+  margin-left: auto;
   display: inline-grid;
   grid-template-columns: 30% 30% 30%;
   padding: 30px;
-  margin: auto;
-  /* align-: center; */
 }
 .car {
-  /* background-color: rgba(255, 255, 255, 0.8); */
-  /* border: 1px solid; */
-  /* padding: 20px; */
-  /* font-size: 30px; */
-  /* text-align: center; */
+  min-height: 160px;
   box-shadow: 2px 2px 3px #000;
   border-radius: 2px;
   margin: 5px;
+  position: relative;
+  /* display: block; */
 }
 </style>
