@@ -62,11 +62,11 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: 'Car',
   props: {
     car: Object,
-    site: String
-  }
+    site: String,
+  },
 };
 </script>
 
