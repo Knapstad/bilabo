@@ -31,7 +31,7 @@ export default {
     };
   },
   metaInfo: {
-    title: 'Bilabonnemet - Bilabonnement samlet på en side',
+    title: 'Bilabonnement.app | Bilabonnement samlet på en side',
     meta: [
       { charset: 'utf-8' },
       {
