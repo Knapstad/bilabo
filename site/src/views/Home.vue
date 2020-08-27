@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <div class="carcontainer">
+      <div v-if="loading">Loading...</div>
       <div
+        v-else
         class="car"
         v-for="(car, index) in flatCars.sort(this.compare)"
         :key="index"
@@ -14,7 +16,8 @@
 
 <script>
 import Car from '@/components/Car.vue';
-import cars from '../../../cloudFuctions/mycars.json';
+// import cars from '../../../cloudFuctions/mycars.json';
+import axios from 'axios';
 
 export default {
   name: 'Home',
@@ -23,7 +26,8 @@ export default {
   },
   data() {
     return {
-      cars,
+      cars: null,
+      loading: true,
     };
   },
   metaInfo: {
@@ -56,8 +60,15 @@ export default {
   },
   computed: {
     flatCars: function() {
-      return Object.values(this.cars).flat();
+      console.log(this.cars['data']);
+      return Object.values(this.cars['data']).flat();
     },
+  },
+  mounted() {
+    axios
+      .get('https://europe-west1-bilabo.cloudfunctions.net/give_car')
+      .then((response) => (this.cars = response))
+      .finally(() => (this.loading = false));
   },
 };
 </script>
