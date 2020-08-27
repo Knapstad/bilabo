@@ -30,6 +30,12 @@ class Fleks:
                     price = str(price)[1] + str(price)[2:-1]
                 car["attributes"]["price"] = price
             cleanCars = []
+            translation = {
+                "el": "Elektrisk",
+                "petrol": "Bensin",
+                "diesel": "Diesel",
+                "petrol-hybrid": "Hybrid",
+            }
             for car in cars["data"]:
                 cleanCars.append(
                     {
@@ -37,7 +43,7 @@ class Fleks:
                         "name": car["attributes"]["modelDescription"],
                         "make": car["attributes"]["make"],
                         "model": car["attributes"]["model"],
-                        "drive": car["attributes"]["transmission"],
+                        "drive": translation[car["attributes"]["fuelType"]],
                         "year": car["attributes"]["year"],
                         "seats": car["attributes"]["seats"],
                         "transmission": car["attributes"]["transmission"],
