@@ -60,7 +60,6 @@ export default {
   },
   computed: {
     flatCars: function() {
-      console.log(this.cars['data']);
       return Object.values(this.cars['data']).flat();
     },
   },
