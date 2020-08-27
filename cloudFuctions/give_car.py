@@ -52,7 +52,7 @@ def load_tekst(client):
     return json.loads(tekst)
 
 
-def main(*args, **kwargs):
+def main(request, *args, **kwargs):
 
     SCOPES = ["https://www.googleapis.com/auth/devstorage.read_write"]
     CREDENTIALS = service_account.Credentials.from_service_account_file(
@@ -62,8 +62,15 @@ def main(*args, **kwargs):
     BUCKET_NAME = config.bucket_name
     client = storage.Client(project=config.bucket_name, credentials=CREDENTIALS)
     mycars = load_tekst(client)
-    return mycars
-
-
-if __name__ == "__main__":
-    pass
+    allowed_domains= ["http://localhost:8080","https://bilabonnement.app", "https://bilabo.app"]
+    if request.environ['HTTP_ORIGIN']  in allowed_domains:
+        origin = request.environ['HTTP_ORIGIN']
+    else:
+        origin = "https://bilabonnement.app"
+        
+    headers = {
+            'Access-Control-Allow-Origin': f'{origin}',
+            'Access-Control-Allow-Methods': 'GET',
+            'Access-Control-Max-Age': '3600',
+        }
+    return (json.dumps(mycars), 200, headers)
