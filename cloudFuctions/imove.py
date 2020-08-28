@@ -107,7 +107,7 @@ class Imove:
                         "name": f"{car['make']} {car['model']}",
                         "make": car["make"],
                         "model": car["model"],
-                        "drive": "Elekrtisk"
+                        "drive": "Elektrisk"
                         if car["fuelType"] == "el"
                         else car["fuelType"],
                         "year": car["year"],
