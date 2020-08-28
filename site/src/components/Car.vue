@@ -123,7 +123,6 @@ svg {
 }
 
 .location {
-  flex: 50%;
   display: inline;
   padding: 4px;
   padding-top: 0px;
