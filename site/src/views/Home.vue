@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Filters />
     <div class="carcontainer">
       <div v-if="loading">Loading...</div>
       <div v-else class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
@@ -11,13 +12,15 @@
 
 <script>
 import Car from "@/components/Car.vue";
+import Filters from "@/components/Filters.vue";
 // import cars from '../../../cloudFuctions/mycars.json';
 import axios from "axios";
 
 export default {
   name: "Home",
   components: {
-    Car
+    Car,
+    Filters,
   },
   data() {
     return {
