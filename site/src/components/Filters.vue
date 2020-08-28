@@ -26,5 +26,6 @@ export default {
 <style scoped>
 .filter-wrap {
   display: flex;
+  justify-content: center;
 }
 </style>
