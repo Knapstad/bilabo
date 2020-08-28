@@ -6,6 +6,12 @@
         <!-- <p>{{ car.site }}</p> -->
         <p>Pris: {{ car.price }}</p>
         <p>{{ car.drive }}</p>
+        <div class="label">
+          Sted:
+          <div class="location-container">
+            <div class="location" v-for="location in car.location" :key="location">{{ location }}</div>
+          </div>
+        </div>
       </div>
       <div class="column">
         <svg
@@ -62,11 +68,11 @@
 
 <script>
 export default {
-  name: 'Car',
+  name: "Car",
   props: {
     car: Object,
-    site: String,
-  },
+    site: String
+  }
 };
 </script>
 
@@ -79,15 +85,16 @@ export default {
 }
 .column {
   flex: 50%;
+  max-width: 50%;
   margin: auto;
 }
 h3 {
-  padding-left: 7px;
+  padding-left: 5%;
   padding-bottom: 0;
   margin-bottom: 0;
 }
 p {
-  padding-left: 7px;
+  padding-left: 10%;
 }
 button {
   appearance: none;
@@ -96,6 +103,7 @@ button {
   height: 30px;
   color: white;
   background: var(--main-medium-dark);
+  margin-top: 5px;
 }
 img {
   width: 100%;
@@ -107,9 +115,26 @@ svg {
   padding-top: 3px;
   fill: var(--main-medium-dark);
 }
+
 .wrap {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.location {
+  flex: 50%;
+  display: inline;
+  padding: 4px;
+  padding-top: 0px;
+  /* margin-bottom: 4px; */
+}
+.label {
+  padding-left: 10%;
+  display: flex;
+}
+.location-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>
