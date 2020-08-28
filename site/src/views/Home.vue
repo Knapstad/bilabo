@@ -20,7 +20,7 @@ export default {
   name: "Home",
   components: {
     Car,
-    Filters,
+    Filters
   },
   data() {
     return {
@@ -58,7 +58,15 @@ export default {
   },
   computed: {
     flatCars: function() {
-      return Object.values(this.cars["data"]).flat();
+      let cars = Object.values(this.cars["data"]).flat();
+      let locs = this.$store.state.locations;
+      if (locs.length == 0) {
+        return cars;
+      }
+      const result = cars.filter(car =>
+        car.location.some(location => locs.includes(location))
+      );
+      return result;
     }
   },
   mounted() {
