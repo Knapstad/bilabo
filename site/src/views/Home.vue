@@ -2,7 +2,18 @@
   <div class="home">
     <Filters />
     <div class="carcontainer">
-      <div v-if="loading">Loading...</div>
+      <div v-if="loading" class="loading">
+        <div class="loading__letter">L</div>
+        <div class="loading__letter">o</div>
+        <div class="loading__letter">a</div>
+        <div class="loading__letter">d</div>
+        <div class="loading__letter">i</div>
+        <div class="loading__letter">n</div>
+        <div class="loading__letter">g</div>
+        <div class="loading__letter">.</div>
+        <div class="loading__letter">.</div>
+        <div class="loading__letter">.</div>
+      </div>
       <div v-else class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
         <Car class :car="car" />
       </div>
@@ -13,7 +24,6 @@
 <script>
 import Car from "@/components/Car.vue";
 import Filters from "@/components/Filters.vue";
-// import cars from '../../../cloudFuctions/mycars.json';
 import axios from "axios";
 
 export default {
@@ -83,6 +93,7 @@ export default {
   display: inline-grid;
   grid-template-columns: 23% 23% 23% 23%;
   padding: 30px;
+  width: 100%;
 }
 .car {
   background: white;
@@ -104,6 +115,75 @@ export default {
 @media only screen and (max-width: 600px) {
   .carcontainer {
     grid-template-columns: 90%;
+  }
+}
+
+.loading {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  grid-column: 2;
+  margin-top: 30px;
+}
+.loading__letter {
+  font-size: 88px;
+  font-weight: normal;
+  letter-spacing: 4px;
+  animation-name: bounce;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.loading__letter:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.loading__letter:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.loading__letter:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.loading__letter:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.loading__letter:nth-child(6) {
+  animation-delay: 0.5s;
+}
+.loading__letter:nth-child(7) {
+  animation-delay: 0.6s;
+}
+.loading__letter:nth-child(8) {
+  animation-delay: 0.8s;
+}
+.loading__letter:nth-child(9) {
+  animation-delay: 1s;
+}
+.loading__letter:nth-child(10) {
+  animation-delay: 1.2s;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0px);
+  }
+  40% {
+    transform: translateY(-40px);
+  }
+  80%,
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@media (max-width: 700px) {
+  .loading__letter {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 340px) {
+  .loading__letter {
+    font-size: 40px;
   }
 }
 </style>
