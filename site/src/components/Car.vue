@@ -61,7 +61,7 @@
       </div>
     </div>
     <a :href="car.order" target="_blank" class="button">
-      <button>BESTILL</button>
+      <button disabled>BESTILL</button>
     </a>
   </div>
 </template>
