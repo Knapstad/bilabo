@@ -104,6 +104,7 @@ button {
   color: white;
   background: var(--main-medium-dark);
   margin-top: 5px;
+  cursor: pointer;
 }
 img {
   width: 100%;
