@@ -36,6 +36,7 @@ export default {
   padding: 5px;
   margin: 5px;
   box-shadow: 2px 2px 3px #000;
+  cursor: pointer;
 }
 .active {
   background: var(--main-medium-light);
