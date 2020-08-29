@@ -1,6 +1,6 @@
 <template>
   <div class="filter-wrap">
-    Sted:
+    <div class="label">Sted:</div>
     <div v-for="item in items" :key="item">
       <FilterItem :item="item" />
     </div>
@@ -27,5 +27,10 @@ export default {
 .filter-wrap {
   display: flex;
   justify-content: center;
+  padding-top: 50px;
+}
+.label {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 </style>
