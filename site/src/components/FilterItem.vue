@@ -35,11 +35,13 @@ export default {
   color: white;
   padding: 5px;
   margin: 5px;
+  box-shadow: 2px 2px 3px #000;
 }
 .active {
   background: var(--main-medium-light);
   color: black;
   padding: 5px;
   margin: 5px;
+  box-shadow: inset 2px 2px 3px #000;
 }
 </style>
