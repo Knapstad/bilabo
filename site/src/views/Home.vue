@@ -1,20 +1,20 @@
 <template>
   <div class="home">
     <Filters />
-    <div class="carcontainer">
-      <div v-if="loading" class="loading">
-        <div class="loading__letter">L</div>
-        <div class="loading__letter">o</div>
-        <div class="loading__letter">a</div>
-        <div class="loading__letter">d</div>
-        <div class="loading__letter">i</div>
-        <div class="loading__letter">n</div>
-        <div class="loading__letter">g</div>
-        <div class="loading__letter">.</div>
-        <div class="loading__letter">.</div>
-        <div class="loading__letter">.</div>
-      </div>
-      <div v-else class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
+    <div v-if="loading" class="loading">
+      <div class="loading__letter">L</div>
+      <div class="loading__letter">o</div>
+      <div class="loading__letter">a</div>
+      <div class="loading__letter">d</div>
+      <div class="loading__letter">i</div>
+      <div class="loading__letter">n</div>
+      <div class="loading__letter">g</div>
+      <div class="loading__letter">.</div>
+      <div class="loading__letter">.</div>
+      <div class="loading__letter">.</div>
+    </div>
+    <div v-else class="carcontainer">
+      <div class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
         <Car class :car="car" />
       </div>
     </div>
@@ -115,14 +115,15 @@ export default {
 @media only screen and (max-width: 600px) {
   .carcontainer {
     grid-template-columns: 90%;
+    padding: 0;
   }
 }
 
 .loading {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   margin: auto;
-  grid-column: 2;
   margin-top: 30px;
 }
 .loading__letter {
