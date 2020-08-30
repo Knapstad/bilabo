@@ -1,5 +1,1 @@
-module.exports = {
-  pwa: {
-    name: "Knapstad"
-  }
-};
+module.exports = {};
