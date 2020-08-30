@@ -71,8 +71,8 @@ export default {
   name: "Car",
   props: {
     car: Object,
-    site: String
-  }
+    site: String,
+  },
 };
 </script>
 
