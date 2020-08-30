@@ -36,7 +36,7 @@ export default {
     return {
       cars: null,
       loading: true,
-      logo: ROOT_PATH + require('../assets/site.jpg')
+      logo: "https://bilabonnement.app" + require('../assets/site.jpg')
     };
   },
   metaInfo: {
