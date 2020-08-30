@@ -60,8 +60,8 @@
         <img v-else :src="car.img.replace(' ', '-')" />
       </div>
     </div>
-    <a :href="car.order" target="_blank" class="button">
-      <button disabled>BESTILL</button>
+    <a :href="car.order" target="_blank">
+      <div class="button">BESTILL</div>
     </a>
   </div>
 </template>
@@ -96,15 +96,19 @@ h3 {
 p {
   padding-left: 10%;
 }
-button {
-  appearance: none;
+a {
+  text-decoration: none;
+}
+.button {
+  text-align: center;
   width: 100%;
   border: 0;
+  line-height: 30px;
   height: 30px;
   color: white;
   background: var(--main-medium-dark);
   margin-top: 5px;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 img {
   width: 100%;
