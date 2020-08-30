@@ -35,7 +35,8 @@ export default {
   data() {
     return {
       cars: null,
-      loading: true
+      loading: true,
+      logo: ROOT_PATH + require('./assets/site.jpg')
     };
   },
   metaInfo: {
@@ -45,12 +46,23 @@ export default {
       {
         name: "description",
         content:
-          "En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste"
+          "En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen"
       },
       {
         name: "viewport",
         content: "width=device-width, initial-scale=1, min-scale=1"
       }
+      {name: 'twitter:card', content: 'summary'},
+      {name: 'twitter:title', content: 'Bilabonnement.app | Bilabonnement samlet på en side"'},
+      {name: 'twitter:description', content: 'En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen'},
+      // image must be an absolute path
+      {name: 'twitter:image', content: this.logo},
+      // Facebook OpenGraph
+      {property: 'og:title', content: 'Bilabonnement.app | Bilabonnement samlet på en side"'},
+      {property: 'og:site_name', content: 'Bilabonnement.app x"'},
+      {property: 'og:type', content: 'website'},
+      {property: 'og:image', content:  this.logo},
+      {property: 'og:description', content: 'En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen'}
     ]
   },
   methods: {
