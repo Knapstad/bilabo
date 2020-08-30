@@ -36,7 +36,7 @@ export default {
     return {
       cars: null,
       loading: true,
-      logo: "https://bilabonnement.app" + require('../assets/site.jpg')
+      // logo: "https://bilabonnement.app" + require('../assets/site.jpg')
     };
   },
   metaInfo: {
@@ -56,12 +56,12 @@ export default {
       {name: 'twitter:title', content: 'Bilabonnement.app | Bilabonnement samlet på en side"'},
       {name: 'twitter:description', content: 'En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen'},
       // image must be an absolute path
-      {name: 'twitter:image', content: this.logo},
+      // {name: 'twitter:image', content: this.logo},
       // Facebook OpenGraph
       {property: 'og:title', content: 'Bilabonnement.app | Bilabonnement samlet på en side"'},
       {property: 'og:site_name', content: 'Bilabonnement.app x"'},
       {property: 'og:type', content: 'website'},
-      {property: 'og:image', content:  this.logo},
+      // {property: 'og:image', content:  this.logo},
       {property: 'og:description', content: 'En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen'}
     ]
   },
