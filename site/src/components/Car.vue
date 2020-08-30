@@ -100,6 +100,7 @@ a {
   text-decoration: none;
 }
 .button {
+  text-decoration: none;
   text-align: center;
   width: 100%;
   border: 0;
