@@ -62,15 +62,20 @@ def main(request, *args, **kwargs):
     BUCKET_NAME = config.bucket_name
     client = storage.Client(project=config.bucket_name, credentials=CREDENTIALS)
     mycars = load_tekst(client)
-    allowed_domains= ["http://localhost:8080","https://bilabonnement.app", "https://bilabo.app"]
-    if request.environ['HTTP_ORIGIN']  in allowed_domains:
-        origin = request.environ['HTTP_ORIGIN']
+    allowed_domains = [
+        "http://localhost:8080",
+        "http://localhost:8081",
+        "https://bilabonnement.app",
+        "https://bilabo.app",
+    ]
+    if request.environ["HTTP_ORIGIN"] in allowed_domains:
+        origin = request.environ["HTTP_ORIGIN"]
     else:
         origin = "https://bilabonnement.app"
-        
+
     headers = {
-            'Access-Control-Allow-Origin': f'{origin}',
-            'Access-Control-Allow-Methods': 'GET',
-            'Access-Control-Max-Age': '3600',
-        }
+        "Access-Control-Allow-Origin": f"{origin}",
+        "Access-Control-Allow-Methods": "GET",
+        "Access-Control-Max-Age": "3600",
+    }
     return (json.dumps(mycars), 200, headers)
