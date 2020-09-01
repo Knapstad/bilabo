@@ -97,7 +97,12 @@ export default {
     axios
       .get("https://europe-west1-bilabo.cloudfunctions.net/give_car")
       .then(response => (this.cars = response))
-      .finally(() => (this.loading = false));
+      .finally(() => (this.loading = false,
+                      window.dataLayer.push({
+                      event: 'loadingDone',
+                        })
+                      )
+                    );
   }
 };
 </script>
