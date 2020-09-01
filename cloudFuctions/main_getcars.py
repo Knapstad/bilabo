@@ -2,14 +2,20 @@ import json
 import math
 from functools import wraps
 from typing import Any, Tuple
-
+import logging
 import config
 from fleks import Fleks
 from imove import Imove
 from swap import Swap
-
+from kinto import Kinto
 from google.cloud import storage
 from google.oauth2 import service_account
+import google.cloud.logging
+
+
+client = google.cloud.logging.Client()
+client.get_default_handler()
+client.setup_logging()
 
 
 def retry_on_connection_error(max_retry: int = 3):
@@ -72,14 +78,25 @@ def main(*args, **kwargs):
     fleks = Fleks.get_cars()
     imove = Imove.get_cars()
     swap = Swap.get_cars()
+    kinto = Kinto.get_cars()
 
     mycars = load_tekst(client)
     if fleks:
         mycars["fleks"] = fleks[0]
+    else:
+        logging.warn("fleks empty")
     if imove:
         mycars["imove"] = imove[0]
+    else:
+        logging.warn("imove empty")
     if swap:
         mycars["swap"] = swap[0]
+    else:
+        logging.warn("swap empty")
+    if kinto:
+        mycars["kinto"] = kinto[0]
+    else:
+        logging.warn("kinto empty")
 
     save_to_cloud(client, mycars, BLOB_NAME, BUCKET_NAME)
 
