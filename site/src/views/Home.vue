@@ -18,6 +18,7 @@
         <Car class :car="car" />
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
@@ -25,12 +26,14 @@
 import Car from "@/components/Car.vue";
 import Filters from "@/components/Filters.vue";
 import axios from "axios";
+import Footer from "@/components/Footer.vue";
 
 export default {
   name: "Home",
   components: {
     Car,
-    Filters
+    Filters,
+    Footer
   },
   data() {
     return {
