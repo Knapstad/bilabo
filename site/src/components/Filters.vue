@@ -1,7 +1,7 @@
 <template>
   <div class="filter-wrap">
     <div class="label">Sted:</div>
-    <div v-for="item in locations" :key="item">
+    <div v-for="item in locations()" :key="item">
       <FilterItem :item="item" />
     </div>
   </div>
@@ -22,11 +22,13 @@ export default {
       items: ["Oslo", "Bergen", "Stavanger"],
     };
   },
-  computed: {
+  methods: {
     locations: function () {
       let cars = Object.values(this.data["data"]).flat();
-      cars = cars.map((a) => a.location).flat().filter((v, i, a) => a.indexOf(v) === i);
-
+      cars = cars
+        .map((a) => a.location)
+        .flat()
+        .filter((v, i, a) => a.indexOf(v) === i);
       return cars;
     },
   },
