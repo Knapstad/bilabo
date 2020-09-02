@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Filters />
+    <Filters :data="cars" />
     <div v-if="loading" class="loading">
       <div class="loading__letter">L</div>
       <div class="loading__letter">o</div>
@@ -33,7 +33,7 @@ export default {
   components: {
     Car,
     Filters,
-    Footer
+    Footer,
   },
   data() {
     return {
@@ -48,27 +48,49 @@ export default {
       {
         name: "description",
         content:
-          "En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen"
+          "En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen",
       },
       {
         name: "viewport",
-        content: "width=device-width, initial-scale=1, min-scale=1"
+        content: "width=device-width, initial-scale=1, min-scale=1",
       },
-      {name: 'twitter:card', content: 'summary'},
-      {name: 'twitter:title', content: 'Bilabonnement.app | Bilabonnement samlet på en side"'},
-      {name: 'twitter:description', content: 'En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen'},
+      { name: "twitter:card", content: "summary" },
+      {
+        name: "twitter:title",
+        content: 'Bilabonnement.app | Bilabonnement samlet på en side"',
+      },
+      {
+        name: "twitter:description",
+        content:
+          "En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen",
+      },
       // image must be an absolute path
-      {name: 'twitter:image', content: "https://res.cloudinary.com/db0kzjtgs/image/upload/v1598880211/site_drfi7i.jpg"},
+      {
+        name: "twitter:image",
+        content:
+          "https://res.cloudinary.com/db0kzjtgs/image/upload/v1598880211/site_drfi7i.jpg",
+      },
       // Facebook OpenGraph
-      {property: 'og:title', content: 'Bilabonnement.app | Bilabonnement samlet på en side"'},
-      {property: 'og:site_name', content: 'Bilabonnement.app x"'},
-      {property: 'og:type', content: 'website'},
-      {property: 'og:image', content:  'https://res.cloudinary.com/db0kzjtgs/image/upload/v1598880211/site_drfi7i.jpg'},
-      {property: 'og:description', content: 'En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen'}
-    ]
+      {
+        property: "og:title",
+        content: 'Bilabonnement.app | Bilabonnement samlet på en side"',
+      },
+      { property: "og:site_name", content: 'Bilabonnement.app x"' },
+      { property: "og:type", content: "website" },
+      {
+        property: "og:image",
+        content:
+          "https://res.cloudinary.com/db0kzjtgs/image/upload/v1598880211/site_drfi7i.jpg",
+      },
+      {
+        property: "og:description",
+        content:
+          "En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen",
+      },
+    ],
   },
   methods: {
-    compare: function(a, b) {
+    compare: function (a, b) {
       const carA = parseInt(a.price);
       const carB = parseInt(b.price);
       if (carA < carB) {
@@ -78,32 +100,34 @@ export default {
         return 1;
       }
       return 0;
-    }
+    },
   },
   computed: {
-    flatCars: function() {
+    flatCars: function () {
       let cars = Object.values(this.cars["data"]).flat();
       let locs = this.$store.state.locations;
       if (locs.length == 0) {
         return cars;
       }
-      const result = cars.filter(car =>
-        car.location.some(location => locs.includes(location))
+      const result = cars.filter((car) =>
+        car.location.some((location) => locs.includes(location))
       );
       return result;
-    }
+    },
   },
   mounted() {
     axios
       .get("https://europe-west1-bilabo.cloudfunctions.net/give_car")
-      .then(response => (this.cars = response))
-      .finally(() => (this.loading = false,
-                      window.dataLayer.push({
-                      event: 'loadingDone',
-                        })
-                      )
-                    );
-  }
+      .then((response) => (this.cars = response))
+      .finally(
+        () => (
+          (this.loading = false),
+          window.dataLayer.push({
+            event: "loadingDone",
+          })
+        )
+      );
+  },
 };
 </script>
 <style>
