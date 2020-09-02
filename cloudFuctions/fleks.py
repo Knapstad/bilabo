@@ -27,7 +27,7 @@ class Fleks:
                 if len(str(price)) > 6:
                     price = str(price)[:2] + str(price)[3:-1]
                 else:
-                    price = str(price)[1] + str(price)[2:-1]
+                    price = str(price)[0] + str(price)[2:-1]
                 car["attributes"]["price"] = price
             cleanCars = []
             translation = {
