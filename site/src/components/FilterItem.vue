@@ -48,4 +48,12 @@ export default {
 .filter:hover {
   background: var(--main-medium-light);
 }
+@media only screen and (max-width: 900px) {
+  .filter {
+    font-size: 12px;
+    padding: 1px;
+    margin: 4px;
+    text-align: center;
+  }
+}
 </style>
