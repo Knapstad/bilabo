@@ -23,7 +23,7 @@ body,
 html,
 #app {
   background: var(--main-light);
-  font-family: consolas, 'Franklin Gothic Medium', Arial, sans-serif;
+  font-family: consolas, "Franklin Gothic Medium", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
@@ -52,5 +52,10 @@ h1 {
   width: 60px;
   height: 60px;
   padding-right: 10px;
+}
+@media only screen and (max-width: 900px) {
+  #nav {
+    padding: 0px;
+  }
 }
 </style>
