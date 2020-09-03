@@ -7,15 +7,18 @@ export default new Vuex.Store({
   state: {
     locations: [],
     sites: [],
+    makes: [],
+    data: [],
   },
   mutations: {
-    addLocation(state, location) {
-      state.locations.push(location);
+    addFilter(state, value) {
+      let arr = state[value[0]];
+      arr.push(value[1]);
     },
-    removeLocation(state, location) {
-      let index = state.locations.indexOf(location);
+    removeFilter(state, value) {
+      let index = state[value[0]].indexOf(value[1]);
       if (index > -1) {
-        state.locations.splice(index, 1);
+        state[value[0]].splice(index, 1);
       }
     },
   },
