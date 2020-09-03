@@ -71,4 +71,26 @@ export default {
 .label {
   margin-left: 1rem;
 }
+
+@media only screen and (max-width: 600px) {
+  .filter-section {
+    grid-template-rows: repeat(7, 1.5rem);
+  }
+  .filter-wrap {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .filter-section {
+    grid-template-rows: repeat(10, 1.5rem);
+    /* grid-auto-flow: columns; */
+  }
+  .filter-wrap {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
 </style>
