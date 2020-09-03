@@ -5,23 +5,26 @@
 <script>
 export default {
   name: "FilterItem",
-  props: ["item"],
+  props: ["item", "type"],
   data() {
     return {
-      isActive: false
+      isActive: false,
     };
   },
   methods: {
-    active: function() {
+    active: function () {
       if (this.isActive) {
-        this.$store.commit("removeLocation", this.item);
+        console.log(this.item);
+        this.$store.commit("removeFilter", [this.type, this.item]);
       }
       if (!this.isActive) {
-        this.$store.commit("addLocation", this.item);
+        console.log(this.item);
+        console.log(this.type);
+        this.$store.commit("addFilter", [this.type, this.item]);
       }
       this.isActive = !this.isActive;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -40,9 +43,9 @@ export default {
 }
 .active {
   background: var(--main-medium-light);
-  color: black;
-  padding: 5px;
-  margin: 5px;
   box-shadow: inset 2px 2px 3px #000;
+}
+.filter:hover {
+  background: var(--main-medium-light);
 }
 </style>
