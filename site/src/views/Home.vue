@@ -106,15 +106,19 @@ export default {
     flatCars: function () {
       let cars = Object.values(this.cars["data"]).flat();
       let locs = this.$store.state.locations;
-      if (locs.length == 0) {
-        return cars;
+      let makes = this.$store.state.makes;
+      if (locs.length > 0) {
+        cars = cars.filter((car) =>
+          car.location.some((location) => locs.includes(location))
+        );
       }
-      const result = cars.filter((car) =>
-        car.location.some((location) => locs.includes(location))
-      );
-      return result;
+      if (makes.length > 0) {
+        cars = cars.filter((car) => makes.includes(car.make));
+      }
+      return cars;
     },
   },
+
   mounted() {
     axios
       .get("https://europe-west1-bilabo.cloudfunctions.net/give_car")
