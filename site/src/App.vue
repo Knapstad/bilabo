@@ -25,7 +25,9 @@ export default {};
 }
 body {
   box-sizing: border-box;
+  margin: 0;
 }
+
 body,
 html,
 #app {
