@@ -35,7 +35,6 @@ html,
   font-family: consolas, 'Franklin Gothic Medium', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* width: 100%; */
   height: auto;
   overflow-x: hidden;
 }
