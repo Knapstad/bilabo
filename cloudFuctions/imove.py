@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup as BS
+from datetime import datetime
 import json
 
 
@@ -53,13 +54,16 @@ class Imove:
             "Nissan Leaf Tekna 40 kw (SPZ) ": "nissan_leaf_m4rmmc.jpg",
             "Nissan Leaf Tekna 62kW (SPZ)": "nissan_leaf_m4rmmc.jpg",
             "Nissan e-NV200 ": "Nissan_e-NV200_zcp5hr.jpg",
-            "Peugeot e-2008": "Peugeot_e-208_ic0bnm.jpg",
-            "Peugeot e-208": "Peugeot_e-2008_vhluhb.jpg",
+            "Peugeot e-208": "Peugeot_e-208_ic0bnm.jpg",
+            "Peugeot e-2008": "Peugeot_e-2008_vhluhb.jpg",
             "Polestar 2": "Polestar_2_q7glmo.jpg",
             "SEAT Mii Electric": "SEAT_Mii_Electric_xuewhc.png",
             "Seat Mii Electric": "SEAT_Mii_Electric_xuewhc.png",
             "Seat Mii Electric ": "SEAT_Mii_Electric_xuewhc.png",
             "Seat Mii Electric (SPZ)": "SEAT_Mii_Electric_xuewhc.png",
+            "Skoda Citigo": "Skoda_CITIGOe_ierjzq.png",
+            "Skoda citigo": "Skoda_CITIGOe_ierjzq.png",
+            "Skoda CITIGO": "Skoda_CITIGOe_ierjzq.png",
             "Skoda CITIGOe IV": "Skoda_CITIGOe_ierjzq.png",
             "Skoda Citigo (SPZ)": "Skoda_CITIGOe_ierjzq.png",
             "Tesla  Model S 75D": "Tesla__Model_S_rjksdm.png",
@@ -83,7 +87,7 @@ class Imove:
                 "https://res.cloudinary.com/db0kzjtgs/image/upload/v1598602983/imove/"
             )
             base = "https://secure.imove.no/cars"
-            api = "https://secure.imove.no/api/vehicles"
+            api = "https://secure.imove.no/api/vehicles?postalCode=0010"
             response = requests.get(f"{api}")
             tries = 0
             while "20" not in str(response.status_code):
@@ -97,7 +101,10 @@ class Imove:
             cars = response.json()
             cleanCars = []
             for car in cars:
-                if f"{car['make']} {car['model']}" in images:
+                if (
+                    f"{car['make']} {car['model']}".replace(" (earlybird)", "")
+                    in images
+                ):
                     img = img_url + images[f"{car['make']} {car['model']}"]
                 else:
                     img = "svg"
@@ -120,15 +127,22 @@ class Imove:
                             district["description"] for district in car["districts"]
                         ],
                         "availability": "available"
-                        if car["isReserved"]
+                        if not car["isReserved"]
                         else "unavailable",
+                        "from": car["availableFromDate"],
                         "order": f'{base}/{car["id"]}',
                         "img": img,
                         "cargoVolume": car["trunkCapacityInLiters"],
                     }
                 )
 
-            available = [car for car in cleanCars if car["availability"] == "available"]
+            available = [
+                car
+                for car in cleanCars
+                if car["availability"] == "available"
+                and (datetime.now() - datetime.fromisoformat(car["from"][:-1])).days
+                < 15
+            ]
             unavailable = [
                 car for car in cleanCars if car["availability"] != "available"
             ]
