@@ -18,11 +18,11 @@ export default {};
   --main-medium-light: #84a9ac;
   --main-light: #cae8d5;
 }
-*,
+/* *,
 *:before,
 *:after {
   box-sizing: inherit;
-}
+} */
 body {
   box-sizing: border-box;
   margin: 0;
