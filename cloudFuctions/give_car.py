@@ -67,6 +67,7 @@ def main(request, *args, **kwargs):
         "http://localhost:8081",
         "https://bilabonnement.app",
         "https://bilabo.app",
+        "https://test.bilabonnement.app",
     ]
     if request.environ["HTTP_ORIGIN"] in allowed_domains:
         origin = request.environ["HTTP_ORIGIN"]
