@@ -18,15 +18,22 @@ export default {};
   --main-medium-light: #84a9ac;
   --main-light: #cae8d5;
 }
-
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  box-sizing: border-box;
+}
 body,
 html,
 #app {
   background: var(--main-light);
-  font-family: consolas, "Franklin Gothic Medium", Arial, sans-serif;
+  font-family: consolas, 'Franklin Gothic Medium', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 100%;
+  /* width: 100%; */
   height: auto;
   overflow-x: hidden;
 }
