@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
-      <img src="@/assets/logo.png" class="logo" />
-      <h1>Bilabonnement</h1>
+      <router-link to="/">
+        <img src="@/assets/logo.png" class="logo"
+      /></router-link>
+      <router-link to="/"> <h1>Bilabonnement</h1> </router-link>
     </div>
     <router-view />
   </div>
@@ -60,6 +62,12 @@ h1 {
   width: 60px;
   height: 60px;
   padding-right: 10px;
+}
+.router-link {
+  text-decoration: none;
+}
+.router-link-active {
+  text-decoration: none;
 }
 @media only screen and (max-width: 900px) {
   #nav {
