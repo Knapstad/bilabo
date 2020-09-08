@@ -9,7 +9,13 @@
         <div class="label">
           Sted:
           <div class="location-container">
-            <div class="location" v-for="location in car.location" :key="location">{{ location }}</div>
+            <div
+              class="location"
+              v-for="location in car.location"
+              :key="location"
+            >
+              {{ location }}
+            </div>
           </div>
         </div>
       </div>
@@ -25,7 +31,7 @@
           width="100%"
           height="100%"
           viewBox="0 10 100 65"
-          style="enable-background:new 0 0 98.967 98.967;"
+          style="enable-background: new 0 0 98.967 98.967"
           xml:space="preserve"
         >
           <g>
@@ -60,7 +66,7 @@
         <img v-else :src="car.img.replace(' ', '-')" />
       </div>
     </div>
-    <a :href="car.order" target="_blank">
+    <a :href="url" target="_blank">
       <div class="button">BESTILL</div>
     </a>
   </div>
@@ -68,10 +74,25 @@
 
 <script>
 export default {
-  name: "Car",
+  name: 'Car',
   props: {
     car: Object,
     site: String,
+  },
+  computed: {
+    url() {
+      if (this.car.order.includes('?')) {
+        return (
+          this.car.order +
+          '&utm_source=bilabonnemet.app&utm_medium=link&utm_campaign=bilabonnement.app'
+        );
+      } else {
+        return (
+          this.car.order +
+          '?utm_source=bilabonnemet.app&utm_medium=link&utm_campaign=bilabonnement.app'
+        );
+      }
+    },
   },
 };
 </script>
