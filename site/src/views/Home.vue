@@ -159,12 +159,6 @@ export default {
     grid-template-columns: 45% 45%;
   }
 }
-@media only screen and (max-width: 600px) {
-  .carcontainer {
-    grid-template-columns: 90%;
-    padding: 0;
-  }
-}
 
 .loading {
   display: flex;
