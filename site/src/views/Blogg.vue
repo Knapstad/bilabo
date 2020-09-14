@@ -1,25 +1,29 @@
 <template>
-  <div class="bloggcontent">
-    <block-content :blocks="blocks" :serializers="serializers" />
+  <div>
+    <div class="bloggcontent">
+      <block-content :blocks="blocks" :serializers="serializers" />
+    
+    </div>
+    <Footer />
   </div>
+
 </template>
 
 <script>
-// Import the component if not already added globally
 import BlockContent from 'sanity-blocks-vue-component';
 import sanityClient from '@sanity/client';
+import Footer from '@/components/Footer.vue'
 const client = sanityClient({
   projectId: 'bwpvihdh',
   dataset: 'production',
   useCdn: false,
 });
-
-// Import any components to be used as serializers
 export default {
   name: 'Blogg',
   props: ['slug'],
   components: {
     BlockContent,
+    Footer,
   },
   data() {
     return {

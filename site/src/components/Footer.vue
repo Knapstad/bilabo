@@ -1,11 +1,11 @@
 <template>
   <div class="contact">
-    Contact: <a href="mailto:post@bilabonnement.app">post@bilabonnement.app</a>
+    <a href="mailto:post@bilabonnement.app">post@bilabonnement.app</a> | 
+    <a href="/om-oss">Om oss</a>
   </div>
 </template>
 
 <script>
-// import FilterItem from "@/components/FilterItem.vue";
 
 export default {
   name: 'Foot',
