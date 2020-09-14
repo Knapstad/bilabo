@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Filters :data="cars" />
+    <Filters :data="cars" :flat="flatCars"/>
     <div v-if="loading" class="loading">
       <div class="loading__letter">L</div>
       <div class="loading__letter">o</div>
