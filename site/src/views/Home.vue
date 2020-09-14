@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Filters :data="cars" :flat="flatCars"/>
+    <Filters :data="cars" :flat="locations"/>
     <div v-if="loading" class="loading">
       <div class="loading__letter">L</div>
       <div class="loading__letter">o</div>
@@ -114,6 +114,16 @@ export default {
       }
       if (makes.length > 0) {
         cars = cars.filter((car) => makes.includes(car.make));
+      }
+      return cars;
+    },
+    locations: function () {
+      let cars = Object.values(this.cars["data"]).flat();
+      let locs = this.$store.state.locations;
+      if (locs.length > 0) {
+        cars = cars.filter((car) =>
+          car.location.some((location) => locs.includes(location))
+        );
       }
       return cars;
     },
