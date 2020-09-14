@@ -7,10 +7,12 @@
       <router-link to="/"> <h1>Bilabonnement</h1> </router-link>
     </div>
     <router-view />
+  <Footer />
   </div>
 </template>
 <script>
-export default {};
+export default {
+ };
 </script>
 
 <style>
