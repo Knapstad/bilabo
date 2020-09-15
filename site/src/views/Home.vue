@@ -25,8 +25,9 @@
 <script>
 import Car from "@/components/Car.vue";
 import Filters from "@/components/Filters.vue";
-import axios from "axios";
 import Footer from "@/components/Footer.vue";
+import axios from "axios";
+
 
 export default {
   name: "Home",
@@ -104,7 +105,7 @@ export default {
   },
   computed: {
     flatCars: function () {
-      let cars = Object.values(this.cars["data"]).flat();
+      let cars = this.locations;
       let locs = this.$store.state.locations;
       let makes = this.$store.state.makes;
       if (locs.length > 0) {
