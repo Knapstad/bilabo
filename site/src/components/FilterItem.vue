@@ -8,18 +8,15 @@ export default {
   props: ["item", "type"],
   data() {
     return {
-      isActive: false,
+      isActive: this.$store.state[this.type].includes(this.item),
     };
   },
   methods: {
     active: function () {
       if (this.isActive) {
-        console.log(this.item);
         this.$store.commit("removeFilter", [this.type, this.item]);
       }
       if (!this.isActive) {
-        console.log(this.item);
-        console.log(this.type);
         this.$store.commit("addFilter", [this.type, this.item]);
       }
       this.isActive = !this.isActive;

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Filters :data="cars" />
+    <Filters :data="cars" :flat="locations"/>
     <div v-if="loading" class="loading">
       <div class="loading__letter">L</div>
       <div class="loading__letter">o</div>
@@ -25,8 +25,9 @@
 <script>
 import Car from "@/components/Car.vue";
 import Filters from "@/components/Filters.vue";
-import axios from "axios";
 import Footer from "@/components/Footer.vue";
+import axios from "axios";
+
 
 export default {
   name: "Home",
@@ -104,7 +105,7 @@ export default {
   },
   computed: {
     flatCars: function () {
-      let cars = Object.values(this.cars["data"]).flat();
+      let cars = this.locations;
       let locs = this.$store.state.locations;
       let makes = this.$store.state.makes;
       if (locs.length > 0) {
@@ -114,6 +115,16 @@ export default {
       }
       if (makes.length > 0) {
         cars = cars.filter((car) => makes.includes(car.make));
+      }
+      return cars;
+    },
+    locations: function () {
+      let cars = Object.values(this.cars["data"]).flat();
+      let locs = this.$store.state.locations;
+      if (locs.length > 0) {
+        cars = cars.filter((car) =>
+          car.location.some((location) => locs.includes(location))
+        );
       }
       return cars;
     },
