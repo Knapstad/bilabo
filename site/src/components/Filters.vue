@@ -24,7 +24,7 @@ export default {
   components: {
     FilterItem,
   },
-  props: ["data"],
+  props: ["data", "flat"],
   data() {
     return {
       items: ["Oslo", "Bergen", "Stavanger"],
@@ -40,7 +40,7 @@ export default {
       return cars;
     },
     makes: function () {
-      let cars = Object.values(this.data["data"]).flat();
+      let cars = Object.values(this.flat).flat();
       cars = cars
         .map((a) => a.make)
         .flat()

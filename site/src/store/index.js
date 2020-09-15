@@ -17,7 +17,8 @@ export default new Vuex.Store({
     },
     removeFilter(state, value) {
       let index = state[value[0]].indexOf(value[1]);
-      if (index > -1) {
+      while (index > -1) {
+        index = state[value[0]].indexOf(value[1])
         state[value[0]].splice(index, 1);
       }
     },
