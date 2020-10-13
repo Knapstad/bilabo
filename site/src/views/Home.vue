@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <Filters :data="cars" :flat="locations"/>
     <div v-if="loading" class="loading">
       <div class="loading__letter">L</div>
       <div class="loading__letter">o</div>
@@ -13,9 +12,12 @@
       <div class="loading__letter">.</div>
       <div class="loading__letter">.</div>
     </div>
-    <div v-else class="carcontainer">
-      <div class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
-        <Car class :car="car" />
+    <div v-else >
+      <Filters :data="cars" :flat="locations"/>
+      <div class="carcontainer">
+        <div class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
+          <Car class :car="car" />
+        </div>
       </div>
     </div>
     <Footer />
