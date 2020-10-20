@@ -101,13 +101,6 @@ class Imove:
             cars = response.json()
             cleanCars = []
             for car in cars:
-                # if (
-                #     f"{car['make']} {car['model']}".replace(" (earlybird)", "")
-                #     in images
-                # ):
-                #     img = img_url + images[f"{car['make']} {car['model']}"]
-                # else:
-                #     img = "svg"
                 cleanCars.append(
                     {
                         "site": "imove",
