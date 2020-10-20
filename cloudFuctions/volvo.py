@@ -7,6 +7,7 @@ class Volvo:
 
         cars = [
             {
+                "site": "volvo",
                 "name": "Volvo xc90 Recharge",
                 "make": "Volvo",
                 "model": "XC90 Recharge",
@@ -23,6 +24,7 @@ class Volvo:
                 "cargoVolume": "",
             },
             {
+                "site": "volvo",
                 "name": "Volvo xc60 Recharge",
                 "make": "Volvo",
                 "model": "XC60 Recharge",
@@ -39,6 +41,7 @@ class Volvo:
                 "cargoVolume": "",
             },
             {
+                "site": "volvo",
                 "name": "Volvo xc40 Recharge Pure electric",
                 "make": "Volvo",
                 "model": "XC40 Recharge Pure electric",
@@ -55,6 +58,7 @@ class Volvo:
                 "cargoVolume": "",
             },
             {
+                "site": "volvo",
                 "name": "Volvo s90 Recharge",
                 "make": "Volvo",
                 "model": "S90 Recharge ",
@@ -71,6 +75,7 @@ class Volvo:
                 "cargoVolume": "",
             },
             {
+                "site": "volvo",
                 "name": "Volvo v90 Recharge",
                 "make": "Volvo",
                 "model": "V90 Recharge ",
@@ -87,6 +92,7 @@ class Volvo:
                 "cargoVolume": "",
             },
             {
+                "site": "volvo",
                 "name": "Volvo s60 Recharge",
                 "make": "Volvo",
                 "model": "S60 Recharge ",
@@ -103,6 +109,7 @@ class Volvo:
                 "cargoVolume": "",
             },
             {
+                "site": "volvo",
                 "name": "Volvo v60 Recharge",
                 "make": "Volvo",
                 "model": "v60 Recharge ",

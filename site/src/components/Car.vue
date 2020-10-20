@@ -1,9 +1,10 @@
 <template>
   <div class="wrap">
-    <h3>{{ car.name }}</h3>
+    <div class="header"><h3>{{ car.name }}</h3>
+      <img class="logo" :src="logo">
+    </div>
     <div class="hello">
       <div class="column">
-        <!-- <p>{{ car.site }}</p> -->
         <p>Pris: {{ car.price }}</p>
         <p>{{ car.drive }}</p>
         <div class="label">
@@ -20,7 +21,7 @@
         </div>
       </div>
       <div class="column">
-        <svg
+          <svg
           v-if="car.img === 'svg'"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -93,6 +94,15 @@ export default {
         );
       }
     },
+    logo(){
+      let logo = ""
+      try{
+        logo = require(`@/assets/${this.car.site}.png`);
+      }catch{
+        logo="";
+      }
+      return logo
+    }
   },
 };
 </script>
@@ -108,6 +118,11 @@ export default {
   flex: 50%;
   max-width: 50%;
   margin: auto;
+}
+.header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 h3 {
   padding-left: 5%;
@@ -136,6 +151,13 @@ img {
   width: 100%;
   height: auto;
   padding-top: 3px;
+  
+}
+img.logo{
+  width: 50px;
+  margin-right: 10px;
+  align-self: center;
+  min-height: 10px;
 }
 svg {
   width: 98%;
