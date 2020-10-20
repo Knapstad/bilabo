@@ -7,7 +7,6 @@
       <div class="column">
         <p>Pris: {{ car.price }}</p>
         <p>{{ car.drive }}</p>
-        <p>{{car.site}}</p>
         <div class="label">
           Sted:
           <div class="location-container">
