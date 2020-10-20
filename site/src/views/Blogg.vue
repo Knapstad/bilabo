@@ -13,6 +13,8 @@
 import BlockContent from 'sanity-blocks-vue-component';
 import sanityClient from '@sanity/client';
 import Footer from '@/components/Footer.vue'
+
+
 const client = sanityClient({
   projectId: 'bwpvihdh',
   dataset: 'production',
@@ -29,6 +31,10 @@ export default {
     return {
       loading: true,
       blocks: [],
+      updates: "",
+      created: "",
+      title: "",
+      description: "",
       serializers: {
         types: {},
       },
@@ -39,10 +45,34 @@ export default {
       return `*[_type=='post' && slug.current == ${this.slug}]`;
     },
   },
+  metaInfo() {
+    return {
+      title: `${this.title} | `,
+      titleTemplate: `%s Bilabonnement.app`,
+      meta: [
+        { charset: 'utf-8' },
+        { property: 'og:description ', content: this.description},
+        { name: 'twitter:description ', content: this.description},
+        { name: 'twitter:creator ', content: "@bknapstad"},
+        { property: 'og:title ', content: this.title},
+        { name: 'twitter:title ', content: this.title},
+        { property: 'og:type ', content: "article"},
+        { property: 'article:published_time', content: this.created},
+        { property: 'article:modified_time', content: this.updated},
+        { name: 'description', content: this.description}
+      ]};
+  },
   mounted() {
     client
       .fetch(`*[_type=='post' && slug.current == "${this.slug}"]`)
-      .then((response) => (this.blocks = response[0].body))
+      .then((response) => (
+        this.response = response,
+        this.blocks = this.response[0].body,
+        this.created = this.response[0]._createdAt,
+        this.created = this.response[0]._updatedAt,
+        this.updated = this.response[0]._updatedAt,
+        this.title = response[0].title,
+        this.description = response[0].description))
       .finally(
         () => (
           (this.loading = false),
