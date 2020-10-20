@@ -29,6 +29,9 @@ export default {
     return {
       loading: true,
       blocks: [],
+      created: "",
+      title: "",
+      description: "",
       serializers: {
         types: {},
       },
@@ -42,7 +45,14 @@ export default {
   mounted() {
     client
       .fetch(`*[_type=='post' && slug.current == "${this.slug}"]`)
-      .then((response) => (this.blocks = response[0].body))
+      .then((response) => (
+        this.response = response,
+        this.blocks = this.response[0].body,
+        this.created = this.response[0]._createdAt,
+        this.created = this.response[0]._updatedAt,
+        this.created = this.response[0]._updatedAt,
+        this.title = response[0].title,
+        this.description = response[0].description))
       .finally(
         () => (
           (this.loading = false),
