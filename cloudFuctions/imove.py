@@ -101,13 +101,6 @@ class Imove:
             cars = response.json()
             cleanCars = []
             for car in cars:
-                if (
-                    f"{car['make']} {car['model']}".replace(" (earlybird)", "")
-                    in images
-                ):
-                    img = img_url + images[f"{car['make']} {car['model']}"]
-                else:
-                    img = "svg"
                 cleanCars.append(
                     {
                         "site": "imove",
@@ -131,7 +124,7 @@ class Imove:
                         else "unavailable",
                         "from": car["availableFromDate"],
                         "order": f'{base}/{car["id"]}',
-                        "img": img,
+                        "img": f"https://secure.imove.no/{car['images'][0]['url']}" if car["images"] else "svg",
                         "cargoVolume": car["trunkCapacityInLiters"],
                     }
                 )
