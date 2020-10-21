@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bloggcontent">
-      <block-content :blocks="blocks" :serializers="serializers" />
+      <block-content :blocks="blocks" :serializers="serializers" :imageOptions="{h: 500}"/>
     
     </div>
     <Footer />
@@ -42,7 +42,7 @@ export default {
   },
   computed: {
     query() {
-      return `*[_type=='post' && slug.current == ${this.slug}]`;
+      return `*[_type=='post' && slug.current == ${this.slug}]{..., body[]{..., "asset": asset->}}`;
     },
   },
   metaInfo() {
@@ -64,7 +64,7 @@ export default {
   },
   mounted() {
     client
-      .fetch(`*[_type=='post' && slug.current == "${this.slug}"]`)
+      .fetch(`*[_type=='post' && slug.current == "${this.slug}"]{..., body[]{..., "asset": asset->}}`)
       .then((response) => (
         this.response = response,
         this.blocks = this.response[0].body,
@@ -99,6 +99,10 @@ export default {
   font-size: 22px;
   margin-bottom: 50px;
 }
+figure img{
+  width: 80%;
+  ;
+}
 @media screen and (max-width: 1500px) {
   .bloggcontent {
     width: 40%;
@@ -114,4 +118,5 @@ export default {
     width: 60%;
   }
 }
+
 </style>
