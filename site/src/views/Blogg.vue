@@ -1,7 +1,10 @@
 <template>
-  <div>
+  <div>   
     <div class="bloggcontent">
-      <block-content :blocks="blocks" :serializers="serializers" :imageOptions="{h: 500}"/>
+      <div>
+        <img class="headerimage" :src="mainImage" alt="">
+      </div>
+      <block-content :blocks="blocks" :serializers="serializers" :imageOptions="{h: 300, w: 1000 ,fit : 'crop'}"/>
     
     </div>
     <Footer />
@@ -31,10 +34,12 @@ export default {
     return {
       loading: true,
       blocks: [],
-      updates: "",
+      response: undefined,
+      updated: "",
       created: "",
       title: "",
       description: "",
+      mainImage: undefined,
       serializers: {
         types: {},
       },
@@ -64,15 +69,15 @@ export default {
   },
   mounted() {
     client
-      .fetch(`*[_type=='post' && slug.current == "${this.slug}"]{..., body[]{..., "asset": asset->}}`)
+      .fetch(`*[_type=='post' && slug.current == "${this.slug}"]{..., body[]{..., "asset": asset->}, mainImage{..., "asset": asset->}}`)
       .then((response) => (
         this.response = response,
         this.blocks = this.response[0].body,
         this.created = this.response[0]._createdAt,
-        this.created = this.response[0]._updatedAt,
         this.updated = this.response[0]._updatedAt,
         this.title = response[0].title,
-        this.description = response[0].description))
+        this.description = response[0].description,
+        this.mainImage = response[0].mainImage.asset.url+"?w=1000&h=300&fit=crop&hotspot=true&fp-y=0.58"))
       .finally(
         () => (
           (this.loading = false),
@@ -87,6 +92,7 @@ export default {
 <style scoped>
 .bloggcontent {
   display: flex;
+  flex-direction: column;
   width: 33%;
   margin: auto;
   line-height: 1.5;
@@ -99,9 +105,17 @@ export default {
   font-size: 22px;
   margin-bottom: 50px;
 }
+figure{
+  margin: 0;
+}
 figure img{
-  width: 80%;
+  width: 100%;
+  margin-top: 1rem;
   ;
+}
+img.headerimage{
+  width: 100%;
+
 }
 @media screen and (max-width: 1500px) {
   .bloggcontent {
