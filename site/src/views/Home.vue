@@ -45,13 +45,13 @@ export default {
     };
   },
   metaInfo: {
-    title: "Bilabonnement.app | Bilabonnement samlet på en side",
+    title: "Bilabonnement samlet på en side | Bilabonnement.app",
     meta: [
       { charset: "utf-8" },
       {
         name: "description",
         content:
-          "En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen",
+          "En oversikt over flere bilabonnement leverandører på en side. Vi gjør det enkelt å finne det billigste bilabonnementet",
       },
       {
         name: "viewport",
