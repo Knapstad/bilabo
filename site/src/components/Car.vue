@@ -67,7 +67,7 @@
         <img v-else :src="car.img.replace(' ', '-')" />
       </div>
     </div>
-    <a :href="url" target="_blank">
+    <a :href="url" target="_blank" rel="nofollow">
       <div class="button">BESTILL</div>
     </a>
   </div>
