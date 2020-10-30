@@ -2,7 +2,7 @@
   <div>   
     <div class="bloggcontent">
       <div>
-        <img class="headerimage" :src="mainImage" alt="">
+        <img class="headerimage" :src="mainImage.url" :alt="mainImage.alt">
       </div>
       <block-content :blocks="blocks" :serializers="serializers" :imageOptions="{h: 300, w: 1000 ,fit : 'crop'}"/>
     
@@ -16,6 +16,7 @@
 import BlockContent from 'sanity-blocks-vue-component';
 import sanityClient from '@sanity/client';
 import Footer from '@/components/Footer.vue'
+import BlockImage from '@/components/BlockImage.vue'
 
 
 const client = sanityClient({
@@ -41,7 +42,9 @@ export default {
       description: "",
       mainImage: undefined,
       serializers: {
-        types: {},
+        types: {
+          image: BlockImage
+          }
       },
     };
   },
@@ -65,7 +68,11 @@ export default {
         { property: 'article:published_time', content: this.created},
         { property: 'article:modified_time', content: this.updated},
         { name: 'description', content: this.description}
-      ]};
+      ],
+      link: [
+      {rel: 'canonical', href: `https://bilabonnement.app/${this.slug}`}
+  ]
+      };
   },
   mounted() {
     client
@@ -77,7 +84,8 @@ export default {
         this.updated = this.response[0]._updatedAt,
         this.title = response[0].title,
         this.description = response[0].description,
-        this.mainImage = response[0].mainImage.asset.url+"?w=1000&h=300&fit=crop&hotspot=true&fp-y=0.58"))
+        this.mainImage = {url: response[0].mainImage.asset.url+"?w=1000&h=300&fit=crop&hotspot=true&fp-y=0.58", alt: response[0].mainImage.alt}
+        ))
       .finally(
         () => (
           (this.loading = false),
