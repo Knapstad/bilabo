@@ -1,9 +1,5 @@
 <template>
-  <div>
-      <img :src="imgUrl" :alt=alt :class=clss>
-  </div>
-  
-
+    <img :class=clss :src="imgUrl" :alt=alt >
 </template>
 
 <script>
