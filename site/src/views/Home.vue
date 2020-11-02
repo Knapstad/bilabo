@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <section class="home">
     <div v-if="loading" class="loading">
       <div class="loading__letter">L</div>
       <div class="loading__letter">o</div>
@@ -14,14 +14,14 @@
     </div>
     <div v-else >
       <Filters :data="cars" :flat="locations"/>
-      <div class="carcontainer">
-        <div class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
+      <section class="carcontainer">
+        <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
           <Car class :car="car" />
-        </div>
-      </div>
+        </article>
+      </section>
     </div>
     <Footer />
-  </div>
+  </section>
 </template>
 
 <script>
