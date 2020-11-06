@@ -113,17 +113,12 @@ export default {
   font-size: 22px;
   margin-bottom: 50px;
 }
-figure{
-  margin: 0;
+img.headerimage {
+  width: 100%;
 }
-figure img{
+img.fullwidth{
   width: 100%;
   margin-top: 1rem;
-  ;
-}
-img.headerimage{
-  width: 100%;
-
 }
 @media screen and (max-width: 1500px) {
   .bloggcontent {
@@ -140,5 +135,9 @@ img.headerimage{
     width: 60%;
   }
 }
-
+@media only screen and (max-width: 900px) {
+  .bloggcontent{
+    width: 95%;
+  }
+}
 </style>
