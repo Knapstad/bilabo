@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">
-        <img src="@/assets/logo.png" class="logo"
+        <img src="@/assets/logo.png" class="logo" alt="Til forsiden"
       /></router-link>
       <router-link to="/"> <h1>Bilabonnement</h1> </router-link>
     </div>
