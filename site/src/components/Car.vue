@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="header"><h3>{{ car.name }}</h3>
-      <img class="logo" :src="logo" alt=" ">
+      <img class="logo" :src="logo" alt="">
     </div>
     <div class="hello">
       <div class="column">
@@ -64,7 +64,7 @@
           <g />
           <g />
         </svg>
-        <img v-else :src="car.img.replace(' ', '-')" alt=" "/>
+        <img v-else :src="car.img.replace(' ', '-')" alt=""/>
       </div>
     </div>
     <a :href="url" target="_blank" rel="nofollow noopener" >
