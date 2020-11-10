@@ -34,7 +34,7 @@ a {
 
 @media only screen and (max-width: 360px) {
   .contact {
-    font-size: 12px;
+    font-size: 10px;
   }
 }
 </style>
