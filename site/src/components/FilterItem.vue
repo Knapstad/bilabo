@@ -1,5 +1,5 @@
 <template>
-  <div class="filter" :class="{active: isActive}" @click="active">{{item}}</div>
+  <button role="button" class="filter" :class="{active: isActive}" @click="active">{{item}}</button>
 </template>
 
 <script>
@@ -28,15 +28,19 @@ export default {
 <style scoped>
 .filter-wrap {
   display: flex;
+  
 }
 .filter {
   border-radius: 2px;
   background: var(--main-medium-dark);
   color: white;
-  padding: 5px;
-  margin: 5px;
+  padding: .4rem;
+  margin: .2rem;
   box-shadow: 2px 2px 3px #000;
-  cursor: pointer;
+  /* cursor: pointer; */
+  border: none;
+  width: 90%;
+  font-size: 1rem;
 }
 .active {
   background: var(--main-medium-light);
@@ -48,9 +52,17 @@ export default {
 @media only screen and (max-width: 900px) {
   .filter {
     font-size: 12px;
-    padding: 1px;
+    padding: .4rem;
     margin: 4px;
     text-align: center;
   }
 }
+/* @media only screen and (max-width: 600px) {
+  .filter {
+    font-size: 12px;
+    padding: .2rem;
+    margin: 4px;
+    text-align: center;
+  }
+} */
 </style>
