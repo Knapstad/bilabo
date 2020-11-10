@@ -71,15 +71,50 @@ export default {
 .label {
   margin-left: 1rem;
 }
-
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
   .filter-section {
-    grid-template-rows: repeat(7, 1.5rem);
+    grid-template-rows: repeat(3, 2rem);
   }
   .filter-wrap {
     width: 100%;
     margin: 0;
     padding: 0;
+    padding-bottom: .5rem;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .filter-section {
+    grid-template-rows: repeat(4, 2rem);
+  }
+  .filter-wrap {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-bottom: .5rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .filter-section {
+    grid-template-rows: repeat(5, 2rem);
+  }
+  .filter-wrap {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-bottom: .5rem;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .filter-section {
+    grid-template-rows: repeat(7, 2rem);
+  }
+  .filter-wrap {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-bottom: .5rem;
   }
 }
 @media only screen and (max-width: 360px) {
