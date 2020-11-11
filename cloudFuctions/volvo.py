@@ -71,7 +71,7 @@ class Volvo:
                 "location": ["Oslo", "Bergen", "Stavanger"],
                 "availability": "available",
                 "order": "https://www.volvocars.com/no/build/sedan/s90?filter=carebyvolvo&customerType=b2c&ref=cbv-b2c",
-                "img": "https://cas.volvocars.com/image/dynamic/MY21_2017/234/exterior-v1/R5/73100/RB0R00/R15C/_/TC05/LR02/TM04/GR02/T101/NP02/JG02/JB0A/T214/LF05/_/VP03/CB03/_/EV03/_/_/PU02/FH01/2G03/_/SideModelpage.jpg?market=no&client=vbsgw&Angle=7&bg=ffffff&w=600",
+                "img": "https://cas.volvocars.com/image/dynamic/MY21_2017/234/exterior-v1/R5/73100/RB0R00/R15C/_/TC05/LR02/TM04/GR02/T101/NP02/JG02/JB0A/T214/LF05/_/VP03/CB03/_/EV03/_/_/FH01/2G03/_/_/_/Default.jpg?market=no&client=vbsgw&Angle=4&bg=fafafa&w=400%202x",
                 "cargoVolume": "",
             },
             {
