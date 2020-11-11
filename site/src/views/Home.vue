@@ -1,5 +1,6 @@
 <template>
   <section class="home">
+  <a href="#content" class="skip">Hopp over filter</a>
     <div v-if="loading" class="loading">
       <div class="loading__letter">L</div>
       <div class="loading__letter">o</div>
@@ -14,7 +15,7 @@
     </div>
     <div v-else >
       <Filters :data="cars" :flat="locations"/>
-      <section class="carcontainer">
+      <section id="content" class="carcontainer">
         <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
           <Car class :car="car" />
         </article>
@@ -162,6 +163,27 @@ export default {
   margin: 5px;
   position: relative;
 }
+.skip {
+        position: absolute;
+        top: -1000px;
+        left: -1000px;
+        height: 1px;
+        width: 1px;
+        text-align: left;
+        overflow: hidden;
+    }
+    
+    a.skip:active, 
+    a.skip:focus, 
+    a.skip:hover {
+      left: 0; 
+        top: 0;
+        width: auto; 
+        height: auto; 
+        overflow: visible; 
+        color: white;
+        font-size: 2em;
+    }
 @media only screen and (max-width: 2400px) {
   .carcontainer {
     grid-template-columns: 30% 30% 30%;
