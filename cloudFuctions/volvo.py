@@ -20,7 +20,7 @@ class Volvo:
                 "location": ["Oslo", "Bergen", "Stavanger"],
                 "availability": "available",
                 "order": "https://www.volvocars.com/no/build/suv/xc90?filter=carebyvolvo&customerType=b2c&ref=cbv-b2c",
-                "img": "https://cas.volvocars.com/image/dynamic/MY21_2017/256/exterior-v1/R7/49200/R14D/2G03/_/LR02/TC05/TP05/_/_/SR02/TM04/GR02/T101/TJ02/NP03/_/JG02/CB03/EV02/JB06/T214/LF05/_/VP03/_/FH01/_/SideModelpage.jpg?market=no&client=vbsgw&Angle=7&bg=ffffff&w=600",
+                "img": "https://cas.volvocars.com/image/dynamic/MY21_2017/256/exterior-v1/R7/49200/R14D/2G03/_/LR02/TC05/TP05/_/_/SR02/TM04/GR02/T101/TJ02/NP03/_/JG02/CB03/EV02/JB06/T214/LF05/_/VP03/FH01/_/SideModelpage.jpg?market=no&client=vbsgw&Angle=7&bg=ffffff&w=600",
                 "cargoVolume": "",
             },
             {
@@ -71,7 +71,7 @@ class Volvo:
                 "location": ["Oslo", "Bergen", "Stavanger"],
                 "availability": "available",
                 "order": "https://www.volvocars.com/no/build/sedan/s90?filter=carebyvolvo&customerType=b2c&ref=cbv-b2c",
-                "img": "https://cas.volvocars.com/image/dynamic/MY21_2017/234/exterior-v1/R5/73100/RB0R00/R15C/_/TC05/LR02/TM04/GR02/T101/NP02/JG02/JB0A/T214/LF05/_/VP03/CB03/_/EV03/_/_/FH01/2G03/_/_/_/Default.jpg?market=no&client=vbsgw&Angle=4&bg=fafafa&w=400%202x",
+                "img": "https://cas.volvocars.com/image/dynamic/MY21_2017/234/exterior-v1/R5/61400/RB0R00/R15C/_/TC05/_/TM04/GR02/T101/NP02/JG02/JB0A/T214/LF05/_/VP03/CB03/_/_/_/_/FH01/_/_/_/_/SideModelpage.jpg?market=no&client=vbsgw&Angle=7&bg=ffffff&w=375",
                 "cargoVolume": "",
             },
             {
@@ -88,7 +88,7 @@ class Volvo:
                 "location": ["Oslo", "Bergen", "Stavanger"],
                 "availability": "available",
                 "order": "https://www.volvocars.com/no/build/stasjonsvogn/v90?filter=carebyvolvo&customerType=b2c&ref=cbv-b2c",
-                "img": "https://cas.volvocars.com/image/dynamic/MY21_2017/235/exterior-v1/R5/73100/RB0R00/R15C/_/TC05/TP05/LR02/_/TM04/GR02/T101/JG02/JB0A/T214/LF05/_/VP03/FH01/CB03/_/EV02/_/_/PU02/2G03/_/SideModelpage.jpg?market=no&client=vbsgw&Angle=7&bg=ffffff&w=600",
+                "img": "https://cas.volvocars.com/image/dynamic/MY21_2017/235/exterior-v1/R5/73100/RB0R00/R15C/_/TC05/TP05/LR02/_/TM04/GR02/T101/JG02/JB0A/T214/LF05/_/VP03/FH01/CB03/_/EV02/_/_/PU02/2G03/_/_/SideModelpage.jpg?market=no&client=vbsgw&Angle=7&bg=ffffff&w=600",
                 "cargoVolume": "",
             },
             {
@@ -126,4 +126,4 @@ class Volvo:
                 "cargoVolume": "",
             },
         ]
-        return cars
+        return (cars,)
