@@ -1,9 +1,9 @@
 <template>
-  <div class="contact">
-    <a href="mailto:post@bilabonnement.app">post@bilabonnement.app</a> | 
+  <footer class="contact">
+    <address href="mailto:post@bilabonnement.app">post@bilabonnement.app</address> | 
     <a href="/om-oss">Om oss</a> | 
     <a href="/hva-er-bilabonnement">Hva er bilabonnement </a>
-  </div>
+  </footer>
 </template>
 
 <script>
