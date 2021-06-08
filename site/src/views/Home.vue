@@ -15,11 +15,11 @@
     </div>
     <div v-else >
       <Filters :data="cars" :flat="locations"/>
-      <section id="content" class="carcontainer">
+      <main id="content" class="carcontainer">
         <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
           <Car class :car="car" />
         </article>
-      </section>
+      </main>
     </div>
     <Footer />
   </section>
@@ -162,7 +162,11 @@ export default {
   border-radius: 2px;
   margin: 5px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
+
 .skip {
         position: absolute;
         top: -1000px;
