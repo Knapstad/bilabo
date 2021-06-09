@@ -44,7 +44,7 @@ class Fleks:
                         "make": car["attributes"]["make"],
                         "model": car["attributes"]["model"],
                         "drive": translation[car["attributes"]["fuelType"]],
-                        "year": car["attributes"]["year"],
+                        # "year": car["attributes"]["year"],
                         "seats": car["attributes"]["seats"],
                         "transmission": car["attributes"]["transmission"],
                         "price": int(car["attributes"]["price"]),
