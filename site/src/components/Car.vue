@@ -7,7 +7,9 @@
       <div class="column">
         <p>Pris: {{ car.price }}</p>
         <p>{{ car.drive }}</p>
-        <div class="label">
+        <p v-if="car.includedkm">KM/mnd: {{parseInt(car.includedkm)}}</p>
+        <p v-if="car.delivery">{{ car.delivery }} levering</p>
+  <!-- <div class="label">
           Sted:
           <div class="location-container">
             <div
@@ -18,7 +20,7 @@
               {{ location }}
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="column">
           <svg
@@ -67,7 +69,13 @@
         <img v-else :src="car.img.replace(' ', '-')" alt=""/>
       </div>
     </div>
+    <p v-if="car.site === 'volvo'" class="carfooter">
+      Forbruk: {{ car.fuelconsumption }}
+      Utslipp: {{ car.co2 }}
+      Binding: {{ car.binding }}
+    </p>
     <a :href="url" target="_blank" rel="nofollow noopener" >
+      
       <div class="button">BESTILL</div>
     </a>
   </div>
@@ -184,5 +192,11 @@ svg {
 .location-container {
   display: flex;
   flex-wrap: wrap;
+}
+.carfooter{
+font-size: 0.75rem;
+}
+p.carfooter{
+  padding-left: 5%;
 }
 </style>
