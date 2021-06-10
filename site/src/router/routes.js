@@ -11,6 +11,12 @@ module.exports = [
     props: { slug: 'hva-er-bilabonnement' },
   },
   {
+    path: '/volvo',
+    name: 'Volvo care',
+    component: () => import('@/views/Blogg.vue'),
+    props: { slug: 'volvo' },
+  },
+  {
     path: '/om-oss',
     name: 'Om oss',
     component: () => import('@/views/Blogg.vue'),
