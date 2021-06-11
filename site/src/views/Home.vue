@@ -1,5 +1,6 @@
 <template>
   <section class="home">
+  <a href="#content" class="skip">Hopp over filter</a>
     <div v-if="loading" class="loading">
       <div class="loading__letter">L</div>
       <div class="loading__letter">o</div>
@@ -14,11 +15,11 @@
     </div>
     <div v-else >
       <Filters :data="cars" :flat="locations"/>
-      <section class="carcontainer">
+      <main id="content" class="carcontainer">
         <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
           <Car class :car="car" />
         </article>
-      </section>
+      </main>
     </div>
     <Footer />
   </section>
@@ -40,7 +41,7 @@ export default {
   },
   data() {
     return {
-      cars: null,
+      cars: this.$store.state.cars,
       loading: true,
     };
   },
@@ -121,7 +122,7 @@ export default {
       return cars;
     },
     locations: function () {
-      let cars = Object.values(this.cars["data"]).flat();
+      let cars = Object.values(this.$store.state.cars["data"]).flat();
       let locs = this.$store.state.locations;
       if (locs.length > 0) {
         cars = cars.filter((car) =>
@@ -133,18 +134,23 @@ export default {
   },
 
   mounted() {
-    axios
+    if(this.cars=="undefined" || this.cars==null)
+    {axios
       .get("https://europe-west1-bilabo.cloudfunctions.net/give_car")
-      .then((response) => (this.cars = response))
+      .then((response) => (this.$store.commit("addData", ["cars", response])),
+            )
       .finally(
         () => (
           (this.loading = false),
+          (this.cars = this.$store.state.cars),
+          (window.sessionStorage.setItem("cars",JSON.stringify(this.$store.state.cars))),
           window.dataLayer = window.dataLayer || [],
           window.dataLayer.push({
             event: "loadingDone",
           })
         )
-      );
+      );}
+      else{this.loading = false}
   },
 };
 </script>
@@ -162,7 +168,32 @@ export default {
   border-radius: 2px;
   margin: 5px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
+
+.skip {
+        position: absolute;
+        top: -1000px;
+        left: -1000px;
+        height: 1px;
+        width: 1px;
+        text-align: left;
+        overflow: hidden;
+    }
+    
+    a.skip:active, 
+    a.skip:focus, 
+    a.skip:hover {
+      left: 0; 
+        top: 0;
+        width: auto; 
+        height: auto; 
+        overflow: visible; 
+        color: white;
+        font-size: 2em;
+    }
 @media only screen and (max-width: 2400px) {
   .carcontainer {
     grid-template-columns: 30% 30% 30%;

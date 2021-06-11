@@ -9,6 +9,7 @@ export default new Vuex.Store({
     sites: [],
     makes: [],
     data: [],
+    cars: JSON.parse(window.sessionStorage.getItem("cars")),
   },
   mutations: {
     addFilter(state, value) {
@@ -17,11 +18,14 @@ export default new Vuex.Store({
     },
     removeFilter(state, value) {
       let index = state[value[0]].indexOf(value[1]);
-      while (index > -1) {
+      if (index > -1) {
         index = state[value[0]].indexOf(value[1])
         state[value[0]].splice(index, 1);
       }
     },
+    addData(state, value) {
+      state[value[0]] = value[1]
+    }
   },
   actions: {},
   modules: {},
