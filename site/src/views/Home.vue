@@ -140,6 +140,7 @@ export default {
       .finally(
         () => (
           (this.loading = false),
+          window.dataLayer = window.dataLayer || [],
           window.dataLayer.push({
             event: "loadingDone",
           })
