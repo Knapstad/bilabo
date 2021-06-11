@@ -9,6 +9,7 @@ class Volvo:
             api = "https://www.volvocars.com/api/care-by-volvo/cars/cars/?customerType=b2c&itemsPerPage=50&market=no&page=1"
             base = "https://www.volvocars.com/no/care-by-volvo/cars/"
             response = requests.get(api)
+            tries = 0
             while "20" not in str(response.status_code):
                 response = requests.get(f"{api}", timeout=(2, 60))
                 tries += 1
@@ -33,8 +34,13 @@ class Volvo:
                             "range": car["electricRange"],
                             "location": ["Oslo","Bergen","Stavanger","Trondheim"],
                             "availability": "Available",
+                            "includedkm": car["baseMonthlyMileage"],
+                            "delivery": car["deliveryTime"] ,
+                            "fuelconsumption": car["fuelConsumption"] ,
+                            "co2": car["co2"],
+                            "binding": "3md oppsigelse eller 36mnd binding",
                             "order": f"{base}+{car['vehicleId']}",
-                            "img": car["image"][0],
+                            "img": car["image"],
                             "cargoVolume": None
     }
                     )   
@@ -43,4 +49,4 @@ class Volvo:
             print(e)
             return None
 
-        return cleanCars
+        return (cleanCars, )
