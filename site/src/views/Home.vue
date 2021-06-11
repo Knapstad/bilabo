@@ -41,7 +41,7 @@ export default {
   },
   data() {
     return {
-      cars: null,
+      cars: this.$store.state.cars,
       loading: true,
     };
   },
@@ -122,7 +122,7 @@ export default {
       return cars;
     },
     locations: function () {
-      let cars = Object.values(this.cars["data"]).flat();
+      let cars = Object.values(this.$store.state.cars["data"]).flat();
       let locs = this.$store.state.locations;
       if (locs.length > 0) {
         cars = cars.filter((car) =>
@@ -134,18 +134,23 @@ export default {
   },
 
   mounted() {
-    axios
+    if(this.cars=="undefined" || this.cars==null)
+    {axios
       .get("https://europe-west1-bilabo.cloudfunctions.net/give_car")
-      .then((response) => (this.cars = response))
+      .then((response) => (this.$store.commit("addData", ["cars", response])),
+            )
       .finally(
         () => (
           (this.loading = false),
+          (this.cars = this.$store.state.cars),
+          (window.sessionStorage.setItem("cars",JSON.stringify(this.$store.state.cars))),
           window.dataLayer = window.dataLayer || [],
           window.dataLayer.push({
             event: "loadingDone",
           })
         )
-      );
+      );}
+      else{this.loading = false}
   },
 };
 </script>
