@@ -1,6 +1,6 @@
 <template>
   <footer class="contact">
-    <address href="mailto:post@bilabonnement.app">post@bilabonnement.app</address> | 
+    <a href="mailto:post@bilabonnement.app">post@bilabonnement.app</a> | 
     <a href="/om-oss">Om oss</a> | 
     <a href="/hva-er-bilabonnement">Hva er bilabonnement </a>
   </footer>
