@@ -3,17 +3,25 @@ import math
 from functools import wraps
 from typing import Any, Tuple
 import logging
+
+from google.auth import credentials
 import config
 from fleks import Fleks
 from imove import Imove
 from swap import Swap
 from kinto import Kinto
+from volvo import Volvo
 from google.cloud import storage
 from google.oauth2 import service_account
 import google.cloud.logging
 
+SCOPES = ["https://www.googleapis.com/auth/devstorage.read_write"]
+CREDENTIALS = service_account.Credentials.from_service_account_file(
+    config.cloud_credentials, scopes=SCOPES
+    )
 
-client = google.cloud.logging.Client()
+
+client = google.cloud.logging.Client(credentials=CREDENTIALS)
 client.get_default_handler()
 client.setup_logging()
 
@@ -79,7 +87,7 @@ def main(*args, **kwargs):
     imove = Imove.get_cars()
     swap = Swap.get_cars()
     kinto = Kinto.get_cars()
-
+    volvo = Volvo.get_cars()
     mycars = load_tekst(client)
     if fleks:
         mycars["fleks"] = fleks[0]
@@ -97,6 +105,10 @@ def main(*args, **kwargs):
         mycars["kinto"] = kinto[0]
     else:
         logging.warn("kinto empty")
+    if volvo:
+        mycars["volvo"]=volvo[0]
+    else:
+        logging.warm("volvo empty")
 
     save_to_cloud(client, mycars, BLOB_NAME, BUCKET_NAME)
 
