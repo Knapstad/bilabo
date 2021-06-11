@@ -163,14 +163,11 @@ export default {
   width: 100%;
 }
 .car {
-  background: white;
+  background: #fff;
   box-shadow: 2px 2px 3px #000;
   border-radius: 2px;
   margin: 5px;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 }
 
 .skip {
