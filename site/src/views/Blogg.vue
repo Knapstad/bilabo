@@ -2,7 +2,7 @@
   <div>   
     <div class="bloggcontent">
       <div>
-        <img class="headerimage" :src="mainImage.url" :alt="mainImage.alt">
+        <img v-if="mainImage" class="headerimage" :src="mainImage.url" :alt="mainImage.alt">
       </div>
       <block-content :blocks="blocks" :serializers="serializers" :imageOptions="{h: 300, w: 1000 ,fit : 'crop'}"/>
     
@@ -89,8 +89,9 @@ export default {
       .finally(
         () => (
           (this.loading = false),
+          window.dataLayer = window.dataLayer || [],
           window.dataLayer.push({
-            event: 'loadingDone',
+          event: 'loadingDone',
           })
         )
       );
