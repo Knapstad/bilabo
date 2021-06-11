@@ -77,15 +77,15 @@ export default {
   mounted() {
     client
       .fetch(`*[_type=='post' && slug.current == "${this.slug}"]{..., body[]{..., "asset": asset->}, mainImage{..., "asset": asset->}}`)
-      .then((response) => (
+      .then( (response) => {
         this.response = response,
         this.blocks = this.response[0].body,
         this.created = this.response[0]._createdAt,
         this.updated = this.response[0]._updatedAt,
-        this.title = response[0].title,
-        this.description = response[0].description,
-        this.mainImage = {url: response[0].mainImage.asset.url+"?w=1000&h=300&fit=crop&hotspot=true&fp-y=0.58", alt: response[0].mainImage.alt}
-        ))
+        this.title = this.response[0].title,
+        this.description = this.response[0].description,
+        this.mainImage = {url: this.response[0].mainImage.asset.url+"?w=1000&h=300&fit=crop&hotspot=true&fp-y=0.58"||"", alt: response[0].mainImage.alt||""}
+      })
       .finally(
         () => (
           (this.loading = false),
