@@ -95,11 +95,14 @@ export default {
           this.car.order +
           '&utm_source=bilabonnemet.app&utm_medium=link&utm_campaign=bilabonnement.app'
         );
-      } else {
+      } else if(this.car.site == "volvo"){
         return (
-          this.car.order +
-          '?utm_source=bilabonnemet.app&utm_medium=link&utm_campaign=bilabonnement.app'
+          this.car.order
         );
+      } else {
+        return this.car.order +
+          '?utm_source=bilabonnemet.app&utm_medium=link&utm_campaign=bilabonnement.app'
+        
       }
     },
     logo(){
