@@ -15,7 +15,9 @@
     </div>
     <div v-else >
       <Filters :data="cars" :flat="locations"/>
+      
       <main id="content" class="carcontainer">
+        <section class="results">Vi fant {{Object.values(cars["data"]).flat().length}} biler du kan abonnere på </section>
         <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
           <Car class :car="car" />
         </article>
@@ -161,6 +163,12 @@ export default {
   grid-template-columns: 23% 23% 23% 23%;
   padding: 30px;
   width: 100%;
+}
+.results{
+  padding-left: 6px;
+  font-size: 1.3rem;
+  grid-column: 1 / -1;
+  background: dark;
 }
 .car {
   background: #fff;
