@@ -17,6 +17,12 @@ module.exports = [
     props: { slug: 'volvo' },
   },
   {
+    path: '/imove',
+    name: 'iMove',
+    component: () => import('@/views/Blogg.vue'),
+    props: { slug: 'imove' },
+  },
+  {
     path: '/om-oss',
     name: 'Om oss',
     component: () => import('@/views/Blogg.vue'),
