@@ -124,7 +124,7 @@ class Imove:
                         else "unavailable",
                         "from": car["availableFromDate"],
                         "order": f'{base}/{car["id"]}',
-                        "img": f"https://secure.imove.no/{car['images'][0]['url']}" if car["images"] else "svg",
+                        "img": f"https://secure.imove.no{car['images'][0]['url']}" if car["images"] else "svg",
                         "cargoVolume": car["trunkCapacityInLiters"],
                     }
                 )
