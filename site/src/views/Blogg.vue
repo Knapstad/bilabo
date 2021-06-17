@@ -1,5 +1,9 @@
 <template>
-  <div>   
+  
+  <div>
+    <div v-if="this.slug==='404'" class="notfound bloggcontent">
+      <p>Beklager vi finner ikke siden du leter etter</p>
+    </div>
     <div class="bloggcontent">
       <div>
         <img v-if="mainImage" class="headerimage" :src="mainImage.url" :alt="mainImage.alt">
@@ -53,6 +57,44 @@ export default {
       return `*[_type=='post' && slug.current == ${this.slug}]{..., body[]{..., "asset": asset->}}`;
     },
   },
+  methods:{
+    loadData: function() {
+      this.loading= true,
+      this.blocks= [],
+      this.response= undefined,
+      this.updated= "",
+      this.create= "",
+      this.title= "",
+      this.description= "",
+      this.mainImage= undefined,
+      this.serializers= {
+        types: {
+          image: BlockImage
+          }
+      }
+
+      client
+        .fetch(`*[_type=='post' && slug.current == "${this.slug}"]{..., body[]{..., "asset": asset->}, mainImage{..., "asset": asset->}}`)
+        .then((response) => {
+          this.response=response,
+            this.blocks=this.response[0].body,
+            this.created=this.response[0]._createdAt,
+            this.updated=this.response[0]._updatedAt,
+            this.title=this.response[0].title,
+            this.description=this.response[0].description,
+            this.mainImage={ url: this.response[0].mainImage.asset.url+"?w=1000&h=300&fit=crop&hotspot=true&fp-y=0.58"||"", alt: response[0].mainImage.alt||"" };
+        })
+      .finally(
+        () => (
+          (this.loading=false),
+          window.dataLayer=window.dataLayer||[],
+          window.dataLayer.push({
+            event: 'loadingDone',
+          })
+        )
+      );
+    }
+  },
   metaInfo() {
     return {
       title: `${this.title} | `,
@@ -75,30 +117,24 @@ export default {
       };
   },
   mounted() {
-    client
-      .fetch(`*[_type=='post' && slug.current == "${this.slug}"]{..., body[]{..., "asset": asset->}, mainImage{..., "asset": asset->}}`)
-      .then( (response) => {
-        this.response = response,
-        this.blocks = this.response[0].body,
-        this.created = this.response[0]._createdAt,
-        this.updated = this.response[0]._updatedAt,
-        this.title = this.response[0].title,
-        this.description = this.response[0].description,
-        this.mainImage = {url: this.response[0].mainImage.asset.url+"?w=1000&h=300&fit=crop&hotspot=true&fp-y=0.58"||"", alt: response[0].mainImage.alt||""}
-      })
-      .finally(
-        () => (
-          (this.loading = false),
-          window.dataLayer = window.dataLayer || [],
-          window.dataLayer.push({
-          event: 'loadingDone',
-          })
-        )
-      );
+    // this.loadData();
   },
+  watch: {
+      $route: {
+        immediate: true,
+        handler() {
+          this.loadData()
+        }
+      }
+    }
 };
 </script>
 <style scoped>
+.notfound {
+  height: 70vh;
+  justify-content: center;
+  align-items: center;
+}
 .bloggcontent {
   display: flex;
   flex-direction: column;
