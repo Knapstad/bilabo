@@ -54,7 +54,7 @@ export default {
       {
         name: "description",
         content:
-          "En oversikt over flere bilabonnement leverandører på en side. Vi gjør det enkelt å finne det billigste bilabonnementet",
+          "En oversikt over flere bilabonnementleverandører på en side. Vi gjør det enkelt å finne det billigste bilabonnementet",
       },
       {
         name: "viewport",
