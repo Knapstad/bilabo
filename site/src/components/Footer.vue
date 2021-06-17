@@ -71,6 +71,7 @@ a {
 }
 @media only screen and (max-width: 600px) {
   .footerwrapper{
+    padding-top: 1rem;
     flex-direction: column-reverse;
   }
   .contact , .internal, .supplyers {
