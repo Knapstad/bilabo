@@ -70,13 +70,21 @@ a {
   color: white;
 }
 @media only screen and (max-width: 600px) {
-  .contact {
-    font-size: 20px;
+  .footerwrapper{
+    flex-direction: column-reverse;
+  }
+  .contact , .internal, .supplyers {
+    font-size: 1rem;
+    justify-content: flex-start;
+    margin-block-end: 10px;
+  }
+  .internal{
+    line-height: 1.2;
   }
 }
 
 @media only screen and (max-width: 360px) {
-  .contact {
+  .contact .internal, .supplyers  {
     font-size: 10px;
   }
 }
