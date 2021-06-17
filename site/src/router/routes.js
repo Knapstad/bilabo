@@ -32,6 +32,6 @@ module.exports = [
     path: '/*',
     name: 404,
     component: () => import('@/views/Blogg.vue'),
-    props: { data: '404' },
+    props: { slug: '404' },
   },
 ];
