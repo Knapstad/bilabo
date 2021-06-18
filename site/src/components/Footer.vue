@@ -5,9 +5,10 @@
         <h3>Leverandører:</h3>
         <router-link to="/volvo">Volvo</router-link>
         <router-link to="/imove">Imove</router-link>
-        <router-link to="/flex">Fleks</router-link>
+        <router-link to="/fleks">Fleks</router-link>
         <router-link to="/kinto-flex">Kinto Flex</router-link>
         <router-link to="/swapcar">Swapcar</router-link>
+        <router-link to="/flexidrive">Flexidrive</router-link>
       </div>
       <div class="contact">
         <a href="mailto:post@bilabonnement.app">post@bilabonnement.app</a>
