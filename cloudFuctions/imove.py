@@ -112,10 +112,10 @@ class Imove:
                         else car["fuelType"],
                         "year": car["year"],
                         "seats": car["numberOfSeats"],
-                        "transmission": "",
+                        "transmission": "auto",
                         "price": int(car["pricePerMonth"]),
                         "range": car["range"],
-                        "kmMonth": "",
+                        "kmMonth": "ubegrenset km/måned",
                         "location": [
                             district["description"] for district in car["districts"]
                         ],
