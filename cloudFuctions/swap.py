@@ -28,12 +28,12 @@ class Swap:
                     {
                         "site": "swap",
                         "name": car.find("div", {"class": "fcar-title"}).text,
-                        "make": car.find("div", {"class": "fcar-title"}).text.split()[
-                            0
-                        ],
+                        "make": "land rover" if car.find("div", {"class": "fcar-title"}).text.split()[
+                            0].lower() == "land" else  car.find("div", {"class": "fcar-title"}).text.split()[
+                            0],
                         "model": " ".join(
                             car.find("div", {"class": "fcar-title"}).text.split()[1:]
-                        ),
+                        ).replace("Rover ", ""),
                         "drive": details[2],
                         "year": details[0],
                         "seats": details[1],
