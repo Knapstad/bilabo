@@ -39,7 +39,7 @@ class Kinto:
                         "transmission": car.get("transmission", ""),
                         "price": int(car.get("pricePerMonth", "")),
                         "range": car.get("range", ""),
-                        "kmMonth": "",
+                        "kmMonth": "1500",
                         "location": ["Oslo"],
                         "availability": car.get("available", False),
                         "order": f"{base}/car/{car.get('id','')}",
