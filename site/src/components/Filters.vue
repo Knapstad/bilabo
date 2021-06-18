@@ -1,18 +1,23 @@
 <template>
-  <div class="filter-wrap">
-    <div class="label">Sted:</div>
-    <div class="filter-section">
-      <div v-for="item in locations()" :key="item">
-        <FilterItem :item="item" :type="'locations'" />
+<div class="filter-accordian">
+    <details open>
+    <summary>Filter</summary>
+    <div class="filter-wrap">
+      <div class="label">Sted:</div>
+      <div class="filter-section">
+        <div v-for="item in locations()" :key="item">
+          <FilterItem :item="item" :type="'locations'" />
+        </div>
+      </div>
+      <div class="label">Merke:</div>
+      <div class="filter-section">
+        <div v-for="item in makes()" :key="item">
+          <FilterItem :item="item" :type="'makes'" />
+        </div>
       </div>
     </div>
-    <div class="label">Merke:</div>
-    <div class="filter-section">
-      <div v-for="item in makes()" :key="item">
-        <FilterItem :item="item" :type="'makes'" />
-      </div>
-    </div>
-  </div>
+</details>
+</div>
 </template>
 
 <script>
@@ -52,7 +57,15 @@ export default {
 </script>
 
 <style scoped>
+details{
+  display: inline-flex;
+  margin: auto;
+}
 .filter-wrap {
+  display: flex;
+  margin-top: 1rem;
+}
+.filter-accordian {
   margin: auto;
   display: flex;
   padding: 1rem;
