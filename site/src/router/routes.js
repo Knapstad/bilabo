@@ -1,3 +1,19 @@
+var sanityClient = require('@sanity/client');
+
+
+const client = sanityClient({
+  projectId: 'bwpvihdh',
+  dataset: 'production',
+  useCdn: false,
+});
+
+function getSlugs(){
+  client.fetch(`*[_type=='post'].slug.current`)
+    .then((response) => response
+    )
+}
+
+
 module.exports = [
   {
     path: '/',
@@ -18,9 +34,15 @@ module.exports = [
   // },
   {
     path: '/:slug',
+    meta: {
+      sitemap: {
+       // Slugs can also be provided asynchronously
+       // The callback must always return an array
+        slugs: getSlugs(),
+      }
+    },
     name: ':slug',
     component: () => import('@/views/Blogg.vue'),
-    props: { slug: ':slug' },
   },
   // {
   //   path: '/imove',
