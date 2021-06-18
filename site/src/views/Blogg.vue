@@ -1,7 +1,7 @@
 <template>
   
   <div>
-    <div v-if="this.slug==='404'" class="notfound bloggcontent">
+    <div v-if="this.blocks==0" class="notfound bloggcontent">
       <p>Beklager vi finner ikke siden du leter etter</p>
     </div>
     <div class="bloggcontent">
@@ -30,7 +30,7 @@ const client = sanityClient({
 });
 export default {
   name: 'Blogg',
-  props: ['slug'],
+  props: [],
   components: {
     BlockContent,
     Footer,
@@ -53,10 +53,7 @@ export default {
     };
   },
   computed: {
-    query() {
-      return `*[_type=='post' && slug.current == ${this.slug}]{..., body[]{..., "asset": asset->}}`;
-    },
-  },
+   },
   methods:{
     loadData: function() {
       this.loading= true,
@@ -74,7 +71,7 @@ export default {
       }
 
       client
-        .fetch(`*[_type=='post' && slug.current == "${this.slug}"]{..., body[]{..., "asset": asset->}, mainImage{..., "asset": asset->}}`)
+        .fetch(`*[_type=='post' && slug.current == "${this.$route.params.slug}"]{..., body[]{..., "asset": asset->}, mainImage{..., "asset": asset->}}`)
         .then((response) => {
           this.response=response,
             this.blocks=this.response[0].body,
