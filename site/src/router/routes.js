@@ -16,12 +16,12 @@ async function getSlugs() {
       test=response
     }
     )
-    
+    console.log(test)
   
   return {test}
 }
 
-
+console.log(getSlugs())
 module.exports = [
   {
     path: '/',
@@ -46,7 +46,7 @@ module.exports = [
       sitemap: {
        // Slugs can also be provided asynchronously
        // The callback must always return an array
-        slugs: getSlugs(),
+        slugs:  async () => await getSlugs(),
       }
     },
     name: ':slug',
