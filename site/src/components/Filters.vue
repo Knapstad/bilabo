@@ -57,9 +57,8 @@ export default {
 </script>
 
 <style scoped>
-details{
-  display: inline-flex;
-  margin: auto;
+summary {
+  align-self: flex-start;
 }
 .filter-wrap {
   display: flex;
@@ -70,11 +69,13 @@ details{
   display: flex;
   padding: 1rem;
   width: fit-content;
+  min-width: 40%;
   background: var(--main-medium-light);
   color: white;
   margin-top: 1rem;
   box-shadow: 2px 2px 3px #000;
   border-radius: 2px;
+  
 }
 .filter-section {
   display: grid;
@@ -106,6 +107,12 @@ details{
     padding: 0;
     padding-bottom: .5rem;
   }
+  .filter-accordian {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    margin-block-end: 5px;
+    }
 }
 
 @media only screen and (max-width: 600px) {
