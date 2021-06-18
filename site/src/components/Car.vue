@@ -8,19 +8,8 @@
         <p>Pris: {{ car.price }}</p>
         <p>{{ car.drive }}</p>
         <p v-if="car.includedkm">KM/mnd: {{parseInt(car.includedkm)}}</p>
+        <p v-if="car.kmMonth">KM/mnd: {{car.kmMonth}}</p>
         <p v-if="car.delivery">{{ car.delivery }} levering</p>
-  <!-- <div class="label">
-          Sted:
-          <div class="location-container">
-            <div
-              class="location"
-              v-for="location in car.location"
-              :key="location"
-            >
-              {{ location }}
-            </div>
-          </div>
-        </div> -->
       </div>
       <div class="column">
           <svg
