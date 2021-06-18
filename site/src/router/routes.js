@@ -7,12 +7,22 @@ const client = sanityClient({
   useCdn: false,
 });
 
-function getSlugs(){
-  client.fetch(`*[_type=='post'].slug.current`)
-    .then((response) => response
+
+
+async function getSlugs() {
+  test=""
+  await client.fetch(`*[_type=='post'].slug.current`)
+    .then((response) => {
+      test=response
+      console.log(test)
+    }
     )
+    
+  
+  return {test}
 }
 
+test1 = getSlugs()
 
 module.exports = [
   {
