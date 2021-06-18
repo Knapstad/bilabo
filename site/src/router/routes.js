@@ -16,9 +16,7 @@ async function getSlugs() {
       test=response
     }
     )
-    console.log(test)
-  
-  return {test}
+  return test
 }
 
 console.log(getSlugs())
@@ -49,7 +47,7 @@ module.exports = [
         slugs:  async () => await getSlugs(),
       }
     },
-    name: ':slug',
+
     component: () => import('@/views/Blogg.vue'),
   },
   // {
