@@ -109,7 +109,7 @@ export default {
         { name: 'description', content: this.description}
       ],
       link: [
-      {rel: 'canonical', href: `https://bilabonnement.app/${this.slug}`}
+      {rel: 'canonical', href: `https://bilabonnement.app/${this.$route.params.slug}`}
   ]
       };
   },
