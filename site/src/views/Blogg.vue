@@ -102,6 +102,7 @@ export default {
         { name: 'twitter:description ', content: this.description},
         { name: 'twitter:creator ', content: "@bknapstad"},
         { property: 'og:title ', content: this.title},
+        { property: 'og:url ', content:  `https://bilabonnement.app/${this.$route.params.slug}`},
         { name: 'twitter:title ', content: this.title},
         { property: 'og:type ', content: "article"},
         { property: 'article:published_time', content: this.created},
