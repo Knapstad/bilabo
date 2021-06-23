@@ -169,15 +169,15 @@ export default {
   justify-content: center;
   display: inline-grid;
   grid-template-columns: 23% 23% 23% 23%;
-  padding: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   width: 100%;
 }
 .results{
   padding-left: 6px;
   font-size: 1.3rem;
   grid-column: 1 / -1;
-  background: dark;
-}
+  }
 .car {
   background: #fff;
   box-shadow: 2px 2px 3px #000;
