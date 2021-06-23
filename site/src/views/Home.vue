@@ -113,6 +113,8 @@ export default {
       let cars = this.locations;
       let locs = this.$store.state.locations;
       let makes = this.$store.state.makes;
+      let sites = this.$store.state.sites;
+      let drive = this.$store.state.drive;
       if (locs.length > 0) {
         cars = cars.filter((car) =>
           car.location.some((location) => locs.includes(location))
@@ -120,6 +122,12 @@ export default {
       }
       if (makes.length > 0) {
         cars = cars.filter((car) => makes.includes(car.make));
+      }
+      if (sites.length > 0) {
+        cars = cars.filter((car) => sites.includes(car.site));
+      }
+      if (drive.length > 0) {
+        cars = cars.filter((car) => drive.includes(car.drive));
       }
       return cars;
     },
