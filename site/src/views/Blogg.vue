@@ -53,8 +53,24 @@ export default {
     };
   },
   computed: {
-   },
+    jsonld : function(){
+      var jsondata =
+      {
+      "@context" : "http://schema.org",
+      "@type" : "Article",
+      "name" : this.blocks[0].children[0].text,
+      "image" : this.mainImage,
+      "articleBody" : this.blocks.slice(1).map((block) => block.children[0].text).join(),
+        "publisher" : {
+          "@type" : "Organization",
+          "name" : "Bilabonnement"
+        }
+      }
+      return jsondata
+    },
+  },
   methods:{
+    
     loadData: function() {
       this.loading= true,
       this.blocks= [],
