@@ -1,5 +1,5 @@
 <template>
-  
+  <script v-html="jsonld", type="application/ld+json">
   <div>
     <div v-if="this.blocks==0" class="notfound bloggcontent">
       <p>Beklager vi finner ikke siden du leter etter</p>
@@ -9,7 +9,6 @@
         <img v-if="mainImage" class="headerimage" :src="mainImage.url" :alt="mainImage.alt">
       </div>
       <block-content :blocks="blocks" :serializers="serializers" :imageOptions="{h: 300, w: 1000 ,fit : 'crop'}"/>
-    
     </div>
     <Footer />
   </div>
