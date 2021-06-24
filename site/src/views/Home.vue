@@ -63,14 +63,13 @@ export default {
       { name: "twitter:card", content: "summary" },
       {
         name: "twitter:title",
-        content: 'Bilabonnement.app | Bilabonnement samlet på en side"',
+        content: "Bilabonnement.app | Bilabonnement samlet på en side",
       },
       {
         name: "twitter:description",
         content:
           "En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen",
       },
-      // image must be an absolute path
       {
         name: "twitter:image",
         content:
@@ -79,9 +78,13 @@ export default {
       // Facebook OpenGraph
       {
         property: "og:title",
-        content: 'Bilabonnement.app | Bilabonnement samlet på en side"',
+        content: "Bilabonnement.app | Bilabonnement samlet på en side",
       },
-      { property: "og:site_name", content: 'Bilabonnement.app x"' },
+      {
+        property: "og:url",
+        content: 'https://bilabonnemet.app',
+      },
+      { property: "og:site_name", content: "Bilabonnement.app" },
       { property: "og:type", content: "website" },
       {
         property: "og:image",
