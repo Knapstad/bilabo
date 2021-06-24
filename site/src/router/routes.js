@@ -19,7 +19,6 @@ async function getSlugs() {
   return test
 }
 
-console.log(getSlugs())
 module.exports = [
   {
     path: '/',
