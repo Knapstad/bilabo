@@ -1,5 +1,4 @@
 <template>
-  <script v-html="jsonld", type="application/ld+json">
   <div>
     <div v-if="this.blocks==0" class="notfound bloggcontent">
       <p>Beklager vi finner ikke siden du leter etter</p>
@@ -58,7 +57,8 @@ export default {
       "@context" : "http://schema.org",
       "@type" : "Article",
       "name" : this.blocks[0].children[0].text,
-      "image" : this.mainImage,
+      "headline": this.blocks[0].children[0].text,
+      "image" : this.mainImage.url,
       "articleBody" : this.blocks.slice(1).map((block) => block.children[0].text).join(),
         "publisher" : {
           "@type" : "Organization",
@@ -69,6 +69,24 @@ export default {
     },
   },
   methods:{
+    addJsonld : function(){
+      console.log("start")
+      console.log(this.loading)
+      console.log(this.loading === false)
+      if(this.loading === false){
+        console.log("in if")
+        if(!document.querySelector("#articledata")){
+          var jsonldScript = document.createElement("script")
+          jsonldScript.setAttribute("type", "application/ld+json")
+          jsonldScript.setAttribute("id", "articledata")}
+        else{
+          jsonldScript=document.querySelector("#articledata")
+        }
+        jsonldScript.textContent=JSON.stringify(this.jsonld);
+        console.log(jsonldScript)
+        document.head.appendChild(jsonldScript)
+        }
+      },
     
     loadData: function() {
       this.loading= true,
@@ -102,7 +120,8 @@ export default {
           window.dataLayer=window.dataLayer||[],
           window.dataLayer.push({
             event: 'loadingDone',
-          })
+          }),
+          (this.addJsonld())
         )
       );
     }
@@ -137,6 +156,7 @@ export default {
         immediate: true,
         handler() {
           this.loadData()
+          
         }
       }
     }
