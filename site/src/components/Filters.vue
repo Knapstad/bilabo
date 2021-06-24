@@ -94,7 +94,7 @@ export default {
 
 <style scoped>
 summary {
-  /* align-self: flex-start; */
+  align-self: flex-start;
 }
 .filter-wrap {
   display: flex;
