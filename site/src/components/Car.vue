@@ -59,7 +59,7 @@
       </div>
     </div>
     <p v-if="car.site === 'volvo'" class="carfooter">
-      Motor: {{car.engineDescription}}
+      Motor: {{car.enginDescription}}
       Forbruk: {{ car.fuelconsumption }}
       Utslipp: {{ car.co2 }}
       Binding: {{ car.binding }}
