@@ -154,10 +154,9 @@ img {
   
 }
 img.logo{
-  width: 50px;
+  width: 56px;
   margin-right: 10px;
   align-self: center;
-  min-height: 10px;
 }
 svg {
   width: 98%;
