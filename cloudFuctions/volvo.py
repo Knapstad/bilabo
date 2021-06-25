@@ -26,7 +26,7 @@ class Volvo:
                             "name": car["title"],
                             "make": "Volvo",
                             "model": car["model"],
-                            "drive": car["fuelType"],
+                            "drive": car["fuelType"].replace("Pure",""),
                             "year": car["modelYear"],
                             "seats": car["numberOfSeats"],
                             "transmission": car["transmissionType"],
@@ -38,13 +38,16 @@ class Volvo:
                             "delivery": car["deliveryTime"] ,
                             "fuelconsumption": car["fuelConsumption"] ,
                             "co2": car["co2"],
-                            "binding": "3md oppsigelse eller 36mnd binding",
+                            "binding": "3md oppsigelse eller 36mnd binding" if car["fuelType"]=="PureElectric" else "3mnd oppsigelse",
                             "order": f"{base}+{car['vehicleId']}",
                             "img": car["image"],
-                            "cargoVolume": None
-    }
-                    )   
-            
+                            "cargoVolume": car["cargoCapacity"],
+                            "engine": car["engine"],
+                            "enginDescription": car["engineDescription"],
+                            "type": car["modelType"]
+                        }
+                    )
+
         except Exception as e:
             print(e)
             return None
