@@ -5,7 +5,7 @@
     </div>
     <div class="hello">
       <div class="column">
-        <p>Pris: {{ car.price }}</p>
+        <p>Pris: {{ car.price }}/mnd (inkl. mva)</p>
         <p>{{ car.drive }}</p>
         <p v-if="car.includedkm">KM/mnd: {{parseInt(car.includedkm)}}</p>
         <p v-if="car.kmMonth">KM/mnd: {{car.kmMonth}}</p>
@@ -59,6 +59,7 @@
       </div>
     </div>
     <p v-if="car.site === 'volvo'" class="carfooter">
+      Motor: {{car.engineDescription}}
       Forbruk: {{ car.fuelconsumption }}
       Utslipp: {{ car.co2 }}
       Binding: {{ car.binding }}
