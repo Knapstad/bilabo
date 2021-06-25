@@ -112,7 +112,7 @@ export default {
             this.updated=this.response[0]._updatedAt,
             this.title=this.response[0].title,
             this.description=this.response[0].description,
-            this.mainImage={ url: this.response[0].mainImage.asset.url+"?w=1000&h=300&fit=crop&hotspot=true&fp-y=0.58"||"", alt: response[0].mainImage.alt||"" };
+            this.mainImage={ url: this.response[0].mainImage.asset.url+"?w=675&h=345&fit=crop&hotspot=true"||"", alt: response[0].mainImage.alt||"" };
         })
       .finally(
         () => (
