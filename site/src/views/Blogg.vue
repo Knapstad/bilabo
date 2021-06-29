@@ -137,6 +137,7 @@ export default {
         { name: 'twitter:creator ', content: "@bknapstad"},
         { property: 'og:title ', content: this.title},
         { property: 'og:url ', content:  `https://bilabonnement.app/${this.$route.params.slug}`},
+        { property: 'og:image ', content:  `https://res.cloudinary.com/db0kzjtgs/image/upload/v1624966021/${this.$route.params.slug}-site.png`},
         { name: 'twitter:title ', content: this.title},
         { property: 'og:type ', content: "article"},
         { property: 'article:published_time', content: this.created},
