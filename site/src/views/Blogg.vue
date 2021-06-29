@@ -176,9 +176,14 @@ export default {
   margin: auto;
   line-height: 1.5;
 }
-.bloggcontent h1 {
+.bloggcontent h2 {
   color: black;
   font-size: 33px;
+}
+.bloggcontent h3 {
+  color: black;
+  font-size: 1.5rem;
+  font-weight: bolder;
 }
 .bloggcontent p {
   font-size: 22px;
