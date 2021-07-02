@@ -1,18 +1,43 @@
 <template>
-  <div class="filter-wrap">
-    <div class="label">Sted:</div>
-    <div class="filter-section">
-      <div v-for="item in locations()" :key="item">
-        <FilterItem :item="item" :type="'locations'" />
-      </div>
+<div class="filter-accordian">
+    <details open>
+    <summary>Filter</summary>
+    <div class="filter-wrap">
+        <div class="filter-group">
+          <div class="label">Sted</div>
+          <div class="filter-section">
+            <div v-for="item in locations()" :key="item">
+              <FilterItem :item="item" :type="'locations'" />
+            </div>
+          </div>
+        </div>
+        <div class="filter-group">
+          <div class="label">Merke</div>
+          <div class="filter-section">
+            <div v-for="item in makes()" :key="item">
+              <FilterItem :item="item" :type="'makes'" />
+            </div>
+          </div>
+        </div>
+        <div class="filter-group">
+          <div class="label">Type</div>
+          <div class="filter-section">
+            <div v-for="item in drive()" :key="item">
+              <FilterItem :item="item" :type="'drive'" />
+            </div>
+          </div>
+        </div>
+        <div class="filter-group">
+          <div class="label">Side</div>
+          <div class="filter-section">
+            <div v-for="item in sites()" :key="item">
+              <FilterItem :item="item" :type="'sites'" />
+            </div>
+          </div>
+        </div>
     </div>
-    <div class="label">Merke:</div>
-    <div class="filter-section">
-      <div v-for="item in makes()" :key="item">
-        <FilterItem :item="item" :type="'makes'" />
-      </div>
-    </div>
-  </div>
+</details>
+</div>
 </template>
 
 <script>
@@ -47,21 +72,54 @@ export default {
         .filter((v, i, a) => a.indexOf(v) === i);
       return cars;
     },
+    sites: function () {
+      let cars = Object.values(this.flat).flat();
+      cars = cars
+        .map((a) => a.site)
+        .flat()
+        .filter((v, i, a) => a.indexOf(v) === i);
+      return cars;
+    },
+    drive: function () {
+      let cars = Object.values(this.flat).flat();
+      cars = cars
+        .map((a) => a.drive.trim()||"Hydrogen")
+        .flat()
+        .filter((v, i, a) => a.indexOf(v) === i);
+      return cars;
+    },
   },
 };
 </script>
 
 <style scoped>
+summary {
+  align-self: flex-start;
+}
 .filter-wrap {
+  display: flex;
+  margin-top: 1rem;
+}
+.filter-accordian {
   margin: auto;
   display: flex;
   padding: 1rem;
   width: fit-content;
+  min-width: 40%;
   background: var(--main-medium-light);
   color: white;
   margin-top: 1rem;
   box-shadow: 2px 2px 3px #000;
   border-radius: 2px;
+  
+}
+.filter-group{
+  display: flex;
+  flex-direction: column;
+  margin-right: 3px;
+  box-shadow: 1px 2px 3px #000;
+  padding-bottom: 5px;
+  padding-right: 5px;
 }
 .filter-section {
   display: grid;
@@ -69,8 +127,11 @@ export default {
   grid-auto-flow: column;
 }
 .label {
-  margin-left: 1rem;
-}
+  background: var(--main-dark);
+  padding-left: 5px;
+  border-radius: 2px 2px 1px 1px;
+  width: 100%;
+  overflow: hidden;}
 @media only screen and (max-width: 900px) {
   .filter-section {
     grid-template-rows: repeat(3, 2rem);
@@ -80,6 +141,7 @@ export default {
     margin: 0;
     padding: 0;
     padding-bottom: .5rem;
+    flex-wrap: wrap;
   }
 }
 
@@ -92,7 +154,14 @@ export default {
     margin: 0;
     padding: 0;
     padding-bottom: .5rem;
+    flex-wrap: wrap;
   }
+  .filter-accordian {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    margin-block-end: 5px;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -104,6 +173,7 @@ export default {
     margin: 0;
     padding: 0;
     padding-bottom: .5rem;
+    flex-wrap: wrap;
   }
 }
 @media only screen and (max-width: 500px) {
@@ -115,6 +185,7 @@ export default {
     margin: 0;
     padding: 0;
     padding-bottom: .5rem;
+    flex-wrap: wrap;
   }
 }
 @media only screen and (max-width: 360px) {
@@ -126,6 +197,7 @@ export default {
     width: 100%;
     margin: 0;
     padding: 0;
+    flex-wrap: wrap;
   }
 }
 </style>

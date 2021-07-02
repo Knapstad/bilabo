@@ -1,11 +1,13 @@
 <template>
-  <div>   
+  <div>
+    <div v-if="this.blocks==0" class="notfound bloggcontent">
+      <p>Beklager vi finner ikke siden du leter etter</p>
+    </div>
     <div class="bloggcontent">
       <div>
         <img v-if="mainImage" class="headerimage" :src="mainImage.url" :alt="mainImage.alt">
       </div>
       <block-content :blocks="blocks" :serializers="serializers" :imageOptions="{h: 300, w: 1000 ,fit : 'crop'}"/>
-    
     </div>
     <Footer />
   </div>
@@ -26,7 +28,7 @@ const client = sanityClient({
 });
 export default {
   name: 'Blogg',
-  props: ['slug'],
+  props: [],
   components: {
     BlockContent,
     Footer,
@@ -49,9 +51,80 @@ export default {
     };
   },
   computed: {
-    query() {
-      return `*[_type=='post' && slug.current == ${this.slug}]{..., body[]{..., "asset": asset->}}`;
+    jsonld : function(){
+      var jsondata =
+      {
+      "@context" : "http://schema.org",
+      "@type" : "Article",
+      "name" : this.blocks[0].children[0].text,
+      "headline": this.blocks[0].children[0].text,
+      "image" : this.mainImage.url,
+      "articleBody" : this.blocks.slice(1).map((block) => block.children[0].text).join(),
+        "publisher" : {
+          "@type" : "Organization",
+          "name" : "Bilabonnement"
+        }
+      }
+      return jsondata
     },
+  },
+  methods:{
+    addJsonld : function(){
+      console.log("start")
+      console.log(this.loading)
+      console.log(this.loading === false)
+      if(this.loading === false){
+        console.log("in if")
+        if(!document.querySelector("#articledata")){
+          var jsonldScript = document.createElement("script")
+          jsonldScript.setAttribute("type", "application/ld+json")
+          jsonldScript.setAttribute("id", "articledata")}
+        else{
+          jsonldScript=document.querySelector("#articledata")
+        }
+        jsonldScript.textContent=JSON.stringify(this.jsonld);
+        console.log(jsonldScript)
+        document.head.appendChild(jsonldScript)
+        }
+      },
+    
+    loadData: function() {
+      this.loading= true,
+      this.blocks= [],
+      this.response= undefined,
+      this.updated= "",
+      this.create= "",
+      this.title= "",
+      this.description= "",
+      this.mainImage= undefined,
+      this.serializers= {
+        types: {
+          image: BlockImage
+          }
+      }
+
+      client
+        .fetch(`*[_type=='post' && slug.current == "${this.$route.params.slug}"]{..., body[]{..., "asset": asset->}, mainImage{..., "asset": asset->}}`)
+        .then((response) => {
+          this.response=response,
+            this.blocks=this.response[0].body,
+            this.created=this.response[0]._createdAt,
+            this.updated=this.response[0]._updatedAt,
+            this.title=this.response[0].title,
+            this.description=this.response[0].description,
+            this.mainImage={ url: this.response[0].mainImage.asset.url+"?w=675&h=345&fit=crop&hotspot=true"||"", alt: response[0].mainImage.alt||"" };
+        })
+      .finally(
+        () => (
+          (this.loading=false),
+          window.dataLayer=window.dataLayer||[],
+          window.dataLayer.push({
+            event: 'loadingDone',
+          }),
+          (this.addJsonld())
+        )
+      );
+    }
   },
   metaInfo() {
     return {
@@ -63,6 +136,8 @@ export default {
         { name: 'twitter:description ', content: this.description},
         { name: 'twitter:creator ', content: "@bknapstad"},
         { property: 'og:title ', content: this.title},
+        { property: 'og:url ', content:  `https://bilabonnement.app/${this.$route.params.slug}`},
+        { property: 'og:image ', content:  `https://res.cloudinary.com/db0kzjtgs/image/upload/v1624966021/${this.$route.params.slug}-site.png`},
         { name: 'twitter:title ', content: this.title},
         { property: 'og:type ', content: "article"},
         { property: 'article:published_time', content: this.created},
@@ -70,35 +145,30 @@ export default {
         { name: 'description', content: this.description}
       ],
       link: [
-      {rel: 'canonical', href: `https://bilabonnement.app/${this.slug}`}
+      {rel: 'canonical', href: `https://bilabonnement.app/${this.$route.params.slug}`}
   ]
       };
   },
   mounted() {
-    client
-      .fetch(`*[_type=='post' && slug.current == "${this.slug}"]{..., body[]{..., "asset": asset->}, mainImage{..., "asset": asset->}}`)
-      .then( (response) => {
-        this.response = response,
-        this.blocks = this.response[0].body,
-        this.created = this.response[0]._createdAt,
-        this.updated = this.response[0]._updatedAt,
-        this.title = this.response[0].title,
-        this.description = this.response[0].description,
-        this.mainImage = {url: this.response[0].mainImage.asset.url+"?w=1000&h=300&fit=crop&hotspot=true&fp-y=0.58"||"", alt: response[0].mainImage.alt||""}
-      })
-      .finally(
-        () => (
-          (this.loading = false),
-          window.dataLayer = window.dataLayer || [],
-          window.dataLayer.push({
-          event: 'loadingDone',
-          })
-        )
-      );
+    // this.loadData();
   },
+  watch: {
+      $route: {
+        immediate: true,
+        handler() {
+          this.loadData()
+          
+        }
+      }
+    }
 };
 </script>
 <style scoped>
+.notfound {
+  height: 70vh;
+  justify-content: center;
+  align-items: center;
+}
 .bloggcontent {
   display: flex;
   flex-direction: column;
@@ -106,9 +176,14 @@ export default {
   margin: auto;
   line-height: 1.5;
 }
-.bloggcontent h1 {
+.bloggcontent h2 {
   color: black;
   font-size: 33px;
+}
+.bloggcontent h3 {
+  color: black;
+  font-size: 1.5rem;
+  font-weight: bolder;
 }
 .bloggcontent p {
   font-size: 22px;

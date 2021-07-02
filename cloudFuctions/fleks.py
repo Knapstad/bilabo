@@ -37,6 +37,10 @@ class Fleks:
                 "petrol-hybrid": "Hybrid",
             }
             for car in cars["data"]:
+                if(car["attributes"]["make"] == "PEU"):
+                    car["attributes"]["make"] = "peugeot"
+                if(car["attributes"]["make"] == "MER"):
+                    car["attributes"]["make"] = "mercedes"
                 cleanCars.append(
                     {
                         "site": "fleks",
@@ -49,7 +53,7 @@ class Fleks:
                         "transmission": car["attributes"]["transmission"],
                         "price": int(car["attributes"]["price"]),
                         "range": car["attributes"]["range"],
-                        "kmMonth": "",
+                        "kmMonth": "1000",
                         "location": ["Oslo"],
                         "availability": car["attributes"]["availabilityStatus"],
                         "order": f"{base}{car['attributes']['slug']}",
@@ -57,6 +61,7 @@ class Fleks:
                         "cargoVolume": car["attributes"]["cargoVolume"],
                     }
                 )
+
 
             available = [car for car in cleanCars if car["availability"] == "available"]
             unavailable = [

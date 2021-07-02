@@ -1,5 +1,5 @@
 <template>
-  <button role="button" class="filter" :class="{active: isActive}" @click="active">{{item}}</button>
+  <button role="button" class="filter" :class="{active: isActive}" @click="active">{{item.charAt(0).toUpperCase() + item.slice(1)}}</button>
 </template>
 
 <script>
@@ -28,8 +28,7 @@ export default {
 <style scoped>
 .filter-wrap {
   display: flex;
-  
-}
+  }
 .filter {
   border-radius: 2px;
   background: var(--main-medium-dark);
@@ -39,7 +38,7 @@ export default {
   box-shadow: 2px 2px 3px #000;
   /* cursor: pointer; */
   border: none;
-  width: 90%;
+  min-width: 95%;
   font-size: 1rem;
 }
 .active {

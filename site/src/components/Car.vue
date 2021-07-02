@@ -5,22 +5,11 @@
     </div>
     <div class="hello">
       <div class="column">
-        <p>Pris: {{ car.price }}</p>
+        <p>Pris: {{ car.price }}/mnd (inkl. mva)</p>
         <p>{{ car.drive }}</p>
         <p v-if="car.includedkm">KM/mnd: {{parseInt(car.includedkm)}}</p>
+        <p v-if="car.kmMonth">KM/mnd: {{car.kmMonth}}</p>
         <p v-if="car.delivery">{{ car.delivery }} levering</p>
-  <!-- <div class="label">
-          Sted:
-          <div class="location-container">
-            <div
-              class="location"
-              v-for="location in car.location"
-              :key="location"
-            >
-              {{ location }}
-            </div>
-          </div>
-        </div> -->
       </div>
       <div class="column">
           <svg
@@ -70,6 +59,7 @@
       </div>
     </div>
     <p v-if="car.site === 'volvo'" class="carfooter">
+      Motor: {{car.enginDescription}}
       Forbruk: {{ car.fuelconsumption }}
       Utslipp: {{ car.co2 }}
       Binding: {{ car.binding }}
@@ -165,10 +155,9 @@ img {
   
 }
 img.logo{
-  width: 50px;
+  width: 56px;
   margin-right: 10px;
   align-self: center;
-  min-height: 10px;
 }
 svg {
   width: 98%;
