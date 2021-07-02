@@ -9,6 +9,14 @@
       </div>
       <block-content :blocks="blocks" :serializers="serializers" :imageOptions="{h: 300, w: 1000 ,fit : 'crop'}"/>
     </div>
+    <section class="">
+      <h3 class="bloggcontent">Det er for øyeblikket {{flatCars.length}} {{(flatCars.length > 1) ? "tilgenelige biler" : "tilgengelig bil"}} fra {{title}}</h3>
+      <div class="carcontainer">
+      <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
+          <Car class :car="car" />
+        </article>
+      </div>
+    </section>
     <Footer />
   </div>
 
@@ -19,6 +27,8 @@ import BlockContent from 'sanity-blocks-vue-component';
 import sanityClient from '@sanity/client';
 import Footer from '@/components/Footer.vue'
 import BlockImage from '@/components/BlockImage.vue'
+import Car from "@/components/Car.vue";
+import axios from "axios";
 
 
 const client = sanityClient({
@@ -32,9 +42,11 @@ export default {
   components: {
     BlockContent,
     Footer,
+    Car,
   },
   data() {
     return {
+      cars: this.$store.state.cars,
       loading: true,
       blocks: [],
       response: undefined,
@@ -67,6 +79,11 @@ export default {
       }
       return jsondata
     },
+    flatCars: function () {
+      let cars = Object.values(this.$store.state.cars["data"]).flat();
+      cars = cars.filter((car) => this.$route.params.slug.includes(car.site));
+      return cars;
+    },
   },
   methods:{
     addJsonld : function(){
@@ -87,6 +104,25 @@ export default {
         document.head.appendChild(jsonldScript)
         }
       },
+    get_cars: function(){
+      if(this.cars=="undefined" || this.cars==null)
+      {axios
+      .get("https://europe-west1-bilabo.cloudfunctions.net/give_car")
+      .then((response) => (this.$store.commit("addData", ["cars", response])),
+            )
+      .finally(
+        () => (
+          (this.loading = false),
+          (this.cars = this.$store.state.cars),
+          (window.sessionStorage.setItem("cars",JSON.stringify(this.$store.state.cars))),
+          window.dataLayer = window.dataLayer || [],
+          window.dataLayer.push({
+            event: "loadingDone",
+          })
+        )
+      );}
+      else{this.loading = false}
+    },
     
     loadData: function() {
       this.loading= true,
@@ -121,7 +157,8 @@ export default {
           window.dataLayer.push({
             event: 'loadingDone',
           }),
-          (this.addJsonld())
+          (this.addJsonld()),
+          (this.get_cars())
         )
       );
     }
@@ -164,6 +201,26 @@ export default {
 };
 </script>
 <style scoped>
+.carcontainer {
+  justify-content: center;
+  display: inline-grid;
+  grid-template-columns: 23% 23% 23% 23%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  width: 100%;
+}
+.results{
+  padding-left: 6px;
+  font-size: 1.3rem;
+  grid-column: 1 / -1;
+  }
+.car {
+  background: #fff;
+  box-shadow: 2px 2px 3px #000;
+  border-radius: 2px;
+  margin: 5px;
+  position: relative;
+}
 .notfound {
   height: 70vh;
   justify-content: center;
