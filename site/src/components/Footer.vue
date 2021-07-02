@@ -16,6 +16,7 @@
       <div class="internal">
         <router-link to="/om-oss">Om oss</router-link>
         <router-link to="/hva-er-bilabonnement">Hva er bilabonnement </router-link>
+        <router-link to="/cookies-personvern">Cookies og personvern</router-link>
       </div>
     </div>
   </footer>
