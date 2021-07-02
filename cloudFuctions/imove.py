@@ -1,145 +1,99 @@
+from typing import Dict, List
 import requests
 from bs4 import BeautifulSoup as BS
 from datetime import datetime
 import json
+import re
 
 
 class Imove:
     def __init__(self):
 
-        self.url = "https://secure.imove.no/cars"
+        self.url = "https://imove.no/produkter"
+        self.base = "https://imove.no"
+        self.api = "https://imove.no/_next/data/fs72Ed8P4Z0-OYgdjeYs8/no/produkter.json"
 
     @classmethod
-    def get_cars(cls, postalcode=None):
-        images = {
-            "BMW  i3 120ah": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW  i3 Charged Plus": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW  i3 Fully Charged": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW I3 120 Ah ": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW I3 94 Ah": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW i3 120 Ah": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW i3 120Ah": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW i3 120Ah Fully Charged (SPZ)": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW i3 94 Ah": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW i3 94Ah": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW i3 94Ah (SPZ)": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW i3 Charged": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW i3 Charged Plus": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW i3 Charged plus": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW i3 Fully Charged": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW i3 Fully Charged ": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "BMW i3s 94Ah (SPZ)": "BMW__i3_Charged_Plus_wyat3q.jpg",
-            "DS 3 Crossback (SPZ)": "DS_3_Crossback_l8skwa.jpg",
-            "Honda e": "Honda_e_isqmvv.png",
-            "Honda e (SPZ)": "Honda_e_isqmvv.png",
-            "Hyundai Ioniq EV": "hundai_ionic_mmw0o2.png",
-            "Hyundai Ioniq EV ": "hundai_ionic_mmw0o2.png",
-            "Hyundai Kona 64 kw (SPZ)": "Hyunda_kona_pypdwt.jpg",
-            "Hyundai Kona 64kW (SPZ)": "Hyunda_kona_pypdwt.jpg",
-            "KIA e-Soul 64 kw (SPZ)": "KIA_e-Soul_lsakit.jpg",
-            "Kia E-Niro (SPZ)": "kia-niro_u7cgdl.png",
-            "Kia Soul Active 30kW": "KIA_e-Soul_lsakit.jpg",
-            "Kia Soul EV ": "KIA_e-Soul_lsakit.jpg",
-            "Kia Soul Exclusive": "KIA_e-Soul_lsakit.jpg",
-            "Kia e-Soul 64 kw (SPZ)": "KIA_e-Soul_lsakit.jpg",
-            "MG ZS EV Comfort": "mg_ZS_xrbefp.png",
-            "MG ZS EV Comfort ": "mg_ZS_xrbefp.png",
-            "MG ZS EV Luxury": "mg_ZS_xrbefp.png",
-            "MG ZS EV Luxury ": "mg_ZS_xrbefp.png",
-            "MG ZS EV Luxury (SPZ)": "mg_ZS_xrbefp.png",
-            "MG ZS EV Luxury (SPZ) ": "mg_ZS_xrbefp.png",
-            "Nissan Leaf ": "nissan_leaf_m4rmmc.jpg",
-            "Nissan Leaf 40 kw (SPZ)": "nissan_leaf_m4rmmc.jpg",
-            "Nissan Leaf 62kW (SPZ)": "nissan_leaf_m4rmmc.jpg",
-            "Nissan Leaf Tekna 40 kw (SPZ) ": "nissan_leaf_m4rmmc.jpg",
-            "Nissan Leaf Tekna 62kW (SPZ)": "nissan_leaf_m4rmmc.jpg",
-            "Nissan e-NV200 ": "Nissan_e-NV200_zcp5hr.jpg",
-            "Peugeot e-208": "Peugeot_e-208_ic0bnm.jpg",
-            "Peugeot e-2008": "Peugeot_e-2008_vhluhb.jpg",
-            "Polestar 2": "Polestar_2_q7glmo.jpg",
-            "SEAT Mii Electric": "SEAT_Mii_Electric_xuewhc.png",
-            "Seat Mii Electric": "SEAT_Mii_Electric_xuewhc.png",
-            "Seat Mii Electric ": "SEAT_Mii_Electric_xuewhc.png",
-            "Seat Mii Electric (SPZ)": "SEAT_Mii_Electric_xuewhc.png",
-            "Skoda Citigo": "Skoda_CITIGOe_ierjzq.png",
-            "Skoda citigo": "Skoda_CITIGOe_ierjzq.png",
-            "Skoda CITIGO": "Skoda_CITIGOe_ierjzq.png",
-            "Skoda CITIGOe IV": "Skoda_CITIGOe_ierjzq.png",
-            "Skoda Citigo (SPZ)": "Skoda_CITIGOe_ierjzq.png",
-            "Tesla  Model S 75D": "Tesla__Model_S_rjksdm.png",
-            "Tesla Model 3 Long Range": "Tesla-Model-E_adwpvb.png",
-            "Tesla Model 3 Preformance": "Tesla_-Model-X_sehhta.png",
-            "Tesla Model X 75D": "Tesla_-Model-X_sehhta.png",
-            "Volksvagen e-Up": "Volkswagen_e-Up_tnrdho.png",
-            "Volkswagen E-Up! Range": "Volkswagen_e-Up_tnrdho.png",
-            "Volkswagen e-Golf": "Volkswagen_e-Golf_w2qhce.jpg",
-            "Volkswagen e-Golf ": "Volkswagen_e-Golf_w2qhce.jpg",
-            "Volkswagen e-Golf (SPZ)": "Volkswagen_e-Golf_w2qhce.jpg",
-            "Volkswagen e-UP! Range": "Volkswagen_e-Up_tnrdho.png",
-            "Volkswagen e-Up": "Volkswagen_e-Up_tnrdho.png",
-            "Volkswagen e-Up ": "Volkswagen_e-Up_tnrdho.png",
-            "Volkswagen e-Up!": "Volkswagen_e-Up_tnrdho.png",
-            "Volkswagen e-Up! ": "Volkswagen_e-Up_tnrdho.png",
-            "Volkswagen e-Up! Range": "Volkswagen_e-Up_tnrdho.png",
-        }
-        try:
-            img_url = (
-                "https://res.cloudinary.com/db0kzjtgs/image/upload/v1598602983/imove/"
-            )
-            base = "https://secure.imove.no/cars"
-            api = "https://secure.imove.no/api/vehicles?postalCode=0010"
-            response = requests.get(f"{api}")
-            tries = 0
-            while "20" not in str(response.status_code):
-                response = requests.get(f"{api}")
-                tries += 1
-                if tries > 3:
-                    print("no response imove")
-                    break
-            if "20" not in str(response.status_code):
-                return None
-            cars = response.json()
-            cleanCars = []
-            for car in cars:
-                cleanCars.append(
-                    {
-                        "site": "imove",
-                        "name": f"{car['make']} {car['model']}",
-                        "make": car["make"],
-                        "model": car["model"],
-                        "drive": "Elektrisk"
-                        if car["fuelType"] == "el"
-                        else car["fuelType"],
-                        "year": car["year"],
-                        "seats": car["numberOfSeats"],
-                        "transmission": "auto",
-                        "price": int(car["pricePerMonth"]),
-                        "range": car["range"],
-                        "kmMonth": "ubegrenset km/måned",
-                        "location": [
-                            district["description"] for district in car["districts"]
-                        ],
-                        "availability": "available"
-                        if not car["isReserved"]
-                        else "unavailable",
-                        "from": car["availableFromDate"],
-                        "order": f'{base}/{car["id"]}',
-                        "img": f"https://secure.imove.no{car['images'][0]['url']}" if car["images"] else "svg",
-                        "cargoVolume": car["trunkCapacityInLiters"],
+    def get_cars_api(cls) -> Dict:
+        url = "https://imove.no/produkter"
+        base = "https://imove.no"
+        api = "https://imove.no/_next/data/fs72Ed8P4Z0-OYgdjeYs8/no/produkter.json"
+        data = requests.get(api).json()["pageProps"]["products"]
+        cars = []
+        for car in data:
+            cars.append(
+                {
+                    "site": "imove",
+                    "name": car["name"],
+                    "make": car["name"].split()[0],
+                    "model": "",
+                    "drive": "Elektrisk",
+                    "year": car["productionYears"][0],
+                    "seats": car["seats"][0],
+                    "transmission": "auto",
+                    "price":  car["price"],
+                    "range": car["ranges"][-1],
+                    "kmMonth": "ubegrenset",
+                    "location": ["Oslo","Bergen"],
+                    "availability": "available",
+                    "from": car["availableDates"][0]["availableFrom"],
+                    "order": f"{url}/{car['slug']}",
+                    "img": f"https://api.prod.imove.no/file/images/{car['images'][0]['imageId']}/raw?cloudinaryParams=w_480,h_302,c_fill,g_auto",
+                    "cargoVolume": "",
                     }
+            )
+        return (cars, )
+
+
+    def get_links(self) -> List:
+        response = requests.get(self.api)
+        soup = BS(response.text, "lxml")
+        cars = soup.findAll("article")
+        links = [f"{self.base}{car.a['href']}" for car in cars]
+        return links
+
+    def get_car(self, url: str) -> Dict:
+        matchstrig_sted = r"(?<=Tilgjengelig\s\si\s).*(?=fra)"
+        matchstrig_dato = r"(?<=fra\s).*"
+        response = requests.get(url)
+        soup = BS(response.text, "lxml")
+        car = {}
+        try:
+            car = {
+                    "site": "imove",
+                    "name": soup.find("h2", {"class": "Headers__H2-sc-156gim-1 lhuYdM"}).text,
+                    "make": soup.find("h2", {"class": "Headers__H2-sc-156gim-1 lhuYdM"}).text.split()[0],
+                    "model": "",
+                    "drive": "Elektrisk",
+                    "year": soup.select("li div p")[0].text,
+                    "seats": soup.select("li div p")[3].text.replace(" seter",""),
+                    "transmission": "auto",
+                    "price":  "".join([match.group() for match in re.finditer("\d",soup.select(".guOFvB")[0].text)]),
+                    "range": soup.select("li div p")[1].text.replace(" km rekkevidde",""),
+                    "kmMonth": "ubegrenset km/måned",
+                    "location": re.search(matchstrig_sted,soup.select("p.gSUBkT")[0].text).group().split(),
+                    "availability": "available",
+                    "from": re.search(matchstrig_dato,soup.select("p.gSUBkT")[0].text).group(),
+                    "order": f'{url}',
+                    "img": soup.find("img")["src"],
+                    "cargoVolume": "",
+                    }
+        except Exception as E:
+            print(E, url)
+        return car
+
+
+    def get_cars(self, postalcode=None):
+        try:
+            links = self.get_links()
+            cars = []
+            for link in links:
+                cars.append(
+                    self.get_car(link)
                 )
 
-            available = [
-                car
-                for car in cleanCars
-                if car["availability"] == "available"
-                and (datetime.now() - datetime.fromisoformat(car["from"][:-1])).days
-                < 15
-            ]
-            unavailable = [
-                car for car in cleanCars if car["availability"] != "available"
-            ]
-            return (available, unavailable)
+            
+            return (cars, )
         except Exception as e:
             print(e)
             return None
