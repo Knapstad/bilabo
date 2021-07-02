@@ -8,6 +8,7 @@ export default new Vuex.Store({
     locations: [],
     sites: [],
     makes: [],
+    drive: [],
     data: [],
     cars: JSON.parse(window.sessionStorage.getItem("cars")),
   },

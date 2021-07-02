@@ -17,7 +17,7 @@
       <Filters :data="cars" :flat="locations"/>
       
       <main id="content" class="carcontainer">
-        <section class="results">Vi fant {{Object.values(cars["data"]).flat().length}} biler du kan abonnere på </section>
+        <section class="results">Vi fant {{Object.values(flatCars).flat().length}} {{(flatCars.length > 1) ? "biler" : "bil"}} du kan abonnere på </section>
         <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
           <Car class :car="car" />
         </article>
@@ -54,7 +54,7 @@ export default {
       {
         name: "description",
         content:
-          "En oversikt over flere bilabonnement leverandører på en side. Vi gjør det enkelt å finne det billigste bilabonnementet",
+          "En oversikt over flere bilabonnementleverandører på en side. Vi gjør det enkelt å finne det billigste bilabonnementet",
       },
       {
         name: "viewport",
@@ -63,14 +63,13 @@ export default {
       { name: "twitter:card", content: "summary" },
       {
         name: "twitter:title",
-        content: 'Bilabonnement.app | Bilabonnement samlet på en side"',
+        content: "Bilabonnement.app | Bilabonnement samlet på en side",
       },
       {
         name: "twitter:description",
         content:
           "En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen",
       },
-      // image must be an absolute path
       {
         name: "twitter:image",
         content:
@@ -79,9 +78,13 @@ export default {
       // Facebook OpenGraph
       {
         property: "og:title",
-        content: 'Bilabonnement.app | Bilabonnement samlet på en side"',
+        content: "Bilabonnement.app | Bilabonnement samlet på en side",
       },
-      { property: "og:site_name", content: 'Bilabonnement.app x"' },
+      {
+        property: "og:url",
+        content: 'https://bilabonnemet.app',
+      },
+      { property: "og:site_name", content: "Bilabonnement.app" },
       { property: "og:type", content: "website" },
       {
         property: "og:image",
@@ -113,6 +116,8 @@ export default {
       let cars = this.locations;
       let locs = this.$store.state.locations;
       let makes = this.$store.state.makes;
+      let sites = this.$store.state.sites;
+      let drive = this.$store.state.drive;
       if (locs.length > 0) {
         cars = cars.filter((car) =>
           car.location.some((location) => locs.includes(location))
@@ -120,6 +125,12 @@ export default {
       }
       if (makes.length > 0) {
         cars = cars.filter((car) => makes.includes(car.make));
+      }
+      if (sites.length > 0) {
+        cars = cars.filter((car) => sites.includes(car.site));
+      }
+      if (drive.length > 0) {
+        cars = cars.filter((car) => drive.includes(car.drive));
       }
       return cars;
     },
@@ -161,15 +172,15 @@ export default {
   justify-content: center;
   display: inline-grid;
   grid-template-columns: 23% 23% 23% 23%;
-  padding: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   width: 100%;
 }
 .results{
   padding-left: 6px;
   font-size: 1.3rem;
   grid-column: 1 / -1;
-  background: dark;
-}
+  }
 .car {
   background: #fff;
   box-shadow: 2px 2px 3px #000;
