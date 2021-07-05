@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <div class="header"><h3>{{ car.name }}</h3>
+    <div class="header" :id="id"><h3>{{ car.name }}</h3>
       <img class="logo" :src="logo" alt="">
     </div>
     <div class="hello">
@@ -64,19 +64,19 @@
       Utslipp: {{ car.co2 }}
       Binding: {{ car.binding }}
     </p>
-    <a :href="url" target="_blank" rel="nofollow noopener" >
-      
-      <div class="button">BESTILL</div>
+  <a class="button" :href="url" target="_blank" rel="nofollow noopener" :aria-label= "'Bestill '+ car.name" >
+    BESTILL 
     </a>
   </div>
-</template>
+</template> 
 
 <script>
 export default {
-  name: 'Car',
-  props: {
+  name: 'Car',  
+  props: {  
     car: Object,
     site: String,
+    id: Number,
   },
   computed: {
     url() {
