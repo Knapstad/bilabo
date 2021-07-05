@@ -17,7 +17,7 @@
       <Filters :data="cars" :flat="locations"/>
       
       <main id="content" class="carcontainer">
-        <section class="results">Vi fant {{Object.values(flatCars).flat().length}} {{(flatCars.length > 1) ? "biler" : "bil"}} du kan abonnere på </section>
+        <section class="results"><h2>Vi fant {{Object.values(flatCars).flat().length}} {{(flatCars.length > 1) ? "biler" : "bil"}} du kan abonnere på </h2></section>
         <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
           <Car class :car="car" />
         </article>
@@ -168,6 +168,10 @@ export default {
 };
 </script>
 <style>
+h2{
+font-size: 25px;
+margin-bottom: 5px;
+}
 .carcontainer {
   justify-content: center;
   display: inline-grid;
