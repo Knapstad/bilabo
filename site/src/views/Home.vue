@@ -19,7 +19,7 @@
       <main id="content" class="carcontainer">
         <section class="results"><h2>Vi fant {{Object.values(flatCars).flat().length}} {{(flatCars.length > 1) ? "biler" : "bil"}} du kan abonnere på </h2></section>
         <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
-          <Car class :car="car" />
+          <Car class :car="car" :id="index" />
         </article>
       </main>
     </div>
