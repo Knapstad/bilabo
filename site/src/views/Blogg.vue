@@ -93,11 +93,7 @@ export default {
   },
   methods:{
     addJsonld : function(){
-      console.log("start")
-      console.log(this.loading)
-      console.log(this.loading === false)
       if(this.loading === false){
-        console.log("in if")
         if(!document.querySelector("#articledata")){
           var jsonldScript = document.createElement("script")
           jsonldScript.setAttribute("type", "application/ld+json")
@@ -106,7 +102,6 @@ export default {
           jsonldScript=document.querySelector("#articledata")
         }
         jsonldScript.textContent=JSON.stringify(this.jsonld);
-        console.log(jsonldScript)
         document.head.appendChild(jsonldScript)
         }
       },
