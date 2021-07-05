@@ -25,6 +25,7 @@
           viewBox="0 10 100 65"
           style="enable-background: new 0 0 98.967 98.967"
           xml:space="preserve"
+          alt="Illustrasjon av bil ved manglende bilde"
         >
           <g>
             <g>
@@ -55,7 +56,7 @@
           <g />
           <g />
         </svg>
-        <img v-else :src="car.img.replace(' ', '-')" alt=""/>
+        <img v-else :src="car.img.replace(' ', '-')" :alt="car.name + ' ' + car.year + '-modell'"/>
       </div>
     </div>
     <p v-if="car.site === 'volvo'" class="carfooter">
