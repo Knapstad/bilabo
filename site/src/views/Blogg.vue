@@ -272,5 +272,10 @@ img.fullwidth{
   .bloggcontent{
     width: 95%;
   }
+  .carcontainer {
+    grid-template-columns: 49% 49%;
+    padding: 0;
+  }
+
 }
 </style>
