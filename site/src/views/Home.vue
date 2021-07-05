@@ -3,12 +3,11 @@
   <a href="#content" class="skip">Hopp over filter</a>
     <div v-if="loading" class="loading">
       <div class="loading__letter">L</div>
-      <div class="loading__letter">o</div>
-      <div class="loading__letter">a</div>
-      <div class="loading__letter">d</div>
-      <div class="loading__letter">i</div>
-      <div class="loading__letter">n</div>
-      <div class="loading__letter">g</div>
+      <div class="loading__letter">a<a href=""></a></div>
+      <div class="loading__letter">s</div>
+      <div class="loading__letter">t</div>
+      <div class="loading__letter">e</div>
+      <div class="loading__letter">r</div>
       <div class="loading__letter">.</div>
       <div class="loading__letter">.</div>
       <div class="loading__letter">.</div>
