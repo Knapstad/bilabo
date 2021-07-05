@@ -80,8 +80,14 @@ export default {
       return jsondata
     },
     flatCars: function () {
-      let cars = Object.values(this.$store.state.cars["data"]).flat();
-      cars = cars.filter((car) => this.$route.params.slug.includes(car.site));
+      this.get_cars();
+      let cars = []
+      try{
+        cars = Object.values(this.$store.state.cars["data"]).flat();
+        cars = cars.filter((car) => this.$route.params.slug.includes(car.site));
+      }catch{
+        console.log("nocars")
+      }
       return cars;
     },
   },
@@ -114,12 +120,8 @@ export default {
         () => (
           (this.loading = false),
           (this.cars = this.$store.state.cars),
-          (window.sessionStorage.setItem("cars",JSON.stringify(this.$store.state.cars))),
-          window.dataLayer = window.dataLayer || [],
-          window.dataLayer.push({
-            event: "loadingDone",
-          })
-        )
+          (window.sessionStorage.setItem("cars",JSON.stringify(this.$store.state.cars)))
+          )
       );}
       else{this.loading = false}
     },
@@ -188,6 +190,23 @@ export default {
   },
   mounted() {
     this.loadData();
+    if(this.cars=="undefined" || this.cars==null)
+    {axios
+      .get("https://europe-west1-bilabo.cloudfunctions.net/give_car")
+      .then((response) => (this.$store.commit("addData", ["cars", response])),
+            )
+      .finally(
+        () => (
+          (this.loading = false),
+          (this.cars = this.$store.state.cars),
+          (window.sessionStorage.setItem("cars",JSON.stringify(this.$store.state.cars))),
+          window.dataLayer = window.dataLayer || [],
+          window.dataLayer.push({
+            event: "loadingDone",
+          })
+        )
+      );}
+      else{this.loading = false}
   },
   watch: {
       $route: {
