@@ -10,9 +10,9 @@
         <router-link to="/swapcar">Swapcar</router-link>
         <router-link to="/flexidrive">Flexidrive</router-link>
       </nav>
-      <contact class="contact">
+      <address class="contact">
         <a href="mailto:post@bilabonnement.app">post@bilabonnement.app</a>
-      </contact>
+      </address>
       <nav class="internal">
         <router-link to="/om-oss">Om oss</router-link>
         <router-link to="/hva-er-bilabonnement">Hva er bilabonnement </router-link>
@@ -30,6 +30,9 @@ export default {
 </script>
 
 <style scoped>
+address{
+  font-style : normal;
+}
 h3{
   padding: 0px;
   margin: 0px;
