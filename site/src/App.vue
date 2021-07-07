@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <header id="nav">
+    <header id="header">
       <router-link to="/">
         <img src="@/assets/logo.png" class="logo" alt="Til forsiden"
       /></router-link>
-      <router-link to="/"> <h1>Bilabonnement</h1> </router-link>
+      <p class="tagline"><router-link to="/"> <h1>Bilabonnement</h1> </router-link> - vi samler bilabonnement på en side</p>
     </header>
     <router-view />
   <Footer />
@@ -42,6 +42,9 @@ html,
   height: auto;
   overflow-x: hidden;
 }
+.tagline{
+  color: #cae8d5;
+}
 
 h1 {
   font-size: 40px;
@@ -49,7 +52,7 @@ h1 {
   color: #cae8d5;
 }
 
-#nav {
+#header {
   display: flex;
   padding-top: 40px;
   padding-left: 40px;
