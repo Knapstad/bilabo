@@ -7,7 +7,7 @@
       <div>
         <img v-if="mainImage" class="headerimage" :src="mainImage.url" :alt="mainImage.alt">
       </div>
-      <block-content :blocks="blocks" :serializers="serializers" :imageOptions="{h: 300, w: 1000 ,fit : 'crop'}"/>
+      <block-content  :blocks="blocks" :serializers="serializers" :imageOptions="{h: 300, w: 1000 ,fit : 'crop'}"/>
     </div>
     <section class="">
       <h3 class="bloggcontent">Det er for øyeblikket {{flatCars.length}} {{(flatCars.length > 1) ? "tilgengelige biler" : "tilgengelig bil"}} fra {{title}}</h3>
@@ -23,10 +23,13 @@
 </template>
 
 <script>
+// import LinksInternal from '@/components/LinksInternal.vue';
 import BlockContent from 'sanity-blocks-vue-component';
+import BlockImage from '@/components/BlockImage.vue';
+import DataRef from '@/components/DataRef.vue';
+// import Links from '@/components/Links.vue';
+import Footer from '@/components/Footer.vue';
 import sanityClient from '@sanity/client';
-import Footer from '@/components/Footer.vue'
-import BlockImage from '@/components/BlockImage.vue'
 import Car from "@/components/Car.vue";
 import axios from "axios";
 
@@ -36,6 +39,26 @@ const client = sanityClient({
   dataset: 'production',
   useCdn: false,
 });
+const serializers = {
+        types: {
+          image: BlockImage,
+          dataref: DataRef,
+          marks: {
+            link: ({mark, children}) => {
+          const { newtab, href } = mark
+          return newtab ?
+            <a href={href} target="_blank" rel="noopener">{children}</a>
+            : <a href={href}>{children}</a>
+        },
+            internalLink: ({mark, children}) => {
+            const {slug = {}} = mark
+            const href = `/${slug.current}`
+            return <a href={href}>{children}</a>
+          }
+            }
+          }
+        }
+
 export default {
   name: 'Blogg',
   props: [],
@@ -43,6 +66,7 @@ export default {
     BlockContent,
     Footer,
     Car,
+
   },
   data() {
     return {
@@ -55,12 +79,8 @@ export default {
       title: "",
       description: "",
       mainImage: undefined,
-      serializers: {
-        types: {
-          image: BlockImage
-          }
-      },
-    };
+      serializers: serializers
+    }
   },
   computed: {
     jsonld : function(){
@@ -70,7 +90,7 @@ export default {
       "@type" : "Article",
       "name" : this.blocks[0].children[0].text,
       "headline": this.blocks[0].children[0].text,
-      "image" : this.mainImage.url,
+      "image" : this.mainImage?.url ,
       "articleBody" : this.blocks.slice(1).map((block) => block.children[0].text).join(),
         "publisher" : {
           "@type" : "Organization",
@@ -105,6 +125,17 @@ export default {
         document.head.appendChild(jsonldScript)
         }
       },
+    compare: function (a, b) {
+      const carA = parseInt(a.price);
+      const carB = parseInt(b.price);
+      if (carA < carB) {
+        return -1;
+      }
+      if (carA > carB) {
+        return 1;
+      }
+      return 0;
+    },
     get_cars: function(){
       if(this.cars=="undefined" || this.cars==null)
       {axios
@@ -122,20 +153,14 @@ export default {
     },
     
     loadData: function() {
-      this.loading= true,
-      this.blocks= [],
-      this.response= undefined,
-      this.updated= "",
-      this.create= "",
-      this.title= "",
-      this.description= "",
-      this.mainImage= undefined,
-      this.serializers= {
-        types: {
-          image: BlockImage
-          }
-      }
-
+      this.loading = true,
+      this.blocks = [],
+      this.response = undefined,
+      this.updated = "",
+      this.create = "",
+      this.title = "",
+      this.description = "",
+      this.mainImage = undefined,
       client
         .fetch(`*[_type=='post' && slug.current == "${this.$route.params.slug}"]{..., body[]{..., "asset": asset->}, mainImage{..., "asset": asset->}}`)
         .then((response) => {
@@ -145,7 +170,7 @@ export default {
             this.updated=this.response[0]._updatedAt,
             this.title=this.response[0].title,
             this.description=this.response[0].description,
-            this.mainImage={ url: this.response[0].mainImage.asset.url+"?w=675&h=345&fit=crop&hotspot=true"||"", alt: response[0].mainImage.alt||"" };
+            this.mainImage={ url: this.response[0].mainImage?.asset.url+"?w=675&h=345&fit=crop&hotspot=true"||"", alt: response[0].mainImage?.alt||"" };
         })
       .finally(
         () => (
@@ -185,23 +210,6 @@ export default {
   },
   mounted() {
     this.loadData();
-    if(this.cars=="undefined" || this.cars==null)
-    {axios
-      .get("https://europe-west1-bilabo.cloudfunctions.net/give_car")
-      .then((response) => (this.$store.commit("addData", ["cars", response])),
-            )
-      .finally(
-        () => (
-          (this.loading = false),
-          (this.cars = this.$store.state.cars),
-          (window.sessionStorage.setItem("cars",JSON.stringify(this.$store.state.cars))),
-          window.dataLayer = window.dataLayer || [],
-          window.dataLayer.push({
-            event: "loadingDone",
-          })
-        )
-      );}
-      else{this.loading = false}
   },
   watch: {
       $route: {
