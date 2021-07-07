@@ -162,7 +162,11 @@ export default {
           })
         )
       );}
-      else{this.loading = false}
+      else{this.loading = false,
+      window.dataLayer.push({
+            event: "loadingDone",
+          })
+      }
   },
 };
 </script>
