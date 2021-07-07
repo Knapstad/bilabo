@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <div class="footerwrapper">
-      <div class="supplyers">
+      <nav class="supplyers">
         <h3>Leverandører:</h3>
         <router-link to="/volvo">Volvo</router-link>
         <router-link to="/imove">Imove</router-link>
@@ -9,15 +9,15 @@
         <router-link to="/kinto-flex">Kinto Flex</router-link>
         <router-link to="/swapcar">Swapcar</router-link>
         <router-link to="/flexidrive">Flexidrive</router-link>
-      </div>
-      <div class="contact">
+      </nav>
+      <contact class="contact">
         <a href="mailto:post@bilabonnement.app">post@bilabonnement.app</a>
-      </div>
-      <div class="internal">
+      </contact>
+      <nav class="internal">
         <router-link to="/om-oss">Om oss</router-link>
         <router-link to="/hva-er-bilabonnement">Hva er bilabonnement </router-link>
         <router-link to="/cookies-personvern">Cookies og personvern</router-link>
-      </div>
+      </nav>
     </div>
   </footer>
 </template>
