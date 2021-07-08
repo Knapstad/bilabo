@@ -7,7 +7,8 @@
       <div>
         <img v-if="mainImage" class="headerimage" :src="mainImage.url" :alt="mainImage.alt">
       </div>
-      <block-content  :blocks="blocks" :serializers="serializers" :imageOptions="{h: 300, w: 1000 ,fit : 'crop'}"/>
+      <block-content
+      :blocks="blocks" :serializers="serializers" :imageOptions="{h: 300, w: 1000 ,fit : 'crop'}"/>
     </div>
     <section class="">
       <h3 class="bloggcontent">Det er for øyeblikket {{flatCars.length}} {{(flatCars.length > 1) ? "tilgengelige biler" : "tilgengelig bil"}} fra {{title}}</h3>
@@ -23,11 +24,10 @@
 </template>
 
 <script>
-// import LinksInternal from '@/components/LinksInternal.vue';
 import BlockContent from 'sanity-blocks-vue-component';
 import BlockImage from '@/components/BlockImage.vue';
 import DataRef from '@/components/DataRef.vue';
-// import Links from '@/components/Links.vue';
+import Links from '@/components/Links.vue';
 import Footer from '@/components/Footer.vue';
 import sanityClient from '@sanity/client';
 import Car from "@/components/Car.vue";
@@ -42,22 +42,12 @@ const client = sanityClient({
 const serializers = {
         types: {
           image: BlockImage,
-          dataref: DataRef,
-          marks: {
-            link: ({mark, children}) => {
-          const { newtab, href } = mark
-          return newtab ?
-            <a href={href} target="_blank" rel="noopener">{children}</a>
-            : <a href={href}>{children}</a>
-        },
-            internalLink: ({mark, children}) => {
-            const {slug = {}} = mark
-            const href = `/${slug.current}`
-            return <a href={href}>{children}</a>
-          }
-            }
-          }
+          dataref: DataRef
+          },
+        marks: {
+          link: Links
         }
+}
 
 export default {
   name: 'Blogg',
