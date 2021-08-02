@@ -5,7 +5,7 @@
     </div>
     <div class="bloggcontent">
       <div>
-        <img v-if="mainImage" class="headerimage" :src="mainImage.url" :alt="mainImage.alt">
+        <img v-if="mainImage" class="headerimage" :src='mainImage.url+"?w=675&h=345&fit=crop&hotspot=true"' :alt="mainImage.alt">
       </div>
       <block-content
       :blocks="blocks" :serializers="serializers" :imageOptions="{h: 300, w: 1000 ,fit : 'crop'}"/>
@@ -160,7 +160,7 @@ export default {
             this.updated=this.response[0]._updatedAt,
             this.title=this.response[0].title,
             this.description=this.response[0].description,
-            this.mainImage={ url: this.response[0].mainImage?.asset.url+"?w=675&h=345&fit=crop&hotspot=true"||"", alt: response[0].mainImage?.alt||"" };
+            this.mainImage={ url: this.response[0].mainImage?.asset.url||"", alt: response[0].mainImage?.alt||"" };
         })
       .finally(
         () => (
