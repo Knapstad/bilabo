@@ -11,7 +11,7 @@
       :blocks="blocks" :serializers="serializers" :imageOptions="{h: 300, w: 1000 ,fit : 'crop'}"/>
     </div>
     <section class="">
-      <h3 class="bloggcontent">Det er for øyeblikket {{flatCars.length}} {{(flatCars.length > 1) ? "tilgengelige biler" : "tilgengelig bil"}} fra {{title}}</h3>
+      <h3 v-if="flatCars.lengt >= 1" class="bloggcontent">Det er for øyeblikket {{flatCars.length}} {{(flatCars.length > 1) ? "tilgengelige biler" : "tilgengelig bil"}} fra {{title}}</h3>
       <div class="carcontainer">
       <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
           <Car class :car="car" />
