@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="header" :id="id"><h3>{{ car.name }}</h3>
-      <img class="logo" :src="logo" alt="">
+      <img class="logo" :src="logo" :alt='"logo for "+ car.site'>
     </div>
     <div class="hello">
       <div class="column">
