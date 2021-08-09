@@ -65,7 +65,7 @@
       Utslipp: {{ car.co2 }}
       Binding: {{ car.binding }}
     </p>
-  <a class="button" :href="url" target="_blank" rel="nofollow noopener" :aria-label= "'Bestill '+ car.name" >
+  <a class="button" :href="url" target="_blank" rel="nofollow noopener" :aria-label= "'Bestill '+ car.name + ' hos '+ car.site" >
     BESTILL 
     </a>
   </div>
