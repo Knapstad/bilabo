@@ -123,13 +123,13 @@ export default {
         );
       }
       if (makes.length > 0) {
-        cars = cars.filter((car) => makes.includes(car.make));
+        cars = cars.filter((car) => makes.includes(car.make.toLowerCase()));
       }
       if (sites.length > 0) {
         cars = cars.filter((car) => sites.includes(car.site));
       }
       if (drive.length > 0) {
-        cars = cars.filter((car) => drive.includes(car.drive));
+        cars = cars.filter((car) => drive.includes(car.drive.toLowerCase()));
       }
       return cars;
     },
