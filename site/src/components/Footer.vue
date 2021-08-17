@@ -9,6 +9,7 @@
         <router-link to="/kinto-flex">Kinto Flex</router-link>
         <router-link to="/swapcar">Swapcar</router-link>
         <router-link to="/flexidrive">Flexidrive</router-link>
+        <router-link to="/enterprise">Enterprise</router-link>
       </nav>
       <address class="contact">
         <a href="mailto:post@bilabonnement.app">post@bilabonnement.app</a>
