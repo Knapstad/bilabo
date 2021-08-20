@@ -6,11 +6,15 @@ import logging
 
 from google.auth import credentials
 import config
+
+from swap import Swap
 from fleks import Fleks
 from imove import Imove
-from swap import Swap
 from kinto import Kinto
 from volvo import Volvo
+from flexidrive import Flexidrive
+from enterprise import Enterprise
+
 from google.cloud import storage
 from google.oauth2 import service_account
 import google.cloud.logging
@@ -84,11 +88,14 @@ def main(*args, **kwargs):
     client = storage.Client(project=config.bucket_name, credentials=CREDENTIALS)
 
     fleks = Fleks.get_cars()
-    imove = Imove.get_cars()
+    imove = Imove.get_cars_api()
     swap = Swap.get_cars()
     kinto = Kinto.get_cars()
     volvo = Volvo.get_cars()
+    flexidrive = Flexidrive.get_cars()
+    enterprise = Enterprise.get_cars()
     mycars = load_tekst(client)
+    
     if fleks:
         mycars["fleks"] = fleks[0]
     else:
@@ -108,7 +115,13 @@ def main(*args, **kwargs):
     if volvo:
         mycars["volvo"]=volvo[0]
     else:
-        logging.warm("volvo empty")
+        logging.warn("volvo empty")
+    if flexidrive:
+        mycars["flexidrive"] = flexidrive[0]
+    if enterprise:
+        mycars["enterprise"] = enterprise[0]
+    else:
+        logging.warn("enterprise empty")
 
     save_to_cloud(client, mycars, BLOB_NAME, BUCKET_NAME)
 
