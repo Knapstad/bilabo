@@ -27,13 +27,20 @@ class Kinto:
 
             cleanCars = []
             for car in cars:
+                if "hydrogen" in car.get("model",""):
+                            drive =  "hydrogen"
+                elif "electric" in car.get("model",""):
+                    drive = "elekrisk"
+                else:
+                    drive = "bensin"
+
                 cleanCars.append(
                     {
                         "site": "kinto",
                         "name": f"{car.get('make','')} {car.get('model','')}",
                         "make": car.get("make", ""),
                         "model": car.get("model", ""),
-                        "drive": "",
+                        "drive": drive,
                         "year": car.get("year", ""),
                         "seats": car.get("seats", ""),
                         "transmission": car.get("transmission", ""),
