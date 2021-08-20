@@ -17,7 +17,13 @@ class Imove:
     def get_cars_api(cls) -> Dict:
         url = "https://imove.no/produkter"
         base = "https://imove.no"
-        api = "https://imove.no/_next/data/fs72Ed8P4Z0-OYgdjeYs8/no/produkter.json"
+        site = requests.get(url)
+        soup = BS(site.text, "lxml")
+        scripts = soup.select("script")
+        script = [script.get("src") for script in scripts if "_buildMani" in script.get("src","")]
+        datakey = script[0].split("/")[-2]
+        api = f"https://imove.no/_next/data/{datakey}/no/produkter.json"
+        
         data = requests.get(api).json()["pageProps"]["products"]
         cars = []
         for car in data:
