@@ -95,7 +95,8 @@ export default {
         content:
           "En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen",
       },
-    ],
+      {property: "fb:app_id", content: "1605828010582801"},
+      ],
   },
   methods: {
     compare: function (a, b) {
