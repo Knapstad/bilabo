@@ -191,13 +191,16 @@ export default {
         { property: 'og:type ', content: "article"},
         { property: 'article:published_time', content: this.created},
         { property: 'article:modified_time', content: this.updated},
-        { name: 'description', content: this.description}
-      ],
+        { name: 'description', content: this.description},
+        { property: 'og:site_name', content: "Bilabonnement.app"},
+        { property: 'og:locale', content: "no"},
+        { property: "fb:app_id", content: "1605828010582801"},
+      ]
       link: [
-      {rel: 'canonical', href: `https://bilabonnement.app/${this.$route.params.slug}`}
-  ]
-      };
-  },
+          {rel: 'canonical', href: `https://bilabonnement.app/${this.$route.params.slug}`}
+      ]
+          };
+      },
   mounted() {
     this.loadData();
   },
