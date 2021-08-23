@@ -59,7 +59,7 @@ export default {
     for(let i of qp.keys()){
       let filters=qp.get(i).split(",")
       filters.forEach(filter =>  
-        this.$store.commit("addFilter",[i,filter]))
+        this.$store.commit("addFilter",[i,filter.toLowerCase()]))
     }
   },
 methods: {
