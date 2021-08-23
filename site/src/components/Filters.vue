@@ -54,7 +54,15 @@ export default {
     return {
     };
   },
-  methods: {
+  created(){
+    let qp = new URLSearchParams(window.location.search);
+    for(let i of qp.keys()){
+      let filters=qp.get(i).split(",")
+      filters.forEach(filter =>  
+        this.$store.commit("addFilter",[i,filter]))
+    }
+  },
+methods: {
     locations: function () {
       let cars = Object.values(this.data["data"]).flat();
       cars = cars
