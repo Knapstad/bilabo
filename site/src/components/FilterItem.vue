@@ -34,9 +34,9 @@ export default {
       if(updated){ 
         qp.set(this.type, updated);
       }else{qp.delete(this.type)}
-      if(qp.toString().length > 0){console.log(window.location.search.length)
+      if(qp.toString().length > 0){
             history.replaceState(null, null, `?${decodeURI(qp.toString())}`)
-      }else{console.log("In else")
+      }else{
             history.replaceState(null, null, `/`)}
     },
     active: function () {
