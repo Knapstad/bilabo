@@ -194,7 +194,7 @@ export default {
         { name: 'description', content: this.description},
         { property: 'og:site_name', content: "Bilabonnement.app"},
         { property: 'og:locale', content: "no"},
-        { property: "fb:app_id", content: "1605828010582801"},
+        { property: "fb:app_id", content: "381160890208041"},
       ],
       link: [
           {rel: 'canonical', href: `https://bilabonnement.app/${this.$route.params.slug}`}
