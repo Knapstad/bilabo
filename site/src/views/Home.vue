@@ -88,7 +88,7 @@ export default {
       {
         property: "og:image",
         content:
-          "https://res.cloudinary.com/db0kzjtgs/image/upload/v1598880211/site_drfi7i.jpg",
+          "https://res.cloudinary.com/db0kzjtgs/image/upload/v1629447450/site_drfi7i.jpg",
       },
       {
         property: "og:description",
