@@ -1,14 +1,15 @@
 <template>
-    <p>{{_sanityProps}}</p>
+    <div>
+    <p><slot /></p>
+    <p>{{vm}}</p>
+    </div>
 </template>
 
 <script>
 export default {
 
     name: "LinksInternal",
-    props: [ "_key", "_type", "_sanityProps" ],
-    computed: {
-        }
-}
+    props: ["_to","_type","reference","_sanityProps"],
+    }
 
 </script>
