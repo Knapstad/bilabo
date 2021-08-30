@@ -99,29 +99,29 @@ def main(*args, **kwargs):
     if fleks:
         mycars["fleks"] = fleks[0]
     else:
-        logging.warn("fleks empty")
+        logging.warning("fleks empty")
     if imove:
         mycars["imove"] = imove[0]
     else:
-        logging.warn("imove empty")
+        logging.warning("imove empty")
     if swap:
         mycars["swap"] = swap[0]
     else:
-        logging.warn("swap empty")
+        logging.warning("swap empty")
     if kinto:
         mycars["kinto"] = kinto[0]
     else:
-        logging.warn("kinto empty")
+        logging.warning("kinto empty")
     if volvo:
         mycars["volvo"]=volvo[0]
     else:
-        logging.warn("volvo empty")
+        logging.warning("volvo empty")
     if flexidrive:
         mycars["flexidrive"] = flexidrive[0]
     if enterprise:
         mycars["enterprise"] = enterprise[0]
     else:
-        logging.warn("enterprise empty")
+        logging.warning("enterprise empty")
 
     save_to_cloud(client, mycars, BLOB_NAME, BUCKET_NAME)
 
