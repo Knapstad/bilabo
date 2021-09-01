@@ -17,31 +17,50 @@ class Imove:
     def get_cars_api(cls) -> Dict:
         url = "https://imove.no/produkter"
         base = "https://imove.no"
-        api = "https://imove.no/_next/data/fs72Ed8P4Z0-OYgdjeYs8/no/produkter.json"
+        site = requests.get(url)
+        soup = BS(site.text, "lxml")
+        scripts = soup.select("script")
+        script = [script.get("src") for script in scripts if "_buildMani" in script.get("src","")]
+        datakey = script[0].split("/")[-2]
+        api = f"https://imove.no/_next/data/{datakey}/no/produkter.json"
+        
         data = requests.get(api).json()["pageProps"]["products"]
         cars = []
+        with open("car.json") as file:
+            template = json.load(file)
         for car in data:
-            cars.append(
+            cartemplate = template.copy()
+            template.update(
                 {
                     "site": "imove",
                     "name": car["name"],
                     "make": car["name"].split()[0],
                     "model": "",
+                    "content": [{"title": car.get("name",""), "byline": car.get("description")}],
                     "drive": "Elektrisk",
-                    "year": car["productionYears"][0],
-                    "seats": car["seats"][0],
+                    "extra": car.get("extra", []),
+                    "battery": car.get("battery", ""),
+                    "towbar": car.get("towbar", False),
+                    "roofRack": car.get("roofRack", False),
+                    "maxRoofLoad": car.get("maxRoofLoad", ""),
+                    "power": car.get("power", ""),
+                    "driveWheel": car.get("driveWheel", ""),
+                    "year": car.get("productionYears",[])[0],
+                    "seats": car.get("seats", [])[0],
                     "transmission": "auto",
-                    "price":  car["price"],
-                    "range": car["ranges"][-1],
+                    "price":  car.get("price", ""),
+                    "range": car.get("ranges", [])[-1],
+                    "cargoVolume": car.get("cargoVolume", ""),
                     "kmMonth": "ubegrenset",
                     "location": ["Oslo","Bergen"],
                     "availability": "available",
-                    "from": car["availableDates"][0]["availableFrom"],
+                    "from": car.get("availableDates",[])[0].get("availableFrom",""),
                     "order": f"{url}/{car['slug']}",
                     "img": f"https://api.prod.imove.no/file/images/{car['images'][0]['imageId']}/raw?cloudinaryParams=w_480,h_302,c_fill,g_auto",
                     "cargoVolume": "",
                     }
             )
+            cars.append(cartemplate)
         return (cars, )
 
 
