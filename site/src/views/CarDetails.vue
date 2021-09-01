@@ -176,42 +176,22 @@ export default {
 <style scoped>
 .header{
   position: relative;
-  
 }
 .headerimage{
   display:block;
   width: 100%;
-  z-index: 9
-  ;
+  z-index: 9;
 }
 .logo{
   position: absolute;
   z-index: 10;
   top: 5px;
   right: 5%;
-
   }
-.bloggcontent {
-  display: flex;
-  flex-direction: column;
-  width: 33%;
-  margin: auto;
-  line-height: 1.5;
-  font-size: 20px;
-  margin-bottom: 25px;
-}
-.bloggcontent h2{
-  font-size: 30px;
-}
-.bloggcontent h3{
-  font-size: 25px;
-}
 ul li{
   line-height: 0.1;
-  
 }
 img.logo{
-  /* width: 56px; */
   height: auto;
   width: auto;
   max-width: 57px;
@@ -219,7 +199,6 @@ img.logo{
   margin-right: 10px;
   align-self: center;
 }
-
 .henterbil{
   display: flex;
   font-size: xx-large;
@@ -227,19 +206,17 @@ img.logo{
   width: auto;
   align-self: center;
   animation: example 4s infinite;
-  }
+}
 .henterbil:nth-child(2){
   animation-delay: 1s;
-}  
-
+}
 @keyframes example {
   0% {color: var(--main-dark)}
-  30% {color: var(--main-medium-dark); transform: scale(0.9)}
+  30% {color: var(--main-medium-dark)}
   60% {color: var(--main-medium-light)}
   90% {color: var(--main-medium-dark)}
   100% {color: var(--main-dark)}
 }
-
 .nocar{
   display: flex;
   flex-direction: column;
