@@ -90,10 +90,15 @@ h1 {
   font-size: 1.5rem;
   font-weight: bolder;
 }
-.bloggcontent p {
-  font-size: 22px;
-  margin-bottom: 50px;
-}
+  .bloggcontent p {
+    font-size: 22px;
+    margin-bottom: 50px;
+  }
+  .bloggcontent section {
+    font-size: 22px;
+    margin-bottom: 50px;
+  }
+
 img.headerimage {
   width: 100%;
 }
