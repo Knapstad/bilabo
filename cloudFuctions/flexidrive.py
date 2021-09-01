@@ -1,3 +1,5 @@
+import json
+from re import template
 import requests
 from bs4 import BeautifulSoup as BS
 
@@ -22,8 +24,11 @@ class Flexidrive:
             cars = soup.find_all("div", {"class": "collection-item-2 w-dyn-item"})
 
             cleanCars = []
+            with open("car.json") as file:
+                template = json.load(file)
             for car in cars:
-                cleanCars.append(
+                cartemplate = template.copy()
+                cartemplate.update(
                     {
                         "site": "flexidrive",
                         "name": car.find("h4").text,
@@ -43,6 +48,7 @@ class Flexidrive:
                         "cargoVolume": car.get("cargoVolume", ""),
                     }
                 )
+                cleanCars.append(cartemplate)
 
             available = [car for car in cleanCars if car.get("availability", 0)]
             unavailable = [car for car in cleanCars if not car.get("availability", 0)]
