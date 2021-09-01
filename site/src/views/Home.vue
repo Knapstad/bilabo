@@ -57,7 +57,7 @@ export default {
       },
       {
         name: "viewport",
-        content: "width=device-width, initial-scale=1, min-scale=1",
+        content: "width=device-width, initial-scale=1",
       },
       { name: "twitter:card", content: "summary" },
       {
