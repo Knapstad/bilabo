@@ -74,7 +74,52 @@ h1 {
 .router-link-active {
   text-decoration: none;
 }
+.bloggcontent {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  margin: auto;
+  line-height: 1.5;
+}
+.bloggcontent h2 {
+  color: black;
+  font-size: 33px;
+}
+.bloggcontent h3 {
+  color: black;
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+.bloggcontent p {
+  font-size: 22px;
+  margin-bottom: 50px;
+}
+img.headerimage {
+  width: 100%;
+}
+img.fullwidth{
+  width: 100%;
+  margin-top: 1rem;
+}
+@media screen and (max-width: 1500px) {
+  .bloggcontent {
+    width: 40%;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .bloggcontent {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 1300px) {
+  .bloggcontent {
+    width: 60%;
+  }
+}
 @media only screen and (max-width: 900px) {
+  .bloggcontent{
+    width: 95%;
+  }
   #nav {
     padding: 0px;
   }
