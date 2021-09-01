@@ -41,6 +41,9 @@ module.exports = [
     path: '/:site/:carname',
     name: 'cardetails',
     component: () => import('@/views/CarDetails.vue'),
+    sitemap: {
+      ignoreRoute: true,
+    }
   },
   {
     path: '/*',
