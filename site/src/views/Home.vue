@@ -3,7 +3,7 @@
   <a href="#content" class="skip">Hopp over filter</a>
     <div v-if="loading" class="loading">
       <div class="loading__letter">L</div>
-      <div class="loading__letter">a<a href=""></a></div>
+      <div class="loading__letter">a></div>
       <div class="loading__letter">s</div>
       <div class="loading__letter">t</div>
       <div class="loading__letter">e</div>
