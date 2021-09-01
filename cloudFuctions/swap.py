@@ -1,4 +1,6 @@
+import json
 import requests
+
 from bs4 import BeautifulSoup as BS
 
 
@@ -22,9 +24,12 @@ class Swap:
             soup = BS(response.text, "lxml")
             available = []
             cars = soup.findAll("div", {"class": "fcar-list"})
+            with open("car.json") as file:
+                template = json.load(file)
             for car in cars:
                 details = car.find("div", {"class": "fcar-sdesc"}).text.split("|")
-                available.append(
+                cartemplate = template
+                cartemplate.update(
                     {
                         "site": "swap",
                         "name": car.find("div", {"class": "fcar-title"}).text,
@@ -35,12 +40,12 @@ class Swap:
                             car.find("div", {"class": "fcar-title"}).text.split()[1:]
                         ).replace("Rover ", ""),
                         "drive": details[2],
-                        "year": details[0],
+                        "year": details[0] if details[0] else "ukjent års",
                         "seats": details[1],
                         "transmission": details[3],
                         "price": int(float(car.__dict__["attrs"]["data-price"])),
                         "range": "",
-                        "kmMonth": details[-1],
+                        "kmMonth": details[-1].replace("km/måned","").strip(),
                         "location": ["Oslo"],
                         "availability": "Available",
                         "order": f'{base}{car.find("div", {"class": "fcar-btn"}).a["href"]}',
@@ -48,6 +53,7 @@ class Swap:
                         "cargoVolume": "",
                     }
                 )
+                available.append(cartemplate)
             return (available,)
         except Exception as e:
             print(e)
