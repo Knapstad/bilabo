@@ -1,4 +1,5 @@
 import requests
+import json
 class Volvo:
     def __init__(self):
         pass
@@ -37,7 +38,7 @@ class Volvo:
                             "range": car.get("electricRange"),
                             "location": ["Oslo","Bergen","Stavanger","Trondheim"],
                             "availability": "Available",
-                            "kmMonth": car.get("baseMonthlyMileage"),
+                            "kmMonth": int(car.get("baseMonthlyMileage")),
                             "delivery": car.get("deliveryTime") ,
                             "fuelconsumption": car.get("fuelConsumption") ,
                             "towbar": car.get("hasTowbar"),
