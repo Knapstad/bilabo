@@ -30,6 +30,8 @@ class Fleks:
                     price = str(price)[0] + str(price)[2:-1]
                 car["attributes"]["price"] = price
             cleanCars = []
+            with open("car.json") as file:
+                template = json.load(file)
             translation = {
                 "el": "Elektrisk",
                 "petrol": "Bensin",
@@ -41,26 +43,36 @@ class Fleks:
                     car["attributes"]["make"] = "peugeot"
                 if(car["attributes"]["make"] == "MER"):
                     car["attributes"]["make"] = "mercedes"
-                cleanCars.append(
+                cartemplate = template.copy()
+                cartemplate.update(
                     {
                         "site": "fleks",
-                        "name": car["attributes"]["modelDescription"],
-                        "make": car["attributes"]["make"],
-                        "model": car["attributes"]["model"],
-                        "drive": translation[car["attributes"]["fuelType"]],
-                        # "year": car["attributes"]["year"],
-                        "seats": car["attributes"]["seats"],
-                        "transmission": car["attributes"]["transmission"],
-                        "price": int(car["attributes"]["price"]),
-                        "range": car["attributes"]["range"],
+                        "name": car["attributes"].get("modelDescription",""),
+                        "make": car["attributes"].get("make", ""),
+                        "model": car["attributes"].get("model",""),
+                        "content": car["attributes"].get("content", ""),
+                        "drive": translation[car["attributes"].get("fuelType", "")],
+                        "extra": car["attributes"].get("specifications",[]),
+                        "battery": car["attributes"].get("battery",""),
+                        "towbar": car["attributes"].get("towbar",""),
+                        "roofRack": car["attributes"].get("roofRack",""),
+                        "maxRoofLoad": car["attributes"].get("maxRoofLoad",""),
+                        "power": car["attributes"].get("power",""),
+                        "driveWheel": car["attributes"].get("driveWheel",""),
+                        "seats": car["attributes"].get("seats", ""),
+                        "transmission": car["attributes"].get("transmission", ""),
+                        "price": int(car["attributes"].get("price", "")),
+                        "range": car["attributes"].get("range", ""),
+                        "cargoVolume": car["attributes"].get("cargoVolume", ""),
                         "kmMonth": "1000",
                         "location": ["Oslo"],
-                        "availability": car["attributes"]["availabilityStatus"],
-                        "order": f"{base}{car['attributes']['slug']}",
-                        "img": car["attributes"]["imageUrl"],
-                        "cargoVolume": car["attributes"]["cargoVolume"],
+                        "availability": car["attributes"].get("availabilityStatus", ""),
+                        "order": f"{base}{car['attributes'].get('slug','')}",
+                        "img": car["attributes"].get("imageUrl", "")
+                        
                     }
                 )
+                cleanCars.append(cartemplate)
 
 
             available = [car for car in cleanCars if car["availability"] == "available"]
