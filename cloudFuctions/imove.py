@@ -30,7 +30,7 @@ class Imove:
             template = json.load(file)
         for car in data:
             cartemplate = template.copy()
-            template.update(
+            cartemplate.update(
                 {
                     "site": "imove",
                     "name": car["name"],

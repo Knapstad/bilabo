@@ -28,7 +28,7 @@ class Swap:
                 template = json.load(file)
             for car in cars:
                 details = car.find("div", {"class": "fcar-sdesc"}).text.split("|")
-                cartemplate = template
+                cartemplate = template.copy()
                 cartemplate.update(
                     {
                         "site": "swap",
