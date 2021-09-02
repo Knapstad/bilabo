@@ -39,7 +39,7 @@ class Swap:
                         "model": " ".join(
                             car.find("div", {"class": "fcar-title"}).text.split()[1:]
                         ).replace("Rover ", ""),
-                        "drive": details[2],
+                        "drive": details[2] if details[2] != "PHEV" else "hybrid",
                         "year": details[0] if details[0] else "ukjent års",
                         "seats": details[1],
                         "transmission": details[3],
