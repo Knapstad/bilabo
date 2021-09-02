@@ -1,5 +1,5 @@
 import requests
-
+import json
 
 class Fleks:
     def __init__(self):
@@ -30,6 +30,8 @@ class Fleks:
                     price = str(price)[0] + str(price)[2:-1]
                 car["attributes"]["price"] = price
             cleanCars = []
+            with open("car.json") as file:
+                template = json.load(file)
             translation = {
                 "el": "Elektrisk",
                 "petrol": "Bensin",
@@ -41,7 +43,8 @@ class Fleks:
                     car["attributes"]["make"] = "peugeot"
                 if(car["attributes"]["make"] == "MER"):
                     car["attributes"]["make"] = "mercedes"
-                cleanCars.append(
+                cartemplate = template.copy()
+                cartemplate.update(
                     {
                         "site": "fleks",
                         "name": car["attributes"].get("modelDescription",""),
@@ -69,6 +72,7 @@ class Fleks:
                         
                     }
                 )
+                cleanCars.append(cartemplate)
 
 
             available = [car for car in cleanCars if car["availability"] == "available"]

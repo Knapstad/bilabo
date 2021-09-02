@@ -14,7 +14,7 @@
         <div class="filter-group">
           <div class="label">Merke</div>
           <div class="filter-section">
-            <div v-for="item in makes()" :key="item">
+            <div v-for="item in makes().sort()" :key="item">
               <FilterItem :item="item" :type="'makes'" />
             </div>
           </div>
@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="filter-group">
-          <div class="label">Side</div>
+          <div class="label">Leverandør</div>
           <div class="filter-section">
             <div v-for="item in sites()" :key="item">
               <FilterItem :item="item" :type="'sites'" />

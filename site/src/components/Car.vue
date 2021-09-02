@@ -65,9 +65,14 @@
       Utslipp: {{ car.co2 }}
       Binding: {{ car.binding }}
     </p>
-  <a class="button" :href="url" target="_blank" rel="nofollow noopener" :aria-label= "'Bestill '+ car.name + ' hos '+ car.site" >
-    BESTILL 
-    </a>
+  <div class=buttoncontainer>
+    <a class="button left" :href="url" target="_blank" rel="nofollow noopener" :aria-label= "'Bestill '+ car.name" >
+      BESTILL 
+      </a>
+    <router-link class="button" :to="{name: 'cardetails', params:{site: car.site, carname: car.name.replaceAll(' ','-')+'-id-'+car.id}}"  :aria-label= "'Les mer om '+ car.name" >
+    LES MER 
+      </router-link>
+  </div>
   </div>
 </template> 
 
@@ -141,13 +146,24 @@ a {
   text-decoration: none;
   text-align: center;
   width: 100%;
-  border: 0;
+  border-left: var(--main-dark) 1px;
   line-height: 30px;
   height: 30px;
   color: white;
   background: var(--main-medium-dark);
   margin-top: 5px;
-  /* cursor: pointer; */
+}
+.button.left{
+  border-right: var(--main-dark) 1px solid;
+}
+.button:hover {
+  background: var(--main-dark); 
+}
+.button:focus {
+  background: var(--main-dark);
+}
+.buttoncontainer {
+  display: flex;
 }
 img {
   width: 100%;

@@ -26,12 +26,15 @@ class Imove:
         
         data = requests.get(api).json()["pageProps"]["products"]
         cars = []
+        with open("car.json") as file:
+            template = json.load(file)
         for car in data:
-            cars.append(
+            cartemplate = template.copy()
+            cartemplate.update(
                 {
                     "site": "imove",
-                    "name": car["name"],
-                    "make": car["name"].split()[0],
+                    "name": car["name"].lower().replace("Š".lower(),"s"),
+                    "make": car["name"].lower().replace("Š".lower(),"s").split()[0],
                     "model": "",
                     "content": [{"title": car.get("name",""), "byline": car.get("description")}],
                     "drive": "Elektrisk",
@@ -57,6 +60,7 @@ class Imove:
                     "cargoVolume": "",
                     }
             )
+            cars.append(cartemplate)
         return (cars, )
 
 

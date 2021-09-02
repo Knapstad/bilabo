@@ -26,6 +26,8 @@ class Kinto:
             cars = data["query"]["cars"]
 
             cleanCars = []
+            with open("car.json") as file:
+                template = json.load(file)
             for car in cars:
                 if "hydrogen" in car.get("model",""):
                             drive =  "hydrogen"
@@ -33,8 +35,8 @@ class Kinto:
                     drive = "elekrisk"
                 else:
                     drive = "bensin"
-
-                cleanCars.append(
+                cartemplate = template.copy()
+                cartemplate.update(
                     {
                         "site": "kinto",
                         "name": f"{car.get('make','')} {car.get('model','')}",
@@ -54,6 +56,7 @@ class Kinto:
                         "cargoVolume": car.get("cargoVolume", ""),
                     }
                 )
+                cleanCars.append(cartemplate)
 
             available = [car for car in cleanCars if car.get("availability", 0)]
             unavailable = [car for car in cleanCars if not car.get("availability", 0)]
