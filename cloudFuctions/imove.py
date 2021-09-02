@@ -33,8 +33,8 @@ class Imove:
             cartemplate.update(
                 {
                     "site": "imove",
-                    "name": car["name"],
-                    "make": car["name"].split()[0],
+                    "name": car["name"].lower().replace("Š".lower(),"s"),
+                    "make": car["name"].lower().replace("Š".lower(),"s").split()[0],
                     "model": "",
                     "content": [{"title": car.get("name",""), "byline": car.get("description")}],
                     "drive": "Elektrisk",
