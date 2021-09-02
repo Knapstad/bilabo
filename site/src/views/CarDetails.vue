@@ -12,7 +12,7 @@
         </div>
         <h2>Abonner på {{car.name}} fra {{capitalize(car.site)}}</h2>
         <p>Fra {{capitalize(car.site)}} kan du abonnere på denne bilen fra {{car.make}} for {{car.price}} kroner i måneden. Da er forsikring, service og dekkbytte inkludert og du kan i tillegg kjøre {{car.kmMonth}} kilometer i måneden.<span v-if="car.site == 'imove'"> Imove tilbyr i tilegg hyttebil i 10 dager slik at du kan kjøre en liten bybil tilvanlig og bytte til en større bil om du skal på litt lengre tur.</span></p>
-        <p v-if="car.extra">Akuratt denne bilen er utstyrt med følgende utstyr:
+        <p v-if="car.extra&&car.extra.length>0">Akuratt denne bilen er utstyrt med følgende utstyr:
           <ul v-for="(item, index) in car.extra" :key="index">
             <li>{{item}}</li>
           </ul>
