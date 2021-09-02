@@ -3,7 +3,7 @@
   <a href="#content" class="skip">Hopp over filter</a>
     <div v-if="loading" class="loading">
       <div class="loading__letter">L</div>
-      <div class="loading__letter">a></div>
+      <div class="loading__letter">a</div>
       <div class="loading__letter">s</div>
       <div class="loading__letter">t</div>
       <div class="loading__letter">e</div>
@@ -246,39 +246,39 @@ margin-bottom: 5px;
 }
 
 .loading__letter:nth-child(2) {
-  animation-delay: 0.1s;
-}
-.loading__letter:nth-child(3) {
-  animation-delay: 0.2s;
-}
-.loading__letter:nth-child(4) {
   animation-delay: 0.3s;
 }
-.loading__letter:nth-child(5) {
-  animation-delay: 0.4s;
-}
-.loading__letter:nth-child(6) {
-  animation-delay: 0.5s;
-}
-.loading__letter:nth-child(7) {
+.loading__letter:nth-child(3) {
   animation-delay: 0.6s;
 }
+.loading__letter:nth-child(4) {
+  animation-delay: 0.9s;
+}
+.loading__letter:nth-child(5) {
+  animation-delay: 1.2s;
+}
+.loading__letter:nth-child(6) {
+  animation-delay: 1.8s;
+}
+.loading__letter:nth-child(7) {
+  animation-delay: 2.1s;
+}
 .loading__letter:nth-child(8) {
-  animation-delay: 0.8s;
+  animation-delay: 2.4s;
 }
 .loading__letter:nth-child(9) {
-  animation-delay: 1s;
+  animation-delay: 2.7s;
 }
 .loading__letter:nth-child(10) {
-  animation-delay: 1.2s;
+  animation-delay: 3s;
 }
 
 @keyframes bounce {
   0% {
     transform: translateY(0px);
   }
-  40% {
-    transform: translateY(-40px);
+  50% {
+    transform: translateY(-40px) scale(1.3);
   }
   80%,
   100% {
