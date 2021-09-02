@@ -28,17 +28,19 @@ export default {
     removeFromUrl: function() {
       let qp = new URLSearchParams(window.location.search);
       let current = qp.get(this.type);
-      let asarray = current.split(",");
-      asarray.splice(asarray.indexOf(this.item),1)
-      let updated = asarray.join();
-      if(updated){ 
-        qp.set(this.type, updated);
-      }else{qp.delete(this.type)}
-      if(qp.toString().length > 0){
-            history.replaceState(null, null, `?${decodeURI(qp.toString())}`)
-      }else{
-            history.replaceState(null, null, `/`)}
-    },
+      if(current && current.length > 0){
+        let asarray = current.split(",");
+        asarray.splice(asarray.indexOf(this.item),1)
+        let updated = asarray.join();
+        if(updated){ 
+          qp.set(this.type, updated);
+        }else{qp.delete(this.type)}
+        if(qp.toString().length > 0){
+              history.replaceState(null, null, `?${decodeURI(qp.toString())}`)
+        }else{
+              history.replaceState(null, null, `/`)}
+        }
+      },
     active: function () {
       if (this.isActive) {
         this.removeFromUrl()
