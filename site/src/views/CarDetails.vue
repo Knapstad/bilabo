@@ -23,7 +23,7 @@
           <p>{{item.byline}}</p>
         </div>
       <section>
-        <a :href="car.order" target="_blank" rel="noopner nofollow">Bestill denne bilen hos {{car.site}}</a>
+        <a :href="url" target="_blank" rel="noopner nofollow">Bestill denne bilen hos {{car.site}}</a>
       </section>
     </div>
 
@@ -100,6 +100,22 @@ export default {
               , 1000);}
       },
     computed: {
+      url() {
+      if (this.car.order.includes('?')) {
+        return (
+          this.car.order +
+          '&utm_source=bilabonnemet.app&utm_medium=link&utm_campaign=bilabonnement.app'
+        );
+      } else if(this.car.site == "volvo"){
+        return (
+          this.car.order+''
+        );
+      } else {
+        return this.car.order +
+          '?utm_source=bilabonnemet.app&utm_medium=link&utm_campaign=bilabonnement.app'
+        
+      }
+    },
       namematch: function(){
         return this.urlname.includes(this.car.name.replaceAll(" ","-"))},
       logo(){
