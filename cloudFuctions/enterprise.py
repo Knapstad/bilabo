@@ -1,4 +1,5 @@
 import requests
+import json
 
 from bs4 import BeautifulSoup as BS
 
@@ -23,8 +24,11 @@ class Enterprise:
             soup = BS(response.content, "html.parser")
             cars = soup.select(".cf.staggered-block")
             cleanCars = []
+            with open("car.json") as file:
+                template = json.load(file)
             for car in cars:
-                cleanCars.append(
+                cartemplate = template.copy()
+                cartemplate.update(
                     {
                         "site": "enterprise",
                         "name": car.h2.text,
@@ -51,6 +55,7 @@ class Enterprise:
                         "type": None
                     }
                 )
+                cleanCars.append(cartemplate)
 
         except Exception as e:
             print(e)

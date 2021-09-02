@@ -1,4 +1,5 @@
 import requests
+import json
 class Volvo:
     def __init__(self):
         pass
@@ -18,35 +19,42 @@ class Volvo:
                     return None
             cars = response.json()["data"]
             cleanCars = []
+            with open("car.json") as file:
+                template = json.load(file)
             for car in cars:
-                if car["listingType"] == "stock":
-                    cleanCars.append(
+                if car.get("listingType") == "stock":
+                    thiscar = template.copy()
+                    thiscar.update(
                         {
                             "site": "volvo",
-                            "name": car["title"],
+                            "name": f"Volvo {car.get('title')}",
                             "make": "Volvo",
-                            "model": car["model"],
-                            "drive": car["fuelType"].replace("Pure",""),
-                            "year": car["modelYear"],
-                            "seats": car["numberOfSeats"],
-                            "transmission": car["transmissionType"],
-                            "price": car["basePrice"],
-                            "range": car["electricRange"],
+                            "model": car.get("model"),
+                            "drive": car.get("fuelType").replace("PureElectric","Elektrisk"),
+                            "year": car.get("modelYear"),
+                            "seats": car.get("numberOfSeats"),
+                            "transmission": car.get("transmissionType"),
+                            "price": car.get("basePrice"),
+                            "range": car.get("electricRange"),
                             "location": ["Oslo","Bergen","Stavanger","Trondheim"],
                             "availability": "Available",
-                            "includedkm": car["baseMonthlyMileage"],
-                            "delivery": car["deliveryTime"] ,
-                            "fuelconsumption": car["fuelConsumption"] ,
-                            "co2": car["co2"],
-                            "binding": "3md oppsigelse eller 36mnd binding" if car["fuelType"]=="PureElectric" else "3mnd oppsigelse",
-                            "order": f"{base}+{car['vehicleId']}",
-                            "img": car["image"],
-                            "cargoVolume": car["cargoCapacity"],
-                            "engine": car["engine"],
-                            "enginDescription": car["engineDescription"],
-                            "type": car["modelType"]
+                            "kmMonth": int(car.get("baseMonthlyMileage")),
+                            "delivery": car.get("deliveryTime") ,
+                            "fuelconsumption": car.get("fuelConsumption") ,
+                            "towbar": car.get("hasTowbar"),
+                            "co2": car.get("co2"),
+                            "binding": "3md oppsigelse eller 36mnd binding" if car.get("fuelType")=="PureElectric" else "3mnd oppsigelse",
+                            "order": f"{base}{car.get('vehicleId')}",
+                            "img": car.get("image"),
+                            "cargoVolume": car.get("cargoCapacity"),
+                            "engine": car.get("engine"),
+                            "enginDescription": car.get("engineDescription"),
+                            "type": car.get("modelType"),
+                            "color": car.get("color"),
+                            "paint": car.get("paint")
                         }
                     )
+                    cleanCars.append(thiscar)
 
         except Exception as e:
             print(e)
