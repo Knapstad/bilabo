@@ -88,14 +88,15 @@ export default {
       {
         property: "og:image",
         content:
-          "https://res.cloudinary.com/db0kzjtgs/image/upload/v1598880211/site_drfi7i.jpg",
+          "https://res.cloudinary.com/db0kzjtgs/image/upload/v1629447450/site_drfi7i.jpg",
       },
       {
         property: "og:description",
         content:
           "En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen",
       },
-    ],
+      {property: "fb:app_id", content: "381160890208041"},
+      ],
   },
   methods: {
     compare: function (a, b) {
@@ -123,13 +124,13 @@ export default {
         );
       }
       if (makes.length > 0) {
-        cars = cars.filter((car) => makes.includes(car.make));
+        cars = cars.filter((car) => makes.includes(car.make.trim().toLowerCase()));
       }
       if (sites.length > 0) {
         cars = cars.filter((car) => sites.includes(car.site));
       }
       if (drive.length > 0) {
-        cars = cars.filter((car) => drive.includes(car.drive));
+        cars = cars.filter((car) => drive.includes(car.drive.trim().toLowerCase()));
       }
       return cars;
     },

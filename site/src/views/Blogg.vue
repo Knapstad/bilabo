@@ -5,12 +5,13 @@
     </div>
     <div class="bloggcontent">
       <div>
-        <img v-if="mainImage" class="headerimage" :src="mainImage.url" :alt="mainImage.alt">
+        <img v-if="mainImage.url" class="headerimage" :src='mainImage.url+"?w=675&h=345&fit=crop&hotspot=true"' :alt="mainImage.alt">
       </div>
-      <block-content  :blocks="blocks" :serializers="serializers" :imageOptions="{h: 300, w: 1000 ,fit : 'crop'}"/>
+      <block-content
+      :blocks="blocks" :serializers="serializers" :imageOptions="{h: 300, w: 1000 ,fit : 'crop'}"/>
     </div>
     <section class="">
-      <h3 class="bloggcontent">Det er for øyeblikket {{flatCars.length}} {{(flatCars.length > 1) ? "tilgengelige biler" : "tilgengelig bil"}} fra {{title}}</h3>
+      <h3 v-if="flatCars.lengt >= 1" class="bloggcontent">Det er for øyeblikket {{flatCars.length}} {{(flatCars.length > 1) ? "tilgengelige biler" : "tilgengelig bil"}} fra {{title}}</h3>
       <div class="carcontainer">
       <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
           <Car class :car="car" />
@@ -23,11 +24,10 @@
 </template>
 
 <script>
-// import LinksInternal from '@/components/LinksInternal.vue';
 import BlockContent from 'sanity-blocks-vue-component';
 import BlockImage from '@/components/BlockImage.vue';
 import DataRef from '@/components/DataRef.vue';
-// import Links from '@/components/Links.vue';
+import Links from '@/components/Links.vue';
 import Footer from '@/components/Footer.vue';
 import sanityClient from '@sanity/client';
 import Car from "@/components/Car.vue";
@@ -42,22 +42,12 @@ const client = sanityClient({
 const serializers = {
         types: {
           image: BlockImage,
-          dataref: DataRef,
-          marks: {
-            link: ({mark, children}) => {
-          const { newtab, href } = mark
-          return newtab ?
-            <a href={href} target="_blank" rel="noopener">{children}</a>
-            : <a href={href}>{children}</a>
-        },
-            internalLink: ({mark, children}) => {
-            const {slug = {}} = mark
-            const href = `/${slug.current}`
-            return <a href={href}>{children}</a>
-          }
-            }
-          }
+          dataref: DataRef
+          },
+        marks: {
+          link: Links
         }
+}
 
 export default {
   name: 'Blogg',
@@ -170,7 +160,7 @@ export default {
             this.updated=this.response[0]._updatedAt,
             this.title=this.response[0].title,
             this.description=this.response[0].description,
-            this.mainImage={ url: this.response[0].mainImage?.asset.url+"?w=675&h=345&fit=crop&hotspot=true"||"", alt: response[0].mainImage?.alt||"" };
+            this.mainImage={ url: this.response[0].mainImage?.asset.url||"", alt: response[0].mainImage?.alt||"" };
         })
       .finally(
         () => (
@@ -201,13 +191,16 @@ export default {
         { property: 'og:type ', content: "article"},
         { property: 'article:published_time', content: this.created},
         { property: 'article:modified_time', content: this.updated},
-        { name: 'description', content: this.description}
+        { name: 'description', content: this.description},
+        { property: 'og:site_name', content: "Bilabonnement.app"},
+        { property: 'og:locale', content: "no"},
+        { property: "fb:app_id", content: "381160890208041"},
       ],
       link: [
-      {rel: 'canonical', href: `https://bilabonnement.app/${this.$route.params.slug}`}
-  ]
-      };
-  },
+          {rel: 'canonical', href: `https://bilabonnement.app/${this.$route.params.slug}`}
+      ]
+          };
+      },
   mounted() {
     this.loadData();
   },

@@ -12,11 +12,40 @@ export default {
     };
   },
   methods: {
+    addToUrl: function() {
+      let qp = new URLSearchParams(window.location.search);
+      let current = qp.get(this.type);
+      let updated = ""
+      if(current) {
+        updated = current+decodeURIComponent("%2C")+this.item;}
+      else {
+        updated = this.item;
+      }
+      
+      qp.set(this.type, updated);
+      history.replaceState(null, null, `?${decodeURI(qp.toString())}`);},
+    
+    removeFromUrl: function() {
+      let qp = new URLSearchParams(window.location.search);
+      let current = qp.get(this.type);
+      let asarray = current.split(",");
+      asarray.splice(asarray.indexOf(this.item),1)
+      let updated = asarray.join();
+      if(updated){ 
+        qp.set(this.type, updated);
+      }else{qp.delete(this.type)}
+      if(qp.toString().length > 0){
+            history.replaceState(null, null, `?${decodeURI(qp.toString())}`)
+      }else{
+            history.replaceState(null, null, `/`)}
+    },
     active: function () {
       if (this.isActive) {
+        this.removeFromUrl()
         this.$store.commit("removeFilter", [this.type, this.item]);
       }
       if (!this.isActive) {
+        this.addToUrl();
         this.$store.commit("addFilter", [this.type, this.item]);
       }
       this.isActive = !this.isActive;

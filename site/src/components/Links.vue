@@ -1,14 +1,7 @@
-<template>
-    <pre>{{JSON.stringify(_sanityProps)}}</pre>
+<template functional>
+    <div>
+        <a v-if="props.newtab" :href="props.href" target="blank_" rel="nofollow noopener"><slot /></a>
+        <a v-else :href="props.href" rel="nofollow noopener"><slot /></a>
+    </div>
 </template>
 
-<script>
-export default {
-
-    name: "Links",
-    props: [ "_key", "_type", "href", "newtab", "_sanityProps" ],
-    computed: {
-        }
-}
-
-</script>

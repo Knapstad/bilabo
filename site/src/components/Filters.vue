@@ -52,10 +52,17 @@ export default {
   props: ["data", "flat"],
   data() {
     return {
-      items: ["Oslo", "Bergen", "Stavanger"],
     };
   },
-  methods: {
+  created(){
+    let qp = new URLSearchParams(window.location.search);
+    for(let i of qp.keys()){
+      let filters=qp.get(i).split(",")
+      filters.forEach(filter =>  
+        this.$store.commit("addFilter",[i,filter.toLowerCase()]))
+    }
+  },
+methods: {
     locations: function () {
       let cars = Object.values(this.data["data"]).flat();
       cars = cars
@@ -67,7 +74,7 @@ export default {
     makes: function () {
       let cars = Object.values(this.flat).flat();
       cars = cars
-        .map((a) => a.make)
+        .map((a) => a.make.toLowerCase().trim())
         .flat()
         .filter((v, i, a) => a.indexOf(v) === i);
       return cars;
@@ -75,7 +82,7 @@ export default {
     sites: function () {
       let cars = Object.values(this.flat).flat();
       cars = cars
-        .map((a) => a.site)
+        .map((a) => a.site.toLowerCase().trim())
         .flat()
         .filter((v, i, a) => a.indexOf(v) === i);
       return cars;
@@ -83,7 +90,7 @@ export default {
     drive: function () {
       let cars = Object.values(this.flat).flat();
       cars = cars
-        .map((a) => a.drive.trim()||"Hydrogen")
+        .map((a) => a.drive.toLowerCase().trim()||"Hydrogen")
         .flat()
         .filter((v, i, a) => a.indexOf(v) === i);
       return cars;

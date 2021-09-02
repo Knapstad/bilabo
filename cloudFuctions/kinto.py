@@ -22,7 +22,7 @@ class Kinto:
                     return None
             html = response.text
             pattern = r"({\"dataManager\".*?)<\/script"
-            data = json.loads(re.search(pattern, response.text).group(1))
+            data = json.loads(re.search(pattern, html).group(1))
             cars = data["query"]["cars"]
 
             cleanCars = []
