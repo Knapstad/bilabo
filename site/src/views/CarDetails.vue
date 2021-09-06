@@ -54,6 +54,32 @@ export default {
       loading: true
       }
     },
+    metaInfo() {
+    return {
+      title: `${this.car.name} fra ${this.capitalize(this.car.site)} | `,
+      titleTemplate: `%s Bilabonnement.app`,
+      meta: [
+        { charset: 'utf-8' },
+        { property: 'og:description ', content: `Fra ${this.capitalize(this.car.site)} kan du abonnere på denne bilen fra ${this.car.make} for ${this.car.price} kroner i måneden.`},
+        { name: 'twitter:description ', content: `Fra ${this.capitalize(this.car.site)} kan du abonnere på denne bilen fra ${this.car.make} for ${this.car.price} kroner i måneden.`},
+        { name: 'twitter:creator ', content: "@bknapstad"},
+        { property: 'og:title ', content: `${this.car.name} fra ${this.capitalize(this.car.site)}`},
+        { property: 'og:url ', content:  `https://bilabonnement.app/${this.$route.params.slug}`},
+        { property: 'og:image ', content:  this.car.img},
+        { name: 'twitter:title ', content:`${this.car.name} fra ${this.capitalize(this.car.site)}`},
+        { property: 'og:type ', content: "product"},
+        { property: 'article:published_time', content: ""},
+        { property: 'article:modified_time', content: ""},
+        { name: 'description', content: `Fra ${this.capitalize(this.car.site)} kan du abonnere på denne bilen fra ${this.car.make} for ${this.car.price} kroner i måneden.`},
+        { property: 'og:site_name', content: "Bilabonnement.app"},
+        { property: 'og:locale', content: "no"},
+        { property: "fb:app_id", content: "381160890208041"},
+      ],
+      link: [
+          {rel: 'canonical', href: `https://bilabonnement.app/${this.$route.params.slug}`}
+      ]
+          };
+      },
     methods:{
       get_cars: function(){
         if(this.cars=="undefined" || this.cars==null)
