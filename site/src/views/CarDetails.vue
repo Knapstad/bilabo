@@ -10,20 +10,44 @@
           <img class="headerimage" :src=car.img>
           <img class="logo" :src="logo" alt="">
         </div>
-        <h2>Abonner på {{car.name}} fra {{capitalize(car.site)}}</h2>
-        <p>Fra {{capitalize(car.site)}} kan du abonnere på denne bilen fra {{car.make}} for {{car.price}} kroner i måneden. Da er forsikring, service og dekkbytte inkludert og du kan i tillegg kjøre {{car.kmMonth}} kilometer i måneden.<span v-if="car.site == 'imove'"> Imove tilbyr i tilegg hyttebil i 10 dager slik at du kan kjøre en liten bybil tilvanlig og bytte til en større bil om du skal på litt lengre tur.</span></p>
+        <h2>Abonner på {{car.name}} fra {{capitalize(car.site=="volvo" ? "Care by Volvo": car.site)}}</h2>
+        <p>Fra {{capitalize(car.site=="volvo" ? "Care by Volvo": car.site)}} kan du abonnere på denne bilen fra {{car.make}} for {{car.price}} kroner i måneden. Da er forsikring, service og dekkbytte inkludert og du kan i tillegg kjøre {{car.kmMonth}} kilometer i måneden.<span v-if="car.site == 'imove'"> Imove tilbyr i tilegg hyttebil i 10 dager slik at du kan kjøre en liten bybil tilvanlig og bytte til en større bil om du skal på litt lengre tur.</span></p>
         <p v-if="car.extra&&car.extra.length>0">Akuratt denne bilen er utstyrt med følgende utstyr:
           <ul v-for="(item, index) in car.extra" :key="index">
             <li>{{item}}</li>
           </ul>
         </p>
         
+
+
+        <div v-if="car.site == 'volvo'">
+          <p>Her kan  du abonnere på en flott {{car.color}} bil fra Volvo. <span v-if="car.cargoVolume"> Bilen er utstyrt med {{car.cargoVolume}} bagasjerom. </span><span v-if="car.co2">Bilen har et lavt utslipp på ca {{car.co2}}. </span><span v-if="car.fuelconsumption">Forbruket ligger på rundt {{car.fuelconsumption}}. </span><span v-if="car.engine">Bilen er utstyrt med en {{car.engine}} motor, nærmere bestemt {{car.enginDescription}}</span></p>
+        <section>
+            <a :href="url" target="_blank" rel="noopner nofollow">Bestill denne bilen hos {{capitalize(car.site=="volvo" ? "Care by Volvo": car.site)}}</a>
+        </section>
+          <section v-for="(category, index) in car.categories" :key="index">
+            <h3>{{category.displayName}}</h3> 
+            <p>{{category.description}}</p>
+            <div v-for="(sub, index) in category.subCategories" :key="index">
+              <h4>{{sub.displayName}}</h4>
+              <p>{{sub.description}}</p>
+              <div v-for="(item,key) in sub.items" :key="key">
+                <details>
+                  <summary>{{item.displayName}}</summary>
+                  {{item.description}}
+                </details>
+              </div>
+            </div>
+          </section>
+        </div>
+
+
         <div v-for="(item, index) in car.content" :key="index">
           <h3>{{item.title}}</h3>
           <p>{{item.byline}}</p>
         </div>
       <section>
-        <a :href="url" target="_blank" rel="noopner nofollow">Bestill denne bilen hos {{car.site}}</a>
+        <a :href="url" target="_blank" rel="noopner nofollow">Bestill denne bilen hos {{capitalize(car.site=="volvo" ? "Care by Volvo": car.site)}}</a>
       </section>
     </div>
 
@@ -233,6 +257,23 @@ export default {
 ul li{
   line-height: 0.1;
 }
+details{
+    margin-bottom: 10px;
+    background: var(--main-medium-dark);
+    width: 100%;
+    border-radius: 3px;
+    margin: auto;
+    margin-bottom: 5px;
+    box-shadow: 2px 2px 3px #000;
+    color: white;
+    padding: 6px;
+    padding-left: 10px;
+    font-size: medium;
+}
+summary{
+  font-size: 20px;
+}
+
 img.logo{
   height: auto;
   width: auto;
