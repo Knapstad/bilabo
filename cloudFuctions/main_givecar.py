@@ -62,10 +62,12 @@ def main(request, *args, **kwargs):
     BUCKET_NAME = config.bucket_name
     client = storage.Client(project=config.bucket_name, credentials=CREDENTIALS)
     mycars = load_tekst(client)
+    siteid = {}
     for site in mycars:
         for car in mycars[site]:
-            car["id"]= id
-            id+=1
+            car["id"]=f"{siteid.get(car['site'],1)}{site[0]}{site[-1]}"
+            siteid[site] = siteid.get(site,1)+1
+            
     
     allowed_domains= ["http://localhost:8080","http://localhost:8081","https://bilabonnement.app", "https://bilabo.app", "https://test.bilabonnement.app"]
     if request.environ['HTTP_ORIGIN']  in allowed_domains:
