@@ -141,7 +141,7 @@ export default {
       }
     },
       namematch: function(){
-        return this.urlname.includes(this.car.name.replaceAll(" ","-"))},
+        return decodeURI(this.urlname).includes(decodeURI(this.car.name.replaceAll(" ","-")))},
       logo(){
       let logo = ""
       try{
