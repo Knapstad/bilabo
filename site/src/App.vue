@@ -92,7 +92,7 @@ h1 {
 }
   .bloggcontent p {
     font-size: 22px;
-    margin-bottom: 50px;
+    margin-bottom: 17px;
   }
   .bloggcontent section {
     font-size: 22px;
