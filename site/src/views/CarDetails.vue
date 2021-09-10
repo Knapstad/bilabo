@@ -1,8 +1,20 @@
 <template>
   <div> 
     <main class="bloggcontent">
-      <div v-if="this.loading" class="henterbil">
-        Henter bil...
+      <div v-if="this.loading" class="loading">
+        <div class="loading__letter">H</div>
+        <div class="loading__letter">e</div>
+        <div class="loading__letter">n</div>
+        <div class="loading__letter">t</div>
+        <div class="loading__letter">e</div>
+        <div class="loading__letter">r</div>
+        <div class="loading__letter">-</div>
+        <div class="loading__letter">b</div>
+        <div class="loading__letter">i</div>
+        <div class="loading__letter">l</div>
+        <div class="loading__letter">.</div>
+        <div class="loading__letter">.</div>
+        <div class="loading__letter">.</div>
       </div>
 
       <div v-else-if="this.namematch">
@@ -273,23 +285,68 @@ img.logo{
   margin-right: 10px;
   align-self: center;
 }
-.henterbil{
+.loading {
   display: flex;
-  font-size: xx-large;
+  flex-direction: row;
+  justify-content: center;
   margin: auto;
-  width: auto;
-  align-self: center;
-  animation: example 4s infinite;
+  margin-top: 30px;
 }
-.henterbil:nth-child(2){
-  animation-delay: 1s;
+.loading__letter {
+  font-size: 88px;
+  font-weight: normal;
+  letter-spacing: 4px;
+  animation-name: bounce;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
 }
-@keyframes example {
-  0% {color: var(--main-dark)}
-  30% {color: var(--main-medium-dark)}
-  60% {color: var(--main-medium-light)}
-  90% {color: var(--main-medium-dark)}
-  100% {color: var(--main-dark)}
+.loading__letter:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.loading__letter:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.loading__letter:nth-child(4) {
+  animation-delay: 0.9s;
+}
+.loading__letter:nth-child(5) {
+  animation-delay: 1.2s;
+}
+.loading__letter:nth-child(6) {
+  animation-delay: 1.8s;
+}
+.loading__letter:nth-child(7) {
+  animation-delay: 2.1s;
+  color: var(--main-light);
+}
+.loading__letter:nth-child(8) {
+  animation-delay: 2.4s;
+}
+.loading__letter:nth-child(9) {
+  animation-delay: 2.7s;
+}
+.loading__letter:nth-child(10) {
+  animation-delay: 3s;
+}
+.loading__letter:nth-child(11) {
+  animation-delay: 3.3s;
+}
+.loading__letter:nth-child(12) {
+  animation-delay: 3.6s;
+}
+.loading__letter:nth-child(13) {
+  animation-delay: 3.9s;
+}
+@keyframes bounce {
+  0% {
+    transform: translateY(0px);
+  }
+  20% {
+    transform: translateY(-40px) scale(1.3);
+  }
+  40% {
+    transform: translateY(0px)  scale(1);
+  }
 }
 .nocar{
   display: flex;
