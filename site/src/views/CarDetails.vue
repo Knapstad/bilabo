@@ -152,7 +152,6 @@ export default {
       return logo
     },
     flatCars: function () {
-      this.get_cars();
       let cars = []
       try{
         cars = Object.values(this.$store.state.cars["data"]).flat();
@@ -188,18 +187,9 @@ export default {
       return jsondata
     },
     car : function(){
-      if(this.cars =="undefined"||this.cars==null){
-      this.get_cars()
       return this.flatCars.filter(car=> car.id == this.id)[0] }
-      else{
-      return this.flatCars.filter(car => car.id == this.id)[0]
-      }
-    }
-    
-  },
+    },
   created() {
-    (this.get_cars()),
-    (this.addJsonld())
   },
   watch: {
       $route: {
@@ -272,6 +262,7 @@ details{
 }
 summary{
   font-size: 20px;
+  cursor: pointer;
 }
 
 img.logo{
