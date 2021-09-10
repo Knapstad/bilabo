@@ -8,7 +8,8 @@ class Volvo:
     def get_cars(cls):
         try:
             api = "https://www.volvocars.com/api/care-by-volvo/cars/cars/?customerType=b2c&itemsPerPage=50&market=no&page=1"
-            base = "https://www.volvocars.com/no/care-by-volvo/cars/"
+            base = "https://www.volvocars.com/no/care-by-volvo/cars"
+            apibase= "https://www.volvocars.com/api/care-by-volvo/cars/cars/"
             response = requests.get(api)
             tries = 0
             while "20" not in str(response.status_code):
@@ -23,10 +24,18 @@ class Volvo:
                 template = json.load(file)
             for car in cars:
                 if car.get("listingType") == "stock":
+                    extradata = requests.get(f"{apibase}{car['vehicleId']}/?market=no&customerType=b2c")
+                    extradata = extradata.json()["data"]
                     thiscar = template.copy()
                     thiscar.update(
                         {
                             "site": "volvo",
+                            "horsePower": extradata.get("horsePower"),
+                            "accelleration": extradata.get("acceleration"),
+                            "categories": extradata.get("categories"),
+                            "packages": extradata.get("packages"),
+                            "options": extradata.get("options"),
+                            "offers": extradata.get("offers"),
                             "name": f"Volvo {car.get('title')}",
                             "make": "Volvo",
                             "model": car.get("model"),
