@@ -178,10 +178,11 @@ export default {
       "@context": "https://schema.org/",
       "@type": "Product",
       "name": this.car.name,
-      "image": [
+      "sku": this.car.id,
+"image": [
         this.car.img
       ],
-      // "description": this.car?.content[0].byline,
+      "description": `Fra ${this.capitalize(this.car.site)} kan du abonnere på denne bilen fra ${this.car.make} for ${this.car.price} kroner i måneden.`,
       "brand": {
         "@type": "Brand",
         "name": this.car.make
@@ -191,7 +192,7 @@ export default {
         "url": "https://example.com/anvil",
         "priceCurrency": "NOK",
         "price": this.car.price,
-        // "priceValidUntil": "2020-11-20",
+        "priceValidUntil": `${new Date( new Date().setDate(new Date().getDate()+2))}`,
         "itemCondition": "https://schema.org/UsedCondition",
         "availability": "https://schema.org/InStock"
       }
