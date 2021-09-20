@@ -1,6 +1,7 @@
 <template>
   <div> 
-    <main class="bloggcontent">
+    <main>
+
       <div v-if="this.loading" class="loading">
         <div class="loading__letter">H</div>
         <div class="loading__letter">e</div>
@@ -17,7 +18,7 @@
         <div class="loading__letter">.</div>
       </div>
 
-      <div v-else-if="this.namematch">
+      <div v-else-if="this.namematch" class="bloggcontent"> 
         <div class="header">
           <img class="headerimage" :src=car.img :alt="car.name">
           <img class="logo" :src="logo" :alt='"logo for " + car.site'>
@@ -32,7 +33,7 @@
         
 
 
-        <div v-if="car.site == 'volvo'">
+        <div v-if="car.site == 'volvo'" class="bloggcontent">
           <p>Her kan  du abonnere på en flott {{car.color}} bil fra Volvo. <span v-if="car.cargoVolume"> Bilen er utstyrt med {{car.cargoVolume}} bagasjerom. </span><span v-if="car.co2">Bilen har et lavt utslipp på ca {{car.co2}}. </span><span v-if="car.fuelconsumption">Forbruket ligger på rundt {{car.fuelconsumption}}. </span><span v-if="car.engine">Bilen er utstyrt med en {{car.engine}} motor, nærmere bestemt {{car.enginDescription}}</span></p>
           <section>
             <a :href="url" target="_blank" rel="noopner nofollow">Bestill denne bilen hos {{capitalize(car.site=="volvo" ? "Care by Volvo": car.site)}}</a>
@@ -62,13 +63,23 @@
           <a :href="url" target="_blank" rel="noopner nofollow">Bestill denne bilen hos {{capitalize(car.site=="volvo" ? "Care by Volvo": car.site)}}</a>
         </section>
       </div>
-
+    
       <div v-else class="nocar">
+        <div class="bloggcontent nocar">
         <p>Beklager, vi finner ikke denne bilen.</p>
         <img src="/img/logo.990de79b.png" >
         <p>
+        
         <router-link class= "button" to="/">Gå tilbake til forsiden</router-link>
         </p>
+        <p>Eller ta en titt på disse bilene fra {{capitalize(this.$route.params.site)}} eller {{this.$route.params.carname.split("-")[0]}}:</p>
+        </div>
+        
+        <div class="carcontainer">
+          <article class="car" v-for="(car, index) in similarCars.sort(this.compare)" :key="index">
+            <Car class :car="car" />
+          </article>
+        </div>
       </div>
       
     </main>
@@ -77,20 +88,31 @@
 </template>
 <script>
 import Footer from '../components/Footer.vue'
+import Car from '../components/Car.vue'
 import axios from "axios";
 
 export default {
   name: 'CarDetails',
-  components: {Footer},
+  components: {Footer, Car},
   data() {
     return {
       cars:  this.$store.state?.cars,
-      id: this.$route.path.split('/')[2].split('-').reverse()[0],
       urlname: this.$route.path.split("/")[2],
       loading: true
       }
     },
     methods:{
+      compare: function (a, b) {
+      const carA = parseInt(a.price);
+      const carB = parseInt(b.price);
+      if (carA < carB) {
+        return -1;
+      }
+      if (carA > carB) {
+        return 1;
+      }
+      return 0;
+    },
       get_cars: function(){
         if(this.cars=="undefined" || this.cars==null)
           {axios
@@ -101,10 +123,18 @@ export default {
               () => (
                 (this.loading = false),
                 (this.cars = this.$store.state.cars),
-                (window.sessionStorage.setItem("cars",JSON.stringify(this.$store.state.cars)))
+                (window.sessionStorage.setItem("cars",JSON.stringify(this.$store.state.cars))),
+                window.dataLayer=window.dataLayer||[],
+                window.dataLayer.push({
+                  event: 'loadingDone',
+                })
                 )
             );}
-      else{this.loading = false}
+      else{this.loading = false
+          window.dataLayer=window.dataLayer||[],
+          window.dataLayer.push({
+            event: 'loadingDone',
+          })}
       },
       capitalize(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
@@ -137,27 +167,28 @@ export default {
       },
     computed: {
       url() {
-      if (this.car.order.includes('?')) {
+      if (this.car?.order.includes('?')) {
         return (
-          this.car.order +
+          this.car?.order +
           '&utm_source=bilabonnemet.app&utm_medium=link&utm_campaign=bilabonnement.app'
         );
-      } else if(this.car.site == "volvo"){
+      } else if(this.car?.site == "volvo"){
         return (
-          this.car.order+''
+          this.car?.order+''
         );
       } else {
-        return this.car.order +
+        return this.car?.order +
           '?utm_source=bilabonnemet.app&utm_medium=link&utm_campaign=bilabonnement.app'
         
       }
     },
+      id () { return this.$route.path.split('/')[2].split('-').reverse()[0]},
       namematch: function(){
-        return decodeURI(this.urlname).includes(decodeURI(this.car.name.replaceAll(" ","-")))},
+        return decodeURI(this.urlname).includes(decodeURI(this.car?.name.replaceAll(" ","-")))},
       logo(){
       let logo = ""
       try{
-        logo = require(`@/assets/${this.car.site}.png`);
+        logo = require(`@/assets/${this.car?.site}.png`);
       }catch{
         logo="";
       }
@@ -172,31 +203,45 @@ export default {
       }
       return cars;
     },
+    similarCars: function () {
+      let cars = []
+      try{
+        cars = Object.values(this.$store.state.cars["data"]).flat();
+        cars = cars.filter(car => car.make.includes(this.$route.params.carname.split("-")[0]) || car.site.includes(this.$route.params.site));
+      }catch{
+        console.log("nocars")
+      }
+      return cars;
+    },
     jsonld : function(){
-      var jsondata =
+      var jsondata = {}
+      if (this.car){
+        jsondata =
+      
       {
       "@context": "https://schema.org/",
       "@type": "Product",
-      "name": this.car.name,
-      "sku": this.car.id,
-"image": [
-        this.car.img
+      "name": this.car?.name,
+      "sku": this.car?.id,
+      "image": [
+        this.car?.img
       ],
-      "description": `Fra ${this.capitalize(this.car.site)} kan du abonnere på denne bilen fra ${this.car.make} for ${this.car.price} kroner i måneden.`,
+      "description": `Fra ${this.capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.`,
       "brand": {
         "@type": "Brand",
-        "name": this.car.make
+        "name": this.car?.make
       },
       "offers": {
         "@type": "Offer",
         "url": "https://example.com/anvil",
         "priceCurrency": "NOK",
-        "price": this.car.price,
+        "price": this.car?.price,
         "priceValidUntil": `${new Date( new Date().setDate(new Date().getDate()+2))}`,
         "itemCondition": "https://schema.org/UsedCondition",
         "availability": "https://schema.org/InStock"
       }
     }
+     }
       return jsondata
     },
     car : function(){
@@ -215,21 +260,21 @@ export default {
     },
     metaInfo() {
     return {
-      title: `${this.car.name} fra ${this.capitalize(this.car.site)} | `,
+      title: `${this.car?.name} fra ${this.capitalize(this.car?.site)} | `,
       titleTemplate: `%s Bilabonnement.app`,
       meta: [
         { charset: 'utf-8' },
-        { property: 'og:description ', content: `Fra ${this.capitalize(this.car.site)} kan du abonnere på denne bilen fra ${this.car.make} for ${this.car.price} kroner i måneden.`},
-        { name: 'twitter:description ', content: `Fra ${this.capitalize(this.car.site)} kan du abonnere på denne bilen fra ${this.car.make} for ${this.car.price} kroner i måneden.`},
+        { property: 'og:description ', content: `Fra ${this.capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.`},
+        { name: 'twitter:description ', content: `Fra ${this.capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.`},
         { name: 'twitter:creator ', content: "@bknapstad"},
-        { property: 'og:title ', content: `${this.car.name} fra ${this.capitalize(this.car.site)}`},
+        { property: 'og:title ', content: `${this.car?.name} fra ${this.capitalize(this.car?.site)}`},
         { property: 'og:url ', content:  `${window.location.href}`},
-        { property: 'og:image ', content:  this.car.img},
-        { name: 'twitter:title ', content:`${this.car.name} fra ${this.capitalize(this.car.site)}`},
+        { property: 'og:image ', content:  this.car?.img},
+        { name: 'twitter:title ', content:`${this.car?.name} fra ${this.capitalize(this.car?.site)}`},
         { property: 'og:type ', content: "product"},
         { property: 'article:published_time', content: ""},
         { property: 'article:modified_time', content: ""},
-        { name: 'description', content: `Fra ${this.capitalize(this.car.site)} kan du abonnere på denne bilen fra ${this.car.make} for ${this.car.price} kroner i måneden.`},
+        { name: 'description', content: `Fra ${this.capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.`},
         { property: 'og:site_name', content: "Bilabonnement.app"},
         { property: 'og:locale', content: "no"},
         { property: "fb:app_id", content: "381160890208041"},
@@ -354,6 +399,21 @@ img.logo{
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.carcontainer {
+  justify-content: center;
+  display: inline-grid;
+  grid-template-columns: 23% 23% 23% 23%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  width: 100%;
+}
+.car {
+  background: #fff;
+  box-shadow: 2px 2px 3px #000;
+  border-radius: 2px;
+  margin: 5px;
+  position: relative;
 }
 
 </style>
