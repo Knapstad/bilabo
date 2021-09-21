@@ -33,7 +33,7 @@
         
 
 
-        <div v-if="car.site == 'volvo'" class="bloggcontent">
+        <div v-if="car.site == 'volvo'" class="">
           <p>Her kan  du abonnere på en flott {{car.color}} bil fra Volvo. <span v-if="car.cargoVolume"> Bilen er utstyrt med {{car.cargoVolume}} bagasjerom. </span><span v-if="car.co2">Bilen har et lavt utslipp på ca {{car.co2}}. </span><span v-if="car.fuelconsumption">Forbruket ligger på rundt {{car.fuelconsumption}}. </span><span v-if="car.engine">Bilen er utstyrt med en {{car.engine}} motor, nærmere bestemt {{car.enginDescription}}</span></p>
           <section>
             <a :href="url" target="_blank" rel="noopner nofollow">Bestill denne bilen hos {{capitalize(car.site=="volvo" ? "Care by Volvo": car.site)}}</a>
@@ -123,18 +123,22 @@ export default {
               () => (
                 (this.loading = false),
                 (this.cars = this.$store.state.cars),
-                (window.sessionStorage.setItem("cars",JSON.stringify(this.$store.state.cars))),
-                window.dataLayer=window.dataLayer||[],
-                window.dataLayer.push({
-                  event: 'loadingDone',
-                })
+                (this.$track("loadingDone"))
+                // (window.sessionStorage.setItem("cars",JSON.stringify(this.$store.state.cars))),
+                // window.dataLayer=window.dataLayer||[],
+                // window.dataLayer.push({
+                //   event: 'loadingDone',
+                // })
                 )
             );}
-      else{this.loading = false
-          window.dataLayer=window.dataLayer||[],
-          window.dataLayer.push({
-            event: 'loadingDone',
-          })}
+      else{
+        this.loading = false
+        this.$track("loadingDone")
+          // window.dataLayer=window.dataLayer||[],
+          // window.dataLayer.push({
+          //   event: 'loadingDone',
+          // })
+        }
       },
       capitalize(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
