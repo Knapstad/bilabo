@@ -25,14 +25,18 @@
         </div>
         <h2>Abonner på {{car.name}} fra {{capitalize(car.site=="volvo" ? "Care by Volvo": car.site)}}</h2>
         <p>Fra {{capitalize(car.site=="volvo" ? "Care by Volvo": car.site)}} kan du abonnere på denne bilen fra {{car.make}} for {{car.price}} kroner i måneden. Da er forsikring, service og dekkbytte inkludert og du kan i tillegg kjøre {{car.kmMonth}} kilometer i måneden.<span v-if="car.site == 'imove'"> Imove tilbyr i tilegg hyttebil i 10 dager slik at du kan kjøre en liten bybil tilvanlig og bytte til en større bil om du skal på litt lengre tur.</span></p>
+        <p v-if="car.description">{{car.description}}</p>
+
         <p v-if="car.extra&&car.extra.length>0">Akuratt denne bilen er utstyrt med følgende utstyr:
           <ul v-for="(item, index) in car.extra" :key="index">
             <li>{{item}}</li>
           </ul>
         </p>
-        
-
-
+        <details v-for="(item, index) in car.details" :key="index">
+            <summary>{{index}}</summary>
+            {{item}}
+        </details>
+          
         <div v-if="car.site == 'volvo'" class="">
           <p>Her kan  du abonnere på en flott {{car.color}} bil fra Volvo. <span v-if="car.cargoVolume"> Bilen er utstyrt med {{car.cargoVolume}} bagasjerom. </span><span v-if="car.co2">Bilen har et lavt utslipp på ca {{car.co2}}. </span><span v-if="car.fuelconsumption">Forbruket ligger på rundt {{car.fuelconsumption}}. </span><span v-if="car.engine">Bilen er utstyrt med en {{car.engine}} motor, nærmere bestemt {{car.enginDescription}}</span></p>
           <section>
