@@ -56,7 +56,7 @@
           <g />
           <g />
         </svg>
-        <img v-else :src="car.img.replace(' ', '-')" :alt="car.name + ' ' + car.year + '-modell'"/>
+        <img v-else :src="car.img.replace('/upload/','/upload/c_crop,f_auto,g_center,q_auto/')"  :alt="car.name + ' ' + car.year + '-modell'"/>
       </div>
     </div>
     <p v-if="car.site === 'volvo'" class="carfooter">
