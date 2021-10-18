@@ -56,7 +56,7 @@
           <g />
           <g />
         </svg>
-        <img v-else :src="car.img.replace('/upload/','/upload/c_crop,f_auto,g_center,q_auto/')"  :alt="car.name + ' ' + car.year + '-modell'"/>
+        <img v-else :src="car.img.replace('/upload/','/upload/c_crop,f_auto,g_center,q_auto:eco,w_auto/')"  :alt="car.name + ' ' + car.year + '-modell'" @error="imageLoadError"/>
       </div>
     </div>
     <p v-if="car.site === 'volvo'" class="carfooter">
@@ -84,6 +84,11 @@ export default {
     site: String,
     id: Number,
   },
+  methods: {
+    imageLoadError () {
+      this.car.img = "svg";
+      }
+    },
   computed: {
     url() {
       if (this.car.order.includes('?')) {
