@@ -36,9 +36,21 @@
             <summary>{{index}}</summary>
             {{item}}
         </details>
+
           
         <div v-if="car.site == 'volvo'" class="">
-          <p>Her kan  du abonnere på en flott {{car.color}} bil fra Volvo. <span v-if="car.cargoVolume"> Bilen er utstyrt med {{car.cargoVolume}} bagasjerom. </span><span v-if="car.co2">Bilen har et lavt utslipp på ca {{car.co2}}. </span><span v-if="car.fuelconsumption">Forbruket ligger på rundt {{car.fuelconsumption}}. </span><span v-if="car.engine">Bilen er utstyrt med en {{car.engine}} motor, nærmere bestemt {{car.enginDescription}}</span></p>
+          <p>Her kan  du abonnere på en flott {{car.color}} bil fra Volvo. 
+          <span v-if="car.cargoVolume"> Bilen er utstyrt med {{car.cargoVolume}} bagasjerom. </span>
+          <span v-if="car.co2">Denne har et lavt utslipp på ca {{car.co2}}. </span>
+          <span v-if="car.fuelconsumption">Forbruket ligger på rundt {{car.fuelconsumption}}. </span>
+          <span v-if="car.engine">Bilen er utstyrt med en {{car.engine}} motor, nærmere bestemt {{car.enginDescription}}. </span>
+          
+          <span v-if="car.towbar">Bilen er også utstyrt med hengerfeste.  </span>
+          <span v-if="car.delivery">Det er omtrent {{car.delivery}} leveringstid på bilen.</span>
+          <span v-if="car.towbar">Bilen er i tillegg utstyrt med hengerfeste</span>
+
+          
+          </p>
           <section>
             <a :href="url" target="_blank" rel="noopner nofollow">Bestill denne bilen hos {{capitalize(car.site=="volvo" ? "Care by Volvo": car.site)}}</a>
           </section>
