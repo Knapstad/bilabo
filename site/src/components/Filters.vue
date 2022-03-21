@@ -68,6 +68,7 @@ methods: {
       cars = cars
         .map((a) => a.location)
         .flat()
+        .map((a) => a.toLowerCase())
         .filter((v, i, a) => a.indexOf(v) === i);
       return cars;
     },
@@ -76,6 +77,7 @@ methods: {
       cars = cars
         .map((a) => a.make.toLowerCase().trim())
         .flat()
+        .map((a) => a.replace("citröen", "citroën"))
         .filter((v, i, a) => a.indexOf(v) === i);
       return cars;
     },
