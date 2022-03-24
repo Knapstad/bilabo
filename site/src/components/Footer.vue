@@ -10,6 +10,7 @@
         <router-link to="/swapcar">Swapcar</router-link>
         <router-link to="/flexidrive">Flexidrive</router-link>
         <router-link to="/enterprise">Enterprise</router-link>
+        <router-link to="/sesongbil">Sesongbil</router-link>
       </nav>
       <address class="contact">
         <a href="mailto:post@bilabonnement.app">post@bilabonnement.app</a>
