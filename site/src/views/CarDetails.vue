@@ -261,7 +261,7 @@ export default {
         "availability": "https://schema.org/InStock"
       }
     }
-     }
+    }
       return jsondata
     },
     car : function(){
