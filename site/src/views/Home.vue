@@ -136,6 +136,7 @@ export default {
     },
     locations: function () {
       let cars = Object.values(this.$store.state.cars["data"]).flat();
+      cars = cars.filter((car) => car.location.length > 0);
       let locs = this.$store.state.locations;
       if (locs.length > 0) {
         cars = cars.filter((car) =>
@@ -192,9 +193,10 @@ margin-bottom: 5px;
 .car {
   background: #fff;
   box-shadow: 2px 2px 3px #000;
-  border-radius: 2px;
+  border-radius: 12px;
   margin: 5px;
   position: relative;
+  overflow: hidden;
 }
 
 .skip {
