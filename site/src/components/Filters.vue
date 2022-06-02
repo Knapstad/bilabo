@@ -92,7 +92,7 @@ methods: {
     drive: function () {
       let cars = Object.values(this.flat).flat();
       cars = cars
-        .map((a) => a.drive.toLowerCase().trim()||"Hydrogen")
+        .map((a) => a.drive.toLowerCase().trim().replace("Electric","Elektrisk").replace("PHV","Hybrid")||"Hydrogen")
         .flat()
         .filter((v, i, a) => a.indexOf(v) === i);
       return cars;
