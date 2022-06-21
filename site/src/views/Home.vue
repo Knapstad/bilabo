@@ -72,7 +72,7 @@ export default {
       {
         name: "twitter:image",
         content:
-          "https://res.cloudinary.com/db0kzjtgs/image/upload/v1598880211/site_drfi7i.jpg",
+          "https://res.cloudinary.com/bilabonnement/image/upload/v1655797402/site_drvyh2.png",
       },
       // Facebook OpenGraph
       {
@@ -88,7 +88,7 @@ export default {
       {
         property: "og:image",
         content:
-          "https://res.cloudinary.com/db0kzjtgs/image/upload/v1629447450/site_drfi7i.jpg",
+          "https://res.cloudinary.com/bilabonnement/image/upload/v1655797402/site_drvyh2.png",
       },
       {
         property: "og:description",
