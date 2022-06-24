@@ -91,6 +91,11 @@ export default {
           "https://res.cloudinary.com/bilabonnement/image/upload/v1655797402/site_drvyh2.png",
       },
       {
+        property: "og:image:secure_url",
+        content:
+          "https://res.cloudinary.com/bilabonnement/image/upload/v1655797402/site_drvyh2.png",
+      },
+      {
         property: "og:description",
         content:
           "En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen",
