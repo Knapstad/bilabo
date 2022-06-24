@@ -88,12 +88,12 @@ export default {
       {
         property: "og:image",
         content:
-          "https://res.cloudinary.com/bilabonnement/image/upload/v1655797402/site_drvyh2.png",
+          "https://res.cloudinary.com/bilabonnement/image/upload/c_scale,w_500/v1655797402/site_drvyh2.png",
       },
       {
         property: "og:image:secure_url",
         content:
-          "https://res.cloudinary.com/bilabonnement/image/upload/v1655797402/site_drvyh2.png",
+          "https://res.cloudinary.com/bilabonnement/image/upload/c_scale,w_500/v1655797402/site_drvyh2.png",
       },
       {
         property: "og:description",
