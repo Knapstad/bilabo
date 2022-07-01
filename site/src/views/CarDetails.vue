@@ -261,7 +261,7 @@ export default {
             "@type" : "Car",
             "name" : this.car?.name,
             "description": `Fra ${this.capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.`,
-            "image" : this.car?.image
+            "image" : this.car?.image,
             "color" : this.car?.color,
             "vehicleEngine" : {
                 "@type": "EngineSpecification",
