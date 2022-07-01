@@ -279,9 +279,9 @@ export default {
             "bodyType": this.car?.modelType,
             "modelDate": this.car?.modelYear||this.car?.year,
             "seatingCapacity": this.car?.seats,
-            "cargoVolume": this.car?.cargoCapacity||this.car?.cargoVolume,
+            "carg oVolume": this.car?.cargoCapacity||this.car?.cargoVolume,
 
-        }
+      }},
         "gtin": this.car?.pno12,
         "category": "Car",
         "seller": this.car?.site,
@@ -289,8 +289,7 @@ export default {
         "itemCondition": "New",
         "deliveryLeadTime": this.car.deliveryTime,
         "availability": "Available",
-        "areaServed": this.car?.location.join(" "),
-     
+        "areaServed": this.car?.location.join(" ")
     }
     }
       return jsondata
