@@ -246,20 +246,55 @@ export default {
       "image": [
         this.car?.img
       ],
-      "description": `Fra ${this.capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.`,
       "brand": {
         "@type": "Brand",
         "name": this.car?.make
       },
       "offers": {
         "@type": "Offer",
-        "url": "https://example.com/anvil",
-        "priceCurrency": "NOK",
-        "price": this.car?.price,
-        "priceValidUntil": `${new Date( new Date().setDate(new Date().getDate()+2))}`,
+        "priceSpecification" : {
+            "@type" : "UnitPriceSpecification",
+            "priceCurrency" : "NOK",
+            "price" : this.car?.price,
+            "priceValidUntil": `${new Date( new Date().setDate(new Date().getDate()+7))}`,},
+        "itemOffered" : {
+            "@type" : "Car",
+            "name" : this.car?.name,
+            "description": `Fra ${this.capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.`,
+            "image" : this.car?.image
+            "color" : this.car?.color,
+            "vehicleEngine" : {
+                "@type": "EngineSpecification",
+                "name" : this.car?.enginDescription,
+            }
+            "vehicleTransmission" : {
+                "@type": "TransmissionSpecification",
+                "name" : this.car?.transmissionType||this.car?.transmission,
+            },
+            "driveWheelConfiguration": this.car.drive,
+            "emissionsCO2": this.car?.co2,
+            "fuelConsumption": this.car?.fuelConsumption,
+            "fuelType": this.car?.fuelType,
+            "numberOfDoors": this.car?.doors,
+            "bodyType": this.car?.modelType,
+            "modelDate": this.car?.modelYear||this.car?.year,
+            "seatingCapacity": this.car?.seats,
+            "cargoVolume": this.car?.cargoCapacity||this.car?.cargoVolume,
+
+        }
+        "gtin": this.car?.pno12,
+        "category": "Car",
+        "seller": this.car?.site,
+        "offeredBy": this.car?.site,
+        "itemCondition": "New",
+        "deliveryLeadTime": this.car.deliveryTime,
+        "availability": "Available",
+        "areaServed": this.car?.location.join(" "),
+        
         "itemCondition": "https://schema.org/UsedCondition",
         "availability": "https://schema.org/InStock"
       }
+      
     }
     }
       return jsondata
