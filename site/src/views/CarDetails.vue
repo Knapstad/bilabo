@@ -265,7 +265,7 @@ export default {
             "color" : this.car?.color,
             "vehicleEngine" : {
                 "@type": "EngineSpecification",
-                "name" : this.car?.enginDescription,
+                "name" : this.car?.enginDescription||this.car?.engine,
             }
             "vehicleTransmission" : {
                 "@type": "TransmissionSpecification",
@@ -290,11 +290,7 @@ export default {
         "deliveryLeadTime": this.car.deliveryTime,
         "availability": "Available",
         "areaServed": this.car?.location.join(" "),
-        
-        "itemCondition": "https://schema.org/UsedCondition",
-        "availability": "https://schema.org/InStock"
-      }
-      
+     
     }
     }
       return jsondata
