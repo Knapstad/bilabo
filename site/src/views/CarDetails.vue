@@ -271,7 +271,7 @@ export default {
                 "@type": "TransmissionSpecification",
                 "name" : this.car?.transmissionType||this.car?.transmission,
             },
-            "driveWheelConfiguration": this.car.drive,
+            "driveWheelConfiguration": this.car?.driveWheel,
             "emissionsCO2": this.car?.co2,
             "fuelConsumption": this.car?.fuelConsumption,
             "fuelType": this.car?.fuelType,
@@ -281,7 +281,8 @@ export default {
             "seatingCapacity": this.car?.seats,
             "carg oVolume": this.car?.cargoCapacity||this.car?.cargoVolume,
 
-      }},
+      }
+      },
         "gtin": this.car?.pno12,
         "category": "Car",
         "seller": this.car?.site,
