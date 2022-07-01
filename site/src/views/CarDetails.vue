@@ -266,7 +266,7 @@ export default {
             "vehicleEngine" : {
                 "@type": "EngineSpecification",
                 "name" : this.car?.enginDescription||this.car?.engine,
-            }
+            },
             "vehicleTransmission" : {
                 "@type": "TransmissionSpecification",
                 "name" : this.car?.transmissionType||this.car?.transmission,
