@@ -107,6 +107,7 @@ summary {
 }
 .filter-wrap {
   display: flex;
+  flex-wrap: wrap;
   margin-top: 1rem;
 }
 .filter-accordian {
