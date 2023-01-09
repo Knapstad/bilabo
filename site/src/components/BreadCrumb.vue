@@ -25,6 +25,9 @@ export default {
                 let path = paths[item]
                 let seperator = ""
                 base += "/" + paths[item]
+                if (item == 0) {
+                    path = "hjem"
+                }
                 if (item != paths.length - 1) {
                     seperator = " > "
                 }
@@ -37,7 +40,12 @@ export default {
 }
 </script>
 <style scoped>
+div {
+    margin-left: 1rem;
+}
+
 a {
     font-size: medium;
+    text-transform: capitalize;
 }
 </style>
