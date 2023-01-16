@@ -11,6 +11,7 @@
         <router-link to="/flexidrive">Flexidrive</router-link>
         <router-link to="/enterprise">Enterprise</router-link>
         <router-link to="/sesongbil">Sesongbil</router-link>
+        <router-link to="/hunsbedt">Hunsbedt</router-link>
       </nav>
       <address class="contact">
         <a href="mailto:post@bilabonnement.app">post@bilabonnement.app</a>
@@ -32,19 +33,21 @@ export default {
 </script>
 
 <style scoped>
-address{
-  font-style : normal;
+address {
+  font-style: normal;
 }
-h3{
+
+h3 {
   padding: 0px;
   margin: 0px;
   margin-top: .5rem;
 }
 
-.footer{
+.footer {
   background: var(--main-dark);
 }
-.footerwrapper{
+
+.footerwrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -52,13 +55,15 @@ h3{
   padding-left: 10%;
   padding-right: 10%;
 }
-.internal{
+
+.internal {
   display: flex;
   flex-direction: column;
   justify-content: center;
   line-height: 2rem;
   font-size: 1.5rem;
 }
+
 .contact {
   display: flex;
   justify-content: center;
@@ -66,7 +71,8 @@ h3{
   color: white;
   font-size: 30px;
 }
-.supplyers{
+
+.supplyers {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -76,23 +82,30 @@ h3{
 a {
   color: white;
 }
+
 @media only screen and (max-width: 600px) {
-  .footerwrapper{
+  .footerwrapper {
     padding-top: 1rem;
     flex-direction: column-reverse;
   }
-  .contact , .internal, .supplyers {
+
+  .contact,
+  .internal,
+  .supplyers {
     font-size: 1rem;
     justify-content: flex-start;
     margin-block-end: 10px;
   }
-  .internal{
+
+  .internal {
     line-height: 1.2;
   }
 }
 
 @media only screen and (max-width: 360px) {
-  .contact .internal, .supplyers  {
+
+  .contact .internal,
+  .supplyers {
     font-size: 10px;
   }
 }
