@@ -125,7 +125,7 @@ summary.label {
   flex-direction: column;
   padding: 1rem;
   width: fit-content;
-  min-width: 40%;
+  min-width: 86%;
   background: var(--main-medium-light);
   color: white;
   margin-top: 1rem;
@@ -185,7 +185,7 @@ summary.label {
   }
 
   .filter-accordian {
-    min-width: 90%;
+    min-width: 86%;
     /* margin: 0; */
     /* padding: 0; */
     margin-block-end: 5px;
