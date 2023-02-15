@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <span v-for="path in breadcrumbs" :key="path.id">
             <a :href="path.href">{{ path.path }}</a><span>{{ path.seperator }}</span>
         </span>
@@ -13,7 +12,6 @@ export default {
         return {
         };
     },
-
     computed: {
         breadcrumbs: () => {
             let paths = window.location.href.split("/")
