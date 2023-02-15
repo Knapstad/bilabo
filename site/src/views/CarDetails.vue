@@ -292,11 +292,16 @@ export default {
             },
             "offers": {
               "@type": "Offer",
+              "availability": "Available",
+              "areaServed": this.car?.location.join(" "),
+              "seller": this.car?.site,
+              "offeredBy": this.car?.site,
+              "deliveryLeadTime": this.car.deliveryTime,
               "priceSpecification": {
                 "@type": "UnitPriceSpecification",
                 "priceCurrency": "NOK",
                 "price": this.car?.price,
-                "priceValidUntil": `${new Date(new Date().setDate(new Date().getDate() + 7))}`,
+                "validThrough": `${new Date(new Date().setDate(new Date().getDate() + 7))}`,
               },
               "itemOffered": {
                 "@type": "Car",
@@ -308,10 +313,7 @@ export default {
                   "@type": "EngineSpecification",
                   "name": this.car?.enginDescription || this.car?.engine,
                 },
-                "vehicleTransmission": {
-                  "@type": "TransmissionSpecification",
-                  "name": this.car?.transmissionType || this.car?.transmission,
-                },
+                "vehicleTransmission": this.car?.transmissionType || this.car?.transmission,
                 "driveWheelConfiguration": this.car?.driveWheel,
                 "emissionsCO2": this.car?.co2,
                 "fuelConsumption": this.car?.fuelConsumption,
@@ -320,18 +322,16 @@ export default {
                 "bodyType": this.car?.modelType,
                 "modelDate": this.car?.modelYear || this.car?.year,
                 "seatingCapacity": this.car?.seats,
-                "carg oVolume": this.car?.cargoCapacity || this.car?.cargoVolume,
+                "cargoVolume": this.car?.cargoCapacity || this.car?.cargoVolume,
 
               }
             },
             "gtin": this.car?.pno12,
             "category": "Car",
-            "seller": this.car?.site,
-            "offeredBy": this.car?.site,
             "itemCondition": "New",
-            "deliveryLeadTime": this.car.deliveryTime,
-            "availability": "Available",
-            "areaServed": this.car?.location.join(" "),
+
+
+
           },
           {
             "@context": "https://schema.org/",
