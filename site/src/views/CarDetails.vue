@@ -276,68 +276,68 @@ export default {
     jsonld: function () {
       var jsondata = {}
       if (this.car) {
-        jsondata =
+        jsondata = [
 
-        {
-          "@context": "https://schema.org/",
-          "@type": "Product",
-          "name": this.car?.name,
-          "sku": this.car?.id,
-          "image": [
-            this.car?.img
-          ],
-          "brand": {
-            "@type": "Brand",
-            "name": this.car?.make
-          },
-          "offers": {
-            "@type": "Offer",
-            "priceSpecification": {
-              "@type": "UnitPriceSpecification",
-              "priceCurrency": "NOK",
-              "price": this.car?.price,
-              "priceValidUntil": `${new Date(new Date().setDate(new Date().getDate() + 7))}`,
+          {
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            "name": this.car?.name,
+            "sku": this.car?.id,
+            "image": [
+              this.car?.img
+            ],
+            "brand": {
+              "@type": "Brand",
+              "name": this.car?.make
             },
-            "itemOffered": {
-              "@type": "Car",
-              "name": this.car?.name,
-              "description": `Fra ${this.capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.`,
-              "image": this.car?.image,
-              "color": this.car?.color,
-              "vehicleEngine": {
-                "@type": "EngineSpecification",
-                "name": this.car?.enginDescription || this.car?.engine,
+            "offers": {
+              "@type": "Offer",
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "priceCurrency": "NOK",
+                "price": this.car?.price,
+                "priceValidUntil": `${new Date(new Date().setDate(new Date().getDate() + 7))}`,
               },
-              "vehicleTransmission": {
-                "@type": "TransmissionSpecification",
-                "name": this.car?.transmissionType || this.car?.transmission,
-              },
-              "driveWheelConfiguration": this.car?.driveWheel,
-              "emissionsCO2": this.car?.co2,
-              "fuelConsumption": this.car?.fuelConsumption,
-              "fuelType": this.car?.fuelType,
-              "numberOfDoors": this.car?.doors,
-              "bodyType": this.car?.modelType,
-              "modelDate": this.car?.modelYear || this.car?.year,
-              "seatingCapacity": this.car?.seats,
-              "carg oVolume": this.car?.cargoCapacity || this.car?.cargoVolume,
+              "itemOffered": {
+                "@type": "Car",
+                "name": this.car?.name,
+                "description": `Fra ${this.capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.`,
+                "image": this.car?.image,
+                "color": this.car?.color,
+                "vehicleEngine": {
+                  "@type": "EngineSpecification",
+                  "name": this.car?.enginDescription || this.car?.engine,
+                },
+                "vehicleTransmission": {
+                  "@type": "TransmissionSpecification",
+                  "name": this.car?.transmissionType || this.car?.transmission,
+                },
+                "driveWheelConfiguration": this.car?.driveWheel,
+                "emissionsCO2": this.car?.co2,
+                "fuelConsumption": this.car?.fuelConsumption,
+                "fuelType": this.car?.fuelType,
+                "numberOfDoors": this.car?.doors,
+                "bodyType": this.car?.modelType,
+                "modelDate": this.car?.modelYear || this.car?.year,
+                "seatingCapacity": this.car?.seats,
+                "carg oVolume": this.car?.cargoCapacity || this.car?.cargoVolume,
 
-            }
+              }
+            },
+            "gtin": this.car?.pno12,
+            "category": "Car",
+            "seller": this.car?.site,
+            "offeredBy": this.car?.site,
+            "itemCondition": "New",
+            "deliveryLeadTime": this.car.deliveryTime,
+            "availability": "Available",
+            "areaServed": this.car?.location.join(" "),
           },
-          "gtin": this.car?.pno12,
-          "category": "Car",
-          "seller": this.car?.site,
-          "offeredBy": this.car?.site,
-          "itemCondition": "New",
-          "deliveryLeadTime": this.car.deliveryTime,
-          "availability": "Available",
-          "areaServed": this.car?.location.join(" "),
-          "breadcrumb": {
-            "@context": "http://schema.org",
+          {
+            "@context": "https://schema.org/",
             "@type": "BreadcrumbList",
             "itemListElement": this.breadcrumbs
-          },
-        }
+          }]
       }
       return jsondata
     },

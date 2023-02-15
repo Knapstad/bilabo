@@ -96,24 +96,25 @@ export default {
       return breadcrumbs
     },
     jsonld: function () {
-      var jsondata =
-      {
-        "@context": "http://schema.org",
-        "@type": "Article",
-        "name": this.blocks[0].children[0].text,
-        "headline": this.blocks[0].children[0].text,
-        "image": this.mainImage?.url,
-        "articleBody": this.blocks.slice(1).map((block) => block.children[0].text).join(),
-        "publisher": {
-          "@type": "Organization",
-          "name": "Bilabonnement"
+      var jsondata = [
+        {
+          "@context": "http://schema.org",
+          "@type": "Article",
+          "name": this.blocks[0].children[0].text,
+          "headline": this.blocks[0].children[0].text,
+          "image": this.mainImage?.url,
+          "articleBody": this.blocks.slice(1).map((block) => block.children[0].text).join(),
+          "publisher": {
+            "@type": "Organization",
+            "name": "Bilabonnement"
+          },
         },
-        "breadcrumb": {
+        {
           "@context": "http://schema.org",
           "@type": "BreadcrumbList",
           "itemListElement": this.breadcrumbs
         },
-      }
+      ]
 
 
       return jsondata
