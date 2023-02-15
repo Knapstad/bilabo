@@ -77,6 +77,24 @@ export default {
     }
   },
   computed: {
+    breadcrumbs: function () {
+      let paths = window.location.href.split("/")
+      let base = "https:/"
+      paths = paths.slice(2, paths.length)
+      let breadcrumbs = []
+
+      for (let item in paths) {
+        let name = paths[item]
+        let position = parseInt(item) + 1
+        base += "/" + paths[item]
+        if (item == 0) {
+          name = "Hjem"
+        }
+        breadcrumbs.push({ "@type": "ListItem", name: name, position: position, item: base })
+
+      }
+      return breadcrumbs
+    },
     jsonld: function () {
       var jsondata =
       {
@@ -89,8 +107,15 @@ export default {
         "publisher": {
           "@type": "Organization",
           "name": "Bilabonnement"
-        }
+        },
+        "breadcrumb": {
+          "@context": "http://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": this.breadcrumbs
+        },
       }
+
+
       return jsondata
     },
     flatCars: function () {
