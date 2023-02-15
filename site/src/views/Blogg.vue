@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BreadCrumb></BreadCrumb>
+    <BreadCrumb :key="$route.path"></BreadCrumb>
     <div v-if="this.blocks == 0" class="notfound bloggcontent">
       <p>Beklager vi finner ikke siden du leter etter</p>
     </div>

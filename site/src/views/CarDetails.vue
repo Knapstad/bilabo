@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BreadCrumb></BreadCrumb>
+    <BreadCrumb :key="$route.path"></BreadCrumb>
     <main>
 
       <div v-if="this.loading" class="loading">
