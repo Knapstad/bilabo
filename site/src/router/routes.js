@@ -10,10 +10,10 @@ const client = sanityClient({
 
 
 async function getSlugs() {
-  var test=""
+  var test = ""
   await client.fetch(`*[_type=='post'].slug.current`)
     .then((response) => {
-      test=response
+      test = response
     }
     )
   return test
@@ -26,12 +26,20 @@ module.exports = [
     component: () => import('@/views/Home.vue'),
   },
   {
+    path: '/swapcar',
+    redirect: '/swap'
+  },
+  {
+    path: '/kinto-flex',
+    redirect: '/kinto'
+  },
+  {
     path: '/:slug',
     meta: {
       sitemap: {
-       // Slugs can also be provided asynchronously
-       // The callback must always return an array
-        slugs:  async () => await getSlugs(),
+        // Slugs can also be provided asynchronously
+        // The callback must always return an array
+        slugs: async () => await getSlugs(),
       }
     },
 
