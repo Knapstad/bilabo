@@ -28,7 +28,8 @@
         </div>
         <h2>Abonner på {{ car.name }} fra {{ capitalize(car.site == "volvo" ? "Care by Volvo" : car.site) }}</h2>
         <p>Fra {{ capitalize(car.site == "volvo" ? "Care by Volvo" : car.site) }} kan du abonnere på denne bilen fra
-          {{ car.make }} for {{ car.price }} kroner i måneden. Da er forsikring, service og dekkbytte inkludert og du kan i
+          {{ car.make }} for {{ car.price }} kroner i måneden. Da er forsikring, service og dekkbytte inkludert og du
+          kan i
           tillegg kjøre {{ car.kmMonth }} kilometer i måneden.<span v-if="car.site == 'imove'"> Imove tilbyr i tilegg
             hyttebil i 10 dager slik at du kan kjøre en liten bybil tilvanlig og bytte til en større bil om du skal på
             litt lengre tur.</span></p>
@@ -48,7 +49,7 @@
         <div v-if="car.site == 'volvo'" class="">
           <p>Her kan du abonnere på en flott {{ car.color }} bil fra Volvo.
             <span v-if="car.cargoVolume"> Bilen er utstyrt med {{ car.cargoVolume }} bagasjerom. </span>
-            <span v-if="car.co2">Denne har et lavt utslipp på ca {{ car.co2 }}. </span>
+            <span v-if="car.co2">Den har et lavt utslipp på ca {{ car.co2 }}. </span>
             <span v-if="car.fuelconsumption">Forbruket ligger på rundt {{ car.fuelconsumption }}. </span>
             <span v-if="car.engine">Bilen er utstyrt med en {{ car.engine }} motor, nærmere bestemt
               {{ car.enginDescription }}. </span>
@@ -149,20 +150,20 @@ export default {
       if (this.cars == "undefined" || this.cars == null) {
         axios
           .get("https://europe-west1-bilabo.cloudfunctions.net/give_car")
-        .then((response) => (this.$store.commit("addData", ["cars", response])),
-        )
-        .finally(
-          () => (
-            (this.loading = false),
-            (this.cars = this.$store.state.cars),
-            (this.$track("loadingDone"))
-            // (window.sessionStorage.setItem("cars",JSON.stringify(this.$store.state.cars))),
-            // window.dataLayer=window.dataLayer||[],
-            // window.dataLayer.push({
-            //   event: 'loadingDone',
-            // })
+          .then((response) => (this.$store.commit("addData", ["cars", response])),
           )
-        );
+          .finally(
+            () => (
+              (this.loading = false),
+              (this.cars = this.$store.state.cars),
+              (this.$track("loadingDone"))
+              // (window.sessionStorage.setItem("cars",JSON.stringify(this.$store.state.cars))),
+              // window.dataLayer=window.dataLayer||[],
+              // window.dataLayer.push({
+              //   event: 'loadingDone',
+              // })
+            )
+          );
       }
       else {
         this.loading = false
@@ -180,13 +181,13 @@ export default {
       var Jsoninterval = setInterval(() => {
         if (this.loading === false) {
           if (!document.querySelector("#articledata")) {
-            console.log("article script not found")
+            // console.log("article script not found")
             var jsonldScript = document.createElement("script")
-            console.log("article script created")
+            // console.log("article script created")
             jsonldScript.setAttribute("type", "application/ld+json")
-            console.log("set type")
+            // console.log("set type")
             jsonldScript.setAttribute("id", "articledata")
-            console.log("set id")
+            // console.log("set id")
 
           } else {
             jsonldScript = document.querySelector("#articledata")
@@ -196,9 +197,9 @@ export default {
             }
           }
           jsonldScript.textContent = JSON.stringify(this.jsonld);
-          console.log("setting data")
+          // console.log("setting data")
           document.head.appendChild(jsonldScript)
-          console.log("appending script")
+          // console.log("appending script")
           clearInterval(Jsoninterval)
         }
       }
@@ -253,6 +254,24 @@ export default {
         console.log("nocars")
       }
       return cars;
+    },
+    breadcrumbs: function () {
+      let paths = window.location.href.split("/")
+      let base = "https:/"
+      paths = paths.slice(2, paths.length)
+      let breadcrumbs = []
+
+      for (let item in paths) {
+        let name = paths[item]
+        let position = parseInt(item) + 1
+        base += "/" + paths[item]
+        if (item == 0) {
+          name = "Hjem"
+        }
+        breadcrumbs.push({ "@type": "ListItem", name: name, position: position, item: base })
+
+      }
+      return breadcrumbs
     },
     jsonld: function () {
       var jsondata = {}
@@ -312,7 +331,12 @@ export default {
           "itemCondition": "New",
           "deliveryLeadTime": this.car.deliveryTime,
           "availability": "Available",
-          "areaServed": this.car?.location.join(" ")
+          "areaServed": this.car?.location.join(" "),
+          "breadcrumb": {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": this.breadcrumbs
+          },
         }
       }
       return jsondata
@@ -352,6 +376,7 @@ export default {
         { property: 'og:site_name', content: "Bilabonnement.app" },
         { property: 'og:locale', content: "no" },
         { property: "fb:app_id", content: "381160890208041" },
+
       ],
       link: [
         { rel: 'canonical', href: `${window.location.href}` }
