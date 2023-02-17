@@ -292,11 +292,12 @@ export default {
             },
             "offers": {
               "@type": "Offer",
-              "availability": "Available",
+              "availability": "https://schema.org/InStock",
               "areaServed": this.car?.location.join(" "),
               "seller": this.car?.site,
               "offeredBy": this.car?.site,
               "deliveryLeadTime": this.car.deliveryTime,
+              "priceValidUntil": `${new Date(new Date().setDate(new Date().getDate() + 7))}`,
               "priceSpecification": {
                 "@type": "UnitPriceSpecification",
                 "priceCurrency": "NOK",
