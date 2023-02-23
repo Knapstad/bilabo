@@ -2,17 +2,18 @@
   <div id="app">
     <header id="header">
       <router-link to="/">
-        <img src="@/assets/logo.png" class="logo" alt="Til forsiden"
-      /></router-link>
-      <p class="tagline"><router-link to="/"> <h1>Bilabonnement</h1> </router-link> - vi samler bilabonnement på en side</p>
+        <img src="@/assets/logo.png" class="logo" alt="Til forsiden" /></router-link>
+      <p class="tagline"><router-link to="/">
+          <h1>Bilabonnement</h1>
+        </router-link> - vi samler bilabonnement på en side</p>
     </header>
     <router-view />
-  <Footer />
+    <Footer />
   </div>
 </template>
 <script>
 export default {
- };
+};
 </script>
 
 <style>
@@ -22,6 +23,7 @@ export default {
   --main-medium-light: #84a9ac;
   --main-light: #cae8d5;
 }
+
 /* *,
 *:before,
 *:after {
@@ -42,7 +44,8 @@ html,
   height: auto;
   overflow-x: hidden;
 }
-.tagline{
+
+.tagline {
   color: #cae8d5;
 }
 
@@ -68,63 +71,76 @@ h1 {
   height: 60px;
   padding-right: 10px;
 }
+
 .router-link {
   text-decoration: none;
 }
+
 .router-link-active {
   text-decoration: none;
 }
+
 .bloggcontent {
   display: flex;
   flex-direction: column;
-  width: 33%;
+  width: 50%;
   margin: auto;
   line-height: 1.5;
 }
+
 .bloggcontent h2 {
   color: black;
   font-size: 33px;
 }
+
 .bloggcontent h3 {
   color: black;
   font-size: 1.5rem;
   font-weight: bolder;
 }
-  .bloggcontent p {
-    font-size: 22px;
-    margin-bottom: 17px;
-  }
-  .bloggcontent section {
-    font-size: 22px;
-    margin-bottom: 50px;
-  }
+
+.bloggcontent p {
+  font-size: 22px;
+  margin-bottom: 17px;
+}
+
+.bloggcontent section {
+  font-size: 22px;
+  margin-bottom: 50px;
+}
 
 img.headerimage {
   width: 100%;
 }
-img.fullwidth{
+
+img.fullwidth {
   width: 100%;
   margin-top: 1rem;
 }
+
 @media screen and (max-width: 1500px) {
   .bloggcontent {
-    width: 40%;
+    width: 50%;
   }
 }
+
 @media screen and (max-width: 1400px) {
   .bloggcontent {
     width: 50%;
   }
 }
+
 @media screen and (max-width: 1300px) {
   .bloggcontent {
     width: 60%;
   }
 }
+
 @media only screen and (max-width: 900px) {
-  .bloggcontent{
+  .bloggcontent {
     width: 95%;
   }
+
   #nav {
     padding: 0px;
   }
