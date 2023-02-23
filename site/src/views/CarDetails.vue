@@ -47,7 +47,7 @@
 
 
         <div v-if="car.site == 'volvo'" class="">
-          <p>Her kan du abonnere på en flott {{ car.color }} bil fra Volvo.
+          <p>Her kan du abonnere på en flott bil i fargen {{ car.color }} fra Volvo.
             <span v-if="car.cargoVolume"> Bilen er utstyrt med {{ car.cargoVolume }} bagasjerom. </span>
             <span v-if="car.co2">Den har et lavt utslipp på ca {{ car.co2 }}. </span>
             <span v-if="car.fuelconsumption">Forbruket ligger på rundt {{ car.fuelconsumption }}. </span>
@@ -60,12 +60,12 @@
 
 
           </p>
-          <section>
+          <!-- <section>
             <a :href="url" target="_blank" rel="noopner nofollow">Bestill denne bilen hos {{
               capitalize(car.site == "volvo"
                 ? "Care by Volvo" : car.site)
             }}</a>
-          </section>
+          </section> -->
           <section v-for="(category, index) in car.categories" :key="index">
             <h3>{{ category.displayName }}</h3>
             <p>{{ category.description }}</p>
