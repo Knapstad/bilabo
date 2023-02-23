@@ -51,8 +51,7 @@
             <span v-if="car.cargoVolume"> Bilen er utstyrt med {{ car.cargoVolume }} bagasjerom. </span>
             <span v-if="car.co2">Den har et lavt utslipp på ca {{ car.co2 }}. </span>
             <span v-if="car.fuelconsumption">Forbruket ligger på rundt {{ car.fuelconsumption }}. </span>
-            <span v-if="car.engine">Bilen er utstyrt med en {{ car.engine }} motor, nærmere bestemt
-              {{ car.enginDescription }}. </span>
+            <span v-if="car.engine">Bilen er utstyrt med en {{ car.engine }} motor.</span>
 
             <span v-if="car.towbar">Bilen er også utstyrt med hengerfeste. </span>
             <span v-if="car.delivery">Det er omtrent {{ car.delivery }} leveringstid på bilen.</span>
@@ -208,17 +207,18 @@ export default {
   },
   computed: {
     url() {
-      if (this.car?.order.includes('?')) {
+      if (this.car.site == "volvo") {
         return (
-          this.car?.order +
+          this.car.order
+        );
+      } else if (this.car.order.includes('?')) {
+        return (
+          this.car.order +
           '&utm_source=bilabonnemet.app&utm_medium=link&utm_campaign=bilabonnement.app'
         );
-      } else if (this.car?.site == "volvo") {
-        return (
-          this.car?.order + ''
-        );
+
       } else {
-        return this.car?.order +
+        return this.car.order +
           '?utm_source=bilabonnemet.app&utm_medium=link&utm_campaign=bilabonnement.app'
 
       }
