@@ -160,7 +160,7 @@ export default {
     get_cars: function () {
       if (this.cars == "undefined" || this.cars == null) {
         axios
-          .get("https://europe-west1-bilabo.cloudfunctions.net/give_car")
+          .get("https://data.bilabonnement.app/cars")
           .then((response) => (this.$store.commit("addData", ["cars", response])),
           )
           .finally(
