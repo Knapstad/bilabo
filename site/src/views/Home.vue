@@ -159,25 +159,25 @@ export default {
     if (this.cars == "undefined" || this.cars == null) {
       axios
         .get("https://data.bilabonnement.app/cars")
-      .then((response) => (this.$store.commit("addData", ["cars", response])),
-      )
-      .finally(
-        () => (
-          (this.loading = false),
-          (this.cars = this.$store.state.cars),
-          (window.sessionStorage.setItem("cars", JSON.stringify(this.$store.state.cars))),
-          window.dataLayer = window.dataLayer || [],
-          window.dataLayer.push({
-            event: "loadingDone",
-          })
+        .then((response) => (this.$store.commit("addData", ["cars", response])),
         )
-      );
+        .finally(
+          () => (
+            (this.loading = false),
+            (this.cars = this.$store.state.cars),
+            (window.sessionStorage.setItem("cars", JSON.stringify(this.$store.state.cars))),
+            window.dataLayer = window.dataLayer || [],
+            window.dataLayer.push({
+              event: "loadingDone",
+            })
+          )
+        );
     }
     else {
       this.loading = false,
-      window.dataLayer.push({
-        event: "loadingDone",
-      })
+        window.dataLayer.push({
+          event: "loadingDone",
+        })
     }
   },
 };
@@ -325,4 +325,5 @@ a.skip:hover {
   .loading__letter {
     font-size: 40px;
   }
-}</style>
+}
+</style>

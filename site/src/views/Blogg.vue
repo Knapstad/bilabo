@@ -1,6 +1,5 @@
 <template>
   <div>
-    <BreadCrumb :key="$route.path"></BreadCrumb>
     <div v-if="this.blocks == 0" class="notfound bloggcontent">
       <p>Beklager vi finner ikke siden du leter etter</p>
     </div>
@@ -12,8 +11,7 @@
       <block-content :blocks="blocks" :serializers="serializers" :imageOptions="{ h: 300, w: 1000, fit: 'crop' }" />
     </div>
     <section class="">
-      <h3 v-if="flatCars.lengt >= 1" class="bloggcontent">Det er for øyeblikket {{ flatCars.length }} {{ (flatCars.length
-        >
+      <h3 v-if="flatCars.lengt >= 1" class="bloggcontent">Det er for øyeblikket {{ flatCars.length }} {{ (flatCars.length >
         1) ? "tilgengelige biler" : "tilgengelig bil" }} fra {{ title }}</h3>
       <div class="carcontainer">
         <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
@@ -31,7 +29,6 @@ import BlockImage from '@/components/BlockImage.vue';
 import DataRef from '@/components/DataRef.vue';
 import Links from '@/components/Links.vue';
 import Footer from '@/components/Footer.vue';
-import BreadCrumb from '@/components/BreadCrumb.vue'
 import sanityClient from '@sanity/client';
 import Car from "@/components/Car.vue";
 import axios from "axios";
@@ -44,12 +41,11 @@ const client = sanityClient({
 });
 const serializers = {
   types: {
-    image: BlockImage
+    image: BlockImage,
+    dataref: DataRef
   },
   marks: {
-    link: Links,
-    dataref: DataRef,
-    data: DataRef
+    link: Links
   }
 }
 
@@ -58,9 +54,9 @@ export default {
   props: [],
   components: {
     BlockContent,
-    BreadCrumb,
     Footer,
     Car,
+
   },
   data() {
     return {
@@ -77,46 +73,20 @@ export default {
     }
   },
   computed: {
-    breadcrumbs: function () {
-      let paths = window.location.href.split("/")
-      let base = "https:/"
-      paths = paths.slice(2, paths.length)
-      let breadcrumbs = []
-
-      for (let item in paths) {
-        let name = paths[item]
-        let position = parseInt(item) + 1
-        base += "/" + paths[item]
-        if (item == 0) {
-          name = "Hjem"
-        }
-        breadcrumbs.push({ "@type": "ListItem", name: name, position: position, item: base })
-
-      }
-      return breadcrumbs
-    },
     jsonld: function () {
-      var jsondata = [
-        {
-          "@context": "http://schema.org",
-          "@type": "Article",
-          "name": this.blocks[0].children[0].text,
-          "headline": this.blocks[0].children[0].text,
-          "image": this.mainImage?.url,
-          "articleBody": this.blocks.slice(1).map((block) => block.children[0].text).join(),
-          "publisher": {
-            "@type": "Organization",
-            "name": "Bilabonnement"
-          },
-        },
-        {
-          "@context": "http://schema.org",
-          "@type": "BreadcrumbList",
-          "itemListElement": this.breadcrumbs
-        },
-      ]
-
-
+      var jsondata =
+      {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "name": this.blocks[0].children[0].text,
+        "headline": this.blocks[0].children[0].text,
+        "image": this.mainImage?.url,
+        "articleBody": this.blocks.slice(1).map((block) => block.children[0].text).join(),
+        "publisher": {
+          "@type": "Organization",
+          "name": "Bilabonnement"
+        }
+      }
       return jsondata
     },
     flatCars: function () {
@@ -160,16 +130,16 @@ export default {
     get_cars: function () {
       if (this.cars == "undefined" || this.cars == null) {
         axios
-          .get("https://europe-west1-bilabo.cloudfunctions.net/give_car")
-          .then((response) => (this.$store.commit("addData", ["cars", response])),
+          .get("https://data.bilabonnement.app/cars")
+        .then((response) => (this.$store.commit("addData", ["cars", response])),
+        )
+        .finally(
+          () => (
+            (this.loading = false),
+            (this.cars = this.$store.state.cars),
+            (window.sessionStorage.setItem("cars", JSON.stringify(this.$store.state.cars)))
           )
-          .finally(
-            () => (
-              (this.loading = false),
-              (this.cars = this.$store.state.cars),
-              (window.sessionStorage.setItem("cars", JSON.stringify(this.$store.state.cars)))
-            )
-          );
+        );
       }
       else { this.loading = false }
     },
@@ -338,5 +308,4 @@ img.fullwidth {
     padding: 0;
   }
 
-}
-</style>
+}</style>
