@@ -1,6 +1,6 @@
 <template>
   <section class="home">
-  <a href="#content" class="skip">Hopp over filter</a>
+    <a href="#content" class="skip">Hopp over filter</a>
     <div v-if="loading" class="loading">
       <div class="loading__letter">L</div>
       <div class="loading__letter">a</div>
@@ -12,11 +12,14 @@
       <div class="loading__letter">.</div>
       <div class="loading__letter">.</div>
     </div>
-    <div v-else >
-      <Filters :data="cars" :flat="locations"/>
-      
+    <div v-else>
+      <Filters :data="cars" :flat="locations" />
+
       <main id="content" class="carcontainer">
-        <section class="results"><h2>Vi fant {{Object.values(flatCars).flat().length}} {{(flatCars.length > 1) ? "biler" : "bil"}} du kan abonnere på </h2></section>
+        <section class="results">
+          <h2>Vi fant {{ Object.values(flatCars).flat().length }} {{ (flatCars.length > 1) ? "biler" : "bil" }} du kan
+            abonnere på </h2>
+        </section>
         <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
           <Car class :car="car" :id="index" />
         </article>
@@ -100,8 +103,8 @@ export default {
         content:
           "En samling og oversikt over flere bilabonnement på en side. Gjør det enkelt å finne den billigste bilen",
       },
-      {property: "fb:app_id", content: "381160890208041"},
-      ],
+      { property: "fb:app_id", content: "381160890208041" },
+    ],
   },
   methods: {
     compare: function (a, b) {
@@ -153,35 +156,38 @@ export default {
   },
 
   mounted() {
-    if(this.cars=="undefined" || this.cars==null)
-    {axios
-      .get("https://europe-west1-bilabo.cloudfunctions.net/give_car")
+    if (this.cars == "undefined" || this.cars == null) {
+      axios
+        .get("https://data.bilabonnement.app/cars")
       .then((response) => (this.$store.commit("addData", ["cars", response])),
-            )
+      )
       .finally(
         () => (
           (this.loading = false),
           (this.cars = this.$store.state.cars),
-          (window.sessionStorage.setItem("cars",JSON.stringify(this.$store.state.cars))),
+          (window.sessionStorage.setItem("cars", JSON.stringify(this.$store.state.cars))),
           window.dataLayer = window.dataLayer || [],
           window.dataLayer.push({
             event: "loadingDone",
           })
         )
-      );}
-      else{this.loading = false,
+      );
+    }
+    else {
+      this.loading = false,
       window.dataLayer.push({
-            event: "loadingDone",
-          })
-      }
+        event: "loadingDone",
+      })
+    }
   },
 };
 </script>
 <style>
-h2{
-font-size: 25px;
-margin-bottom: 5px;
+h2 {
+  font-size: 25px;
+  margin-bottom: 5px;
 }
+
 .carcontainer {
   justify-content: center;
   display: inline-grid;
@@ -190,11 +196,13 @@ margin-bottom: 5px;
   padding-bottom: 30px;
   width: 100%;
 }
-.results{
+
+.results {
   padding-left: 6px;
   font-size: 1.3rem;
   grid-column: 1 / -1;
-  }
+}
+
 .car {
   background: #fff;
   box-shadow: 2px 2px 3px #000;
@@ -205,32 +213,34 @@ margin-bottom: 5px;
 }
 
 .skip {
-        position: absolute;
-        top: -1000px;
-        left: -1000px;
-        height: 1px;
-        width: 1px;
-        text-align: left;
-        overflow: hidden;
-    }
-    
-    a.skip:active, 
-    a.skip:focus, 
-    a.skip:hover {
-      left: 0; 
-        top: 0;
-        width: auto; 
-        height: auto; 
-        overflow: visible; 
-        color: white;
-        font-size: 2em;
-    }
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+  height: 1px;
+  width: 1px;
+  text-align: left;
+  overflow: hidden;
+}
+
+a.skip:active,
+a.skip:focus,
+a.skip:hover {
+  left: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  color: white;
+  font-size: 2em;
+}
+
 @media only screen and (max-width: 2400px) {
   .carcontainer {
     grid-template-columns: 30% 30% 30%;
   }
 }
-@media only screen and (max-width: 900px) {
+
+@media only screen and (max-width: 1100px) {
   .carcontainer {
     grid-template-columns: 49% 49%;
     padding: 0;
@@ -244,6 +254,7 @@ margin-bottom: 5px;
   margin: auto;
   margin-top: 30px;
 }
+
 .loading__letter {
   font-size: 88px;
   font-weight: normal;
@@ -256,27 +267,35 @@ margin-bottom: 5px;
 .loading__letter:nth-child(2) {
   animation-delay: 0.3s;
 }
+
 .loading__letter:nth-child(3) {
   animation-delay: 0.6s;
 }
+
 .loading__letter:nth-child(4) {
   animation-delay: 0.9s;
 }
+
 .loading__letter:nth-child(5) {
   animation-delay: 1.2s;
 }
+
 .loading__letter:nth-child(6) {
   animation-delay: 1.8s;
 }
+
 .loading__letter:nth-child(7) {
   animation-delay: 2.1s;
 }
+
 .loading__letter:nth-child(8) {
   animation-delay: 2.4s;
 }
+
 .loading__letter:nth-child(9) {
   animation-delay: 2.7s;
 }
+
 .loading__letter:nth-child(10) {
   animation-delay: 3s;
 }
@@ -285,9 +304,11 @@ margin-bottom: 5px;
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-40px) scale(1.3);
   }
+
   80%,
   100% {
     transform: translateY(0px);
@@ -304,5 +325,4 @@ margin-bottom: 5px;
   .loading__letter {
     font-size: 40px;
   }
-}
-</style>
+}</style>
