@@ -113,7 +113,7 @@ a {
 .wrap {
   display: grid;
   grid-template-columns: repeat(10, 10%);
-  grid-template-rows: repeat(10, 10%);
+  grid-template-rows: 30%, repeat(7, 10%);
   height: 100%;
 }
 
@@ -159,23 +159,27 @@ a {
 }
 
 .carname {
-  grid-row: 5;
+  grid-row: 2;
   grid-column: 1/9;
+  padding-left: 5%;
+  margin-bottom: 0;
+  z-index: 1;
+
 }
 
 .logo {
-  grid-row: 1/2;
-  grid-column: 9/12;
+  grid-row: 2;
+  grid-column: 8/10;
   width: 50px;
-  align-self: center;
-  margin-right: 5px;
-  z-index: 1;
+  align-self: top;
+  margin-top: 5px;
   max-height: fit-content;
 }
 
 .info {
   grid-column: 1/11;
-  grid-row: 7/9;
+  grid-row: 3/9;
+  padding-left: 5%;
 }
 
 img {
@@ -187,8 +191,10 @@ img {
 
 .carimage {
   grid-column: 1/11;
-  grid-row: 1/4;
+  grid-row: 1;
   padding: 0;
+  object-fit: cover;
+  width: 100%;
 
 
 }
