@@ -21,7 +21,7 @@
 
       <div v-else-if="this.namematch" class="bloggcontent">
         <div class="header">
-          <img class="headerimage"
+          <img v-if="car && car.img" class="headerimage"
             :src="car.img.replace(' ', '-').replace('/upload/', '/upload/c_crop,f_auto,g_center,q_auto/')"
             :alt="car.name">
           <img class="logo" :src="logo" :alt='"logo for " + car.site'>
