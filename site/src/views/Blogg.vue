@@ -5,7 +5,7 @@
     </div>
     <div class="bloggcontent">
       <div>
-        <img v-if="mainImage.url" class="headerimage" :src='mainImage.url + "?w=675&h=345&fit=crop&hotspot=true"'
+        <img v-if="mainImage" class="headerimage" :src='mainImage.url + "?w=675&h=345&fit=crop&hotspot=true"'
           :alt="mainImage.alt">
       </div>
       <block-content :blocks="blocks" :serializers="serializers" :imageOptions="{ h: 300, w: 1000, fit: 'crop' }" />
