@@ -210,7 +210,7 @@ export default {
     };
   },
   mounted() {
-    this.loadData();
+    // this.loadData();
   },
   watch: {
     $route: {
