@@ -82,7 +82,12 @@ export default {
         "name": this.blocks[0].children[0].text || "",
         "headline": this.blocks[0].children[0].text || "",
         "image": this.mainImage?.url || "",
-        "articleBody": this.blocks.slice(1).map((block) => block.children[0].text).join() || "",
+        "articleBody": this.blocks && this.blocks.length > 1
+          ? this.blocks
+            .slice(1)
+            .map((block) => (block.children && block.children[0] && block.children[0].text) || "")
+            .join()
+          : "",
         "publisher": {
           "@type": "Organization",
           "name": "Bilabonnement"
