@@ -11,7 +11,8 @@
       <block-content :blocks="blocks" :serializers="serializers" :imageOptions="{ h: 300, w: 1000, fit: 'crop' }" />
     </div>
     <section class="">
-      <h3 v-if="flatCars.lengt >= 1" class="bloggcontent">Det er for øyeblikket {{ flatCars.length }} {{ (flatCars.length >
+      <h3 v-if="flatCars.lengt >= 1" class="bloggcontent">Det er for øyeblikket {{ flatCars.length }} {{ (flatCars.length
+        >
         1) ? "tilgengelige biler" : "tilgengelig bil" }} fra {{ title }}</h3>
       <div class="carcontainer">
         <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
@@ -80,7 +81,7 @@ export default {
         "@type": "Article",
         "name": this.blocks[0].children[0].text,
         "headline": this.blocks[0].children[0].text,
-        "image": this.mainImage?.url,
+        "image": this.mainImage?.url || "",
         "articleBody": this.blocks.slice(1).map((block) => block.children[0].text).join(),
         "publisher": {
           "@type": "Organization",
@@ -131,15 +132,15 @@ export default {
       if (this.cars == "undefined" || this.cars == null) {
         axios
           .get("https://data.bilabonnement.app/cars")
-        .then((response) => (this.$store.commit("addData", ["cars", response])),
-        )
-        .finally(
-          () => (
-            (this.loading = false),
-            (this.cars = this.$store.state.cars),
-            (window.sessionStorage.setItem("cars", JSON.stringify(this.$store.state.cars)))
+          .then((response) => (this.$store.commit("addData", ["cars", response])),
           )
-        );
+          .finally(
+            () => (
+              (this.loading = false),
+              (this.cars = this.$store.state.cars),
+              (window.sessionStorage.setItem("cars", JSON.stringify(this.$store.state.cars)))
+            )
+          );
       }
       else { this.loading = false }
     },
@@ -308,4 +309,5 @@ img.fullwidth {
     padding: 0;
   }
 
-}</style>
+}
+</style>
