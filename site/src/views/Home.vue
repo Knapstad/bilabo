@@ -175,9 +175,10 @@ export default {
     }
     else {
       this.loading = false,
-        window.dataLayer.push({
-          event: "loadingDone",
-        })
+        window.dataLayer = window.dataLayer || []
+      window.dataLayer.push({
+        event: "loadingDone",
+      })
     }
   },
 };
