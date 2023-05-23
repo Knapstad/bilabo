@@ -168,7 +168,7 @@ export default {
               this.updated = this.response[0]._updatedAt,
               this.title = this.response[0].title,
               this.description = this.response[0].description,
-              this.mainImage = { url: this.response[0].mainImage?.asset.url || "", alt: response[0].mainImage?.alt || "" };
+              this.mainImage = { url: this.response[0].mainImage?.asset?.url || "", alt: response[0].mainImage?.alt || "" };
           })
           .finally(
             () => (
