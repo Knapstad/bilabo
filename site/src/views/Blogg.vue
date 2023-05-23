@@ -79,10 +79,10 @@ export default {
       {
         "@context": "http://schema.org",
         "@type": "Article",
-        "name": this.blocks[0].children[0].text,
-        "headline": this.blocks[0].children[0].text,
+        "name": this.blocks[0].children[0].text || "",
+        "headline": this.blocks[0].children[0].text || "",
         "image": this.mainImage?.url || "",
-        "articleBody": this.blocks.slice(1).map((block) => block.children[0].text).join(),
+        "articleBody": this.blocks.slice(1).map((block) => block.children[0].text).join() || "",
         "publisher": {
           "@type": "Organization",
           "name": "Bilabonnement"
