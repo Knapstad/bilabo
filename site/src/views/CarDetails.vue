@@ -298,7 +298,7 @@ export default {
               "areaServed": this.car?.location.join(" "),
               "seller": this.car?.site,
               "offeredBy": this.car?.site,
-              "deliveryLeadTime": this.car.deliveryTime,
+              "deliveryLeadTime": this.car?.deliveryTime,
               "priceValidUntil": `${new Date(new Date().setDate(new Date().getDate() + 7))}`,
               "priceSpecification": {
                 "@type": "UnitPriceSpecification",
