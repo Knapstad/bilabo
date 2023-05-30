@@ -79,8 +79,8 @@ export default {
       {
         "@context": "http://schema.org",
         "@type": "Article",
-        "name": this.blocks[0].children[0].text || "",
-        "headline": this.blocks[0].children[0].text || "",
+        "name": this?.blocks?.[0]?.children[0]?.text || "",
+        "headline": this?.blocks?.[0]?.children[0]?.text || "",
         "image": this.mainImage?.url || "",
         "articleBody": this.blocks && this.blocks.length > 1
           ? this.blocks
@@ -210,13 +210,13 @@ export default {
     };
   },
   mounted() {
-    // this.loadData();
+    this.loadData();
   },
   watch: {
     $route: {
       immediate: true,
       handler() {
-        this.loadData()
+        // this.loadData()
 
       }
     }
