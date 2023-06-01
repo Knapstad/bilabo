@@ -19,12 +19,12 @@
         <div class="loading__letter">.</div>
       </div>
 
-      <div v-else-if="this.namematch" class="bloggcontent">
+      <div v-else-if="this.namematch && car" class="bloggcontent">
         <div class="header">
           <img v-if="car && car.img" class="headerimage"
             :src="car.img.replace(' ', '-').replace('/upload/', '/upload/c_crop,f_auto,g_center,q_auto/')"
             :alt="car.name">
-          <img class="logo" :src="logo" :alt='"logo for " + car.site'>
+          <img v-if="car" class="logo" :src="logo" :alt='"logo for " + car?.site'>
         </div>
         <h2>Abonner på {{ car.name }} fra {{ capitalize(car.site == "volvo" ? "Care by Volvo" : car.site) }}</h2>
         <p>Fra {{ capitalize(car.site == "volvo" ? "Care by Volvo" : car.site) }} kan du abonnere på denne bilen fra
