@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      cars: this.$store.state.cars,
+      cars: this?.$store?.state?.cars,
       loading: true,
     };
   },
