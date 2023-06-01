@@ -143,11 +143,7 @@ export default {
       return cars;
     },
     locations: function () {
-      try {
-        let cars = Object.values(this.$store.state.cars["data"]).flat();
-      } catch {
-        let cars = get_cars();
-      }
+      let cars = Object.values(this.$store.state.cars["data"]).flat();
       cars = cars.filter((car) => car.location.length > 0);
       let locs = this.$store.state.locations;
       if (locs.length > 0) {
