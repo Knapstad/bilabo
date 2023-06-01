@@ -11,7 +11,7 @@
       <block-content :blocks="blocks" :serializers="serializers" :imageOptions="{ h: 300, w: 1000, fit: 'crop' }" />
     </div>
     <section class="">
-      <h3 v-if="flatCars.lengt >= 1" class="bloggcontent">Det er for øyeblikket {{ flatCars.length }} {{ (flatCars.length
+      <h3 v-if="flatCars.length >= 1" class="bloggcontent">Det er for øyeblikket {{ flatCars.length }} {{ (flatCars.length
         >
         1) ? "tilgengelige biler" : "tilgengelig bil" }} fra {{ title }}</h3>
       <div class="carcontainer">
@@ -79,7 +79,7 @@ export default {
       {
         "@context": "http://schema.org",
         "@type": "Article",
-        "name": this?.blocks?.[0]?.children[0]?.text || "",
+        "name": this.blocks?.[0]?.children[0]?.text || "",
         "headline": this?.blocks?.[0]?.children[0]?.text || "",
         "image": this.mainImage?.url || "",
         "articleBody": this.blocks && this.blocks.length > 1
