@@ -106,13 +106,19 @@
             {{ this.$route.params.carname.split("-")[0] }}:</p>
         </div>
 
+
+      </div>
+      <section class="">
+        <h3 v-if="flatCars.length >= 1" class="bloggcontent">Det er for øyeblikket {{ flatCars.length }} {{
+          (flatCars.length
+            >
+            1) ? "tilgengelige biler" : "tilgengelig bil" }} fra {{ car.site }}</h3>
         <div class="carcontainer">
-          <article class="car" v-for="(car, index) in similarCars.sort(this.compare)" :key="index">
+          <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
             <Car class :car="car" />
           </article>
         </div>
-      </div>
-
+      </section>
     </main>
     <Footer />
   </div>
@@ -415,6 +421,15 @@ ul li {
   line-height: 0.1;
 }
 
+.car {
+  background: var(--main-medium-light);
+  box-shadow: 2px 2px 3px #000;
+  border-radius: 12px;
+  margin: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
 details {
   margin-bottom: 10px;
   background: var(--main-medium-dark);
@@ -537,13 +552,5 @@ img.logo {
   padding-top: 30px;
   padding-bottom: 30px;
   width: 100%;
-}
-
-.car {
-  background: var(--main-light);
-  box-shadow: 2px 2px 3px #000;
-  border-radius: 2px;
-  margin: 5px;
-  position: relative;
 }
 </style>
