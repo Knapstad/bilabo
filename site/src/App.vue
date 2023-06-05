@@ -18,11 +18,12 @@ export default {
 
 <style>
 :root {
-  --main-dark: #204051;
-  --main-medium-dark: #3b6978;
-  --main-medium-light: #84a9ac;
-  --main-light: #cae8d5;
+  --main-dark: #040F1C;
+  --main-medium-dark: #0c2342;
+  --main-medium-light: #10366a;
+  --main-light: #0c2342;
 }
+
 
 /* *,
 *:before,
@@ -46,13 +47,13 @@ html,
 }
 
 .tagline {
-  color: #cae8d5;
+  color: whitesmoke;
 }
 
 h1 {
   font-size: 40px;
   margin-bottom: 0px;
-  color: #cae8d5;
+  color: #whitesmoke;
 }
 
 #header {
@@ -89,12 +90,12 @@ h1 {
 }
 
 .bloggcontent h2 {
-  color: black;
+  color: whitesmoke;
   font-size: 33px;
 }
 
 .bloggcontent h3 {
-  color: black;
+  color: whitesmoke;
   font-size: 1.5rem;
   font-weight: bolder;
 }

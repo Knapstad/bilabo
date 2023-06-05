@@ -68,7 +68,7 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: whitesmoke;
   font-size: 30px;
 }
 
@@ -76,11 +76,11 @@ h3 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: white;
+  color: whitesmoke;
 }
 
 a {
-  color: white;
+  color: whitesmoke;
 }
 
 @media only screen and (max-width: 600px) {
