@@ -184,6 +184,10 @@ export default {
 };
 </script>
 <style>
+* {
+  color: whitesmoke;
+}
+
 h2 {
   font-size: 25px;
   margin-bottom: 5px;
@@ -205,7 +209,7 @@ h2 {
 }
 
 .car {
-  background: #fff;
+  background: var(--main-medium-light);
   box-shadow: 2px 2px 3px #000;
   border-radius: 12px;
   margin: 5px;
@@ -326,5 +330,4 @@ a.skip:hover {
   .loading__letter {
     font-size: 40px;
   }
-}
-</style>
+}</style>
