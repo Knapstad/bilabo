@@ -224,6 +224,10 @@ export default {
 };
 </script>
 <style scoped>
+* {
+  color: whitesmoke;
+}
+
 .carcontainer {
   justify-content: center;
   display: inline-grid;
@@ -240,11 +244,12 @@ export default {
 }
 
 .car {
-  background: #fff;
+  background: var(--main-medium-light);
   box-shadow: 2px 2px 3px #000;
-  border-radius: 2px;
+  border-radius: 12px;
   margin: 5px;
   position: relative;
+  overflow: hidden;
 }
 
 .notfound {
