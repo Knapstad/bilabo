@@ -390,6 +390,10 @@ export default {
 
 </script>
 <style scoped>
+* {
+  color: whitesmoke;
+}
+
 .header {
   position: relative;
 }
