@@ -45,5 +45,6 @@ div {
 a {
     font-size: medium;
     text-transform: capitalize;
+    color: whitesmoke;
 }
 </style>
