@@ -151,7 +151,10 @@ yarn-error.log*
 *.sln
 *.sw*
 
+
 pythonanywhere
+cloudFuctions
+old
 config.py
 bilabo-4346783febd2.json
 cloudFuctions/cloudFuctionsgivecar.zip
