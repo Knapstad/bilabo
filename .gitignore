@@ -199,3 +199,4 @@ sanity/schemas/post.js
 sanity/schemas/schema.js
 sanity/static/.gitkeep
 sanity/static/favicon.ico
+.\pythonanywhere
