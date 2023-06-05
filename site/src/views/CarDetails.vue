@@ -109,12 +109,12 @@
 
       </div>
       <section class="">
-        <h3 v-if="flatCars.length >= 1" class="bloggcontent">Det er for øyeblikket {{ flatCars.length }} {{
-          (flatCars.length
+        <h3 v-if="similarCars.length >= 1" class="bloggcontent">Det er for øyeblikket {{ similarCars.length }} {{
+          (similarCars.length
             >
             1) ? "tilgengelige biler" : "tilgengelig bil" }} fra {{ car.site }}</h3>
         <div class="carcontainer">
-          <article class="car" v-for="(car, index) in flatCars.sort(this.compare)" :key="index">
+          <article class="car" v-for="(car, index) in similarCars.sort(this.compare)" :key="index">
             <Car class :car="car" />
           </article>
         </div>
