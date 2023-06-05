@@ -262,12 +262,12 @@ export default {
 }
 
 .bloggcontent h2 {
-  color: black;
+  color: white;
   font-size: 33px;
 }
 
 .bloggcontent h3 {
-  color: black;
+  color: white;
   font-size: 1.5rem;
   font-weight: bolder;
 }

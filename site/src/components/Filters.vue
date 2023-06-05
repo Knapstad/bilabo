@@ -127,7 +127,7 @@ summary.label {
   width: fit-content;
   min-width: 86%;
   background: var(--main-medium-light);
-  color: white;
+  color: whitesmoke;
   margin-top: 1rem;
   box-shadow: 2px 2px 3px #000;
   border-radius: 2px;

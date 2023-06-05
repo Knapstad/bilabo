@@ -63,7 +63,7 @@ export default {
 .filter {
   border-radius: 2px;
   background: var(--main-medium-dark);
-  color: white;
+  color: whitesmoke;
   padding: .4rem;
   margin: .2rem;
   box-shadow: 2px 2px 3px #000;

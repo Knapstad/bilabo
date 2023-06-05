@@ -419,7 +419,7 @@ details {
   margin: auto;
   margin-bottom: 5px;
   box-shadow: 2px 2px 3px #000;
-  color: white;
+  color: whitesmoke;
   padding: 6px;
   padding-left: 10px;
   font-size: medium;
@@ -536,7 +536,7 @@ img.logo {
 }
 
 .car {
-  background: #fff;
+  background: var(--main-light);
   box-shadow: 2px 2px 3px #000;
   border-radius: 2px;
   margin: 5px;
