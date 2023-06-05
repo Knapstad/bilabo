@@ -53,7 +53,7 @@ html,
 h1 {
   font-size: 40px;
   margin-bottom: 0px;
-  color: #whitesmoke;
+  color: whitesmoke;
 }
 
 #header {
