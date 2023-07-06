@@ -4,6 +4,7 @@ import router from './router';
 import store from './store';
 import VueMeta from 'vue-meta';
 import Tracking from './services/Tracking';
+import Utilities from './services/Utilities';
 import * as Sentry from "@sentry/vue";
 import { BrowserTracing } from "@sentry/tracing";
 
@@ -31,6 +32,7 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 Vue.use(Tracking);
+Vue.use(Utilities);
 new Vue({
   router,
   store,
