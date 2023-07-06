@@ -21,9 +21,7 @@
 
       <div v-else-if="this.namematch && car" class="bloggcontent">
         <div class="header">
-          <img v-if="car && car.img" class="headerimage"
-            :src="car.img.replace(' ', '-').replace('/upload/', '/upload/c_crop,f_auto,g_center,q_auto/')"
-            :alt="car.name">
+          <img v-if="car && car.img" class="headerimage" :src="headerImageTransformation" :alt="car.name">
           <img class="logo" :src="logo" :alt='"logo for " + car.site'>
         </div>
         <h2>Abonner på {{ car.name }} fra {{ capitalize(car.site == "volvo" ? "Care by Volvo" : car.site) }}</h2>
@@ -352,7 +350,45 @@ export default {
     },
     car: function () {
       return this.flatCars.filter(car => car.id == this.id)[0]
+    },
+    imageTransformation: function () {
+
+      if (window.innerWidth < 1101) {
+        let imgWidth = window.innerWidth * 0.475
+        return this.car?.img.replace("/upload/", `/upload/c_lfill,w_${imgWidth},ar_1.77/q_auto/f_auto/e_trim/`)
+      }
+      else if (window.innerWidth < 2401) {
+        let imgWidth = window.innerWidth * 0.2958
+        return this.car?.img.replace("/upload/", `/upload/c_lfill,w_${imgWidth},ar_1.77/q_auto/f_auto/e_trim/`)
+      }
+      else if (window.innerWidth > 2401) {
+        let imgWidth = window.innerWidth * 0.2264
+        return this.car?.img.replace("/upload/", `/upload/c_lfill,w_${imgWidth},ar_1.77/q_auto/f_auto/e_trim/`)
+      }
+      else {
+        return this.car?.img.replace("/upload/", `/upload/c_lfill,w_500,ar_1.77/q_auto/f_auto/e_trim/`)
+      }
+
+    },
+    headerImageTransformation: function () {
+      if (window.innerWidth < 901) {
+        let imgWidth = window.innerWidth * 0.95
+        return this.car?.img.replace("/upload/", `/upload/c_lfill,w_${imgWidth},ar_1.77/q_auto/f_auto/e_trim/`)
+      }
+      else if (window.innerWidth < 1301) {
+        let imgWidth = window.innerWidth * 0.60
+        return this.car?.img.replace("/upload/", `/upload/c_lfill,w_${imgWidth},ar_1.77/q_auto/f_auto/e_trim/`)
+      }
+      else if (window.innerWidth > 1399) {
+        let imgWidth = window.innerWidth * 0.50
+        return this.car?.img.replace("/upload/", `/upload/c_lfill,w_${imgWidth},ar_1.77/q_auto/f_auto/e_trim/`)
+      }
+      else {
+        return this.car?.img.replace("/upload/", `/upload/c_lfill,w_500,ar_1.77/q_auto/f_auto/e_trim/`)
+      }
     }
+
+
   },
   created() {
   },
@@ -426,7 +462,6 @@ ul li {
   box-shadow: 2px 2px 3px #000;
   border-radius: 12px;
   margin: 5px;
-  position: relative;
   overflow: hidden;
 }
 
