@@ -2,8 +2,7 @@
   <div>
     <BreadCrumb :key="$route.path"></BreadCrumb>
     <main>
-
-      <div v-if="this.loading" class="loading">
+      <div v-if="loading" class="loading">
         <div class="loading__letter">H</div>
         <div class="loading__letter">e</div>
         <div class="loading__letter">n</div>
@@ -19,8 +18,10 @@
         <div class="loading__letter">.</div>
       </div>
 
-      <div v-else-if="this.idmatch && car" class="bloggcontent">
+      <div v-if="this.idmatch && car" class="bloggcontent">
+
         <div class="header">
+
           <img v-if="car && car.img" class="headerimage" :src="headerImageTransformation" :alt="car.name">
           <img class="logo" :src="logo" :alt='"logo for " + car.site'>
         </div>
@@ -57,12 +58,12 @@
 
 
           </p>
-          <!-- <section>
+          <section>
             <a :href="url" target="_blank" rel="noopner nofollow">Bestill denne bilen hos {{
               $capitalize(car.site == "volvo"
                 ? "Care by Volvo" : car.site)
             }}</a>
-          </section> -->
+          </section>
           <section v-for="(category, index) in car.categories" :key="index">
             <h3>{{ category.displayName }}</h3>
             <p>{{ category.description }}</p>
@@ -108,7 +109,7 @@
 
       </div>
 
-      <div v-else class="nocar">
+      <div v-if="!car" class="nocar">
         <div class="bloggcontent nocar">
           <p>Beklager, vi finner ikke denne bilen.</p>
           <img src="/img/logo.990de79b.png">
@@ -123,10 +124,11 @@
 
       </div>
       <section class="">
-        <h3 v-if="similarCars.length >= 1" class="bloggcontent">Det er for øyeblikket {{ similarCars.length }} {{
+        <h3 v-if="car && similarCars.length >= 1" class="bloggcontent">Det er for øyeblikket {{ similarCars.length }} {{
           (similarCars.length
             >
-            1) ? "tilgengelige biler" : "tilgengelig bil" }} fra {{ car.site }}</h3>
+            1) ? "tilgengelige biler" : "tilgengelig bil" }} fra {{ $capitalize(this.$route.params.site) }} og
+          {{ $capitalize(this.$route.params.carname.split("-")[0]) }}</h3>
         <div class="carcontainer">
           <article class="car" v-for="(    car, index    ) in     similarCars.sort(this.compare)    " :key="index">
             <Car class :car="car" :id="index" />
@@ -145,7 +147,12 @@ import axios from "axios";
 
 export default {
   name: 'CarDetails',
-  components: { Footer, Car, BreadCrumb },
+  components: {
+    Footer,
+    Car,
+    BreadCrumb
+  },
+
   data() {
     return {
       cars: this.$store.state?.cars,
@@ -194,51 +201,62 @@ export default {
       }
     },
     addJsonld: function () {
-      var Jsoninterval = setInterval(() => {
-        if (this.loading === false) {
-          if (!document.querySelector("#articledata")) {
-            // console.log("article script not found")
-            var jsonldScript = document.createElement("script")
-            // console.log("article script created")
-            jsonldScript.setAttribute("type", "application/ld+json")
-            // console.log("set type")
-            jsonldScript.setAttribute("id", "articledata")
-            // console.log("set id")
+      try {
+        var Jsoninterval = setInterval(() => {
+          if (this.loading === false) {
+            if (!document.querySelector("#articledata")) {
+              // console.log("article script not found")
+              var jsonldScript = document.createElement("script")
+              // console.log("article script created")
+              jsonldScript.setAttribute("type", "application/ld+json")
+              // console.log("set type")
+              jsonldScript.setAttribute("id", "articledata")
+              // console.log("set id")
 
-          } else {
-            jsonldScript = document.querySelector("#articledata")
-            if (jsonldScript.innerText === JSON.stringify(this.jsonld)) {
-              clearInterval(Jsoninterval)
-              return;
+            } else {
+              jsonldScript = document.querySelector("#articledata")
+              if (jsonldScript.innerText === JSON.stringify(this.jsonld)) {
+                clearInterval(Jsoninterval)
+                return;
+              }
             }
+            jsonldScript.textContent = JSON.stringify(this.jsonld);
+            // console.log("setting data")
+            document.head.appendChild(jsonldScript)
+            // console.log("appending script")
+            clearInterval(Jsoninterval)
           }
-          jsonldScript.textContent = JSON.stringify(this.jsonld);
-          // console.log("setting data")
-          document.head.appendChild(jsonldScript)
-          // console.log("appending script")
-          clearInterval(Jsoninterval)
         }
+          , 1000);
+      } catch {
+        console.log("error addjsonld")
       }
-        , 1000);
+
     }
   },
   computed: {
     url() {
-      if (this.car.site == "volvo") {
-        return (
-          this.car.order
-        );
-      } else if (this.car.order.includes('?')) {
-        return (
-          this.car.order +
-          '&utm_source=bilabonnemet.app&utm_medium=link&utm_campaign=bilabonnement.app'
-        );
+      try {
+        if (this.car.site == "volvo") {
+          return (
+            this.car.order
+          );
+        } else if (this.car.order.includes('?')) {
+          return (
+            this.car.order +
+            '&utm_source=bilabonnemet.app&utm_medium=link&utm_campaign=bilabonnement.app'
+          );
 
-      } else {
-        return this.car.order +
-          '?utm_source=bilabonnemet.app&utm_medium=link&utm_campaign=bilabonnement.app'
+        } else {
+          return this.car.order +
+            '?utm_source=bilabonnemet.app&utm_medium=link&utm_campaign=bilabonnement.app'
 
+        }
+      } catch {
+        console.log("error url")
+        return ""
       }
+
     },
     id() { return this.$route.path.split('/')[2].split('-').reverse()[0] },
     idmatch: function () {
@@ -413,31 +431,35 @@ export default {
     }
   },
   metaInfo() {
-    return {
-      title: `${this.car?.name} fra ${this.$capitalize(this.car?.site)} | `,
-      titleTemplate: `%s Bilabonnement.app`,
-      meta: [
-        { charset: 'utf-8' },
-        { property: 'og:description ', content: `Fra ${this.$capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.` },
-        { name: 'twitter:description ', content: `Fra ${this.$capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.` },
-        { name: 'twitter:creator ', content: "@bknapstad" },
-        { property: 'og:title ', content: `${this.car?.name} fra ${this.$capitalize(this.car?.site)}` },
-        { property: 'og:url ', content: `${window.location.href}` },
-        { property: 'og:image ', content: this.car?.img },
-        { name: 'twitter:title ', content: `${this.car?.name} fra ${this.$capitalize(this.car?.site)}` },
-        { property: 'og:type ', content: "product" },
-        { property: 'article:published_time', content: "" },
-        { property: 'article:modified_time', content: "" },
-        { name: 'description', content: `Fra ${this.$capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.` },
-        { property: 'og:site_name', content: "Bilabonnement.app" },
-        { property: 'og:locale', content: "no" },
-        { property: "fb:app_id", content: "381160890208041" },
+    try {
+      return {
+        title: `${this.car?.name} fra ${this.$capitalize(this.car?.site)} | `,
+        titleTemplate: `%s Bilabonnement.app`,
+        meta: [
+          { charset: 'utf-8' },
+          { property: 'og:description ', content: `Fra ${this.$capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.` },
+          { name: 'twitter:description ', content: `Fra ${this.$capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.` },
+          { name: 'twitter:creator ', content: "@bknapstad" },
+          { property: 'og:title ', content: `${this.car?.name} fra ${this.$capitalize(this.car?.site)}` },
+          { property: 'og:url ', content: `${window.location.href}` },
+          { property: 'og:image ', content: this.car?.img },
+          { name: 'twitter:title ', content: `${this.car?.name} fra ${this.$capitalize(this.car?.site)}` },
+          { property: 'og:type ', content: "product" },
+          { property: 'article:published_time', content: "" },
+          { property: 'article:modified_time', content: "" },
+          { name: 'description', content: `Fra ${this.$capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.` },
+          { property: 'og:site_name', content: "Bilabonnement.app" },
+          { property: 'og:locale', content: "no" },
+          { property: "fb:app_id", content: "381160890208041" },
 
-      ],
-      link: [
-        { rel: 'canonical', href: `${window.location.href}` }
-      ]
-    };
+        ],
+        link: [
+          { rel: 'canonical', href: `${window.location.href}` }
+        ]
+      };
+    } catch {
+      console.log("error metadata")
+    }
   },
 }
 
