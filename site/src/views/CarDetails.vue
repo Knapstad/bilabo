@@ -24,8 +24,8 @@
           <img v-if="car && car.img" class="headerimage" :src="headerImageTransformation" :alt="car.name">
           <img class="logo" :src="logo" :alt='"logo for " + car.site'>
         </div>
-        <h2>Abonner på {{ car.name }} fra {{ capitalize(car.site == "volvo" ? "Care by Volvo" : car.site) }}</h2>
-        <p>Fra {{ capitalize(car.site == "volvo" ? "Care by Volvo" : car.site) }} kan du abonnere på denne bilen fra
+        <h2>Abonner på {{ car.name }} fra {{ $capitalize(car.site == "volvo" ? "Care by Volvo" : car.site) }}</h2>
+        <p>Fra {{ $capitalize(car.site == "volvo" ? "Care by Volvo" : car.site) }} kan du abonnere på denne bilen fra
           {{ car.make }} for {{ car.price }} kroner i måneden. Da er forsikring, service og dekkbytte inkludert og du
           kan i
           tillegg kjøre {{ car.kmMonth }} kilometer i måneden.<span v-if="car.site == 'imove'"> Imove tilbyr i tilegg
@@ -59,7 +59,7 @@
           </p>
           <!-- <section>
             <a :href="url" target="_blank" rel="noopner nofollow">Bestill denne bilen hos {{
-              capitalize(car.site == "volvo"
+              $capitalize(car.site == "volvo"
                 ? "Care by Volvo" : car.site)
             }}</a>
           </section> -->
@@ -86,7 +86,7 @@
         </div>
         <section>
           <a :href="url" target="_blank" rel="noopner nofollow">Bestill denne bilen hos {{
-            capitalize(car.site == "volvo" ?
+            $capitalize(car.site == "volvo" ?
               "Care by Volvo" : car.site)
           }}</a>
         </section>
@@ -100,7 +100,7 @@
 
             <router-link class="button" to="/">Gå tilbake til forsiden</router-link>
           </p>
-          <p>Eller ta en titt på disse bilene fra {{ capitalize(this.$route.params.site) }} eller
+          <p>Eller ta en titt på disse bilene fra {{ $capitalize(this.$route.params.site) }} eller
             {{ this.$route.params.carname.split("-")[0] }}:</p>
         </div>
 
@@ -177,12 +177,7 @@ export default {
         // })
       }
     },
-    capitalize(str) {
-      if (str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-      }
-    },
-    addJsonld: function () {
+      addJsonld: function () {
       var Jsoninterval = setInterval(() => {
         if (this.loading === false) {
           if (!document.querySelector("#articledata")) {
@@ -313,7 +308,7 @@ export default {
               "itemOffered": {
                 "@type": "Car",
                 "name": this.car?.name,
-                "description": `Fra ${this.capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.`,
+                "description": `Fra ${this.$capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.`,
                 "image": this.car?.image,
                 "color": this.car?.color,
                 "vehicleEngine": {
@@ -403,21 +398,21 @@ export default {
   },
   metaInfo() {
     return {
-      title: `${this.car?.name} fra ${this.capitalize(this.car?.site)} | `,
+      title: `${this.car?.name} fra ${this.$capitalize(this.car?.site)} | `,
       titleTemplate: `%s Bilabonnement.app`,
       meta: [
         { charset: 'utf-8' },
-        { property: 'og:description ', content: `Fra ${this.capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.` },
-        { name: 'twitter:description ', content: `Fra ${this.capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.` },
+        { property: 'og:description ', content: `Fra ${this.$capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.` },
+        { name: 'twitter:description ', content: `Fra ${this.$capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.` },
         { name: 'twitter:creator ', content: "@bknapstad" },
-        { property: 'og:title ', content: `${this.car?.name} fra ${this.capitalize(this.car?.site)}` },
+        { property: 'og:title ', content: `${this.car?.name} fra ${this.$capitalize(this.car?.site)}` },
         { property: 'og:url ', content: `${window.location.href}` },
         { property: 'og:image ', content: this.car?.img },
-        { name: 'twitter:title ', content: `${this.car?.name} fra ${this.capitalize(this.car?.site)}` },
+        { name: 'twitter:title ', content: `${this.car?.name} fra ${this.$capitalize(this.car?.site)}` },
         { property: 'og:type ', content: "product" },
         { property: 'article:published_time', content: "" },
         { property: 'article:modified_time', content: "" },
-        { name: 'description', content: `Fra ${this.capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.` },
+        { name: 'description', content: `Fra ${this.$capitalize(this.car?.site)} kan du abonnere på denne bilen fra ${this.car?.make} for ${this.car?.price} kroner i måneden.` },
         { property: 'og:site_name', content: "Bilabonnement.app" },
         { property: 'og:locale', content: "no" },
         { property: "fb:app_id", content: "381160890208041" },
