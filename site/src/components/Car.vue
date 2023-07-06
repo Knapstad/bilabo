@@ -147,6 +147,7 @@ export default {
   grid-column-end: 5;
   grid-row: 1;
   aspect-ratio: 16 / 9;
+  background: rgba(0, 0, 0, 0.12);
 }
 
 .name {
