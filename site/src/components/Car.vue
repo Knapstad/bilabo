@@ -34,8 +34,9 @@
       <img v-else class="carimage" :src="imageTransformation" :alt="car.name + ' ' + car.year + '-modell'">
     </div>
     <h3 class="name">{{ car.name }}</h3>
-    <img class="sitelogo" :src="logo" :alt='"logo for " + car.site'>
-
+    <div class="sitelogo">
+      <img :src="logo" :alt='"logo for " + car.site'>
+    </div>
     <div class="carinfo">
       <div class="cardetails">
         <p>Pris: {{ car.price }}/mnd</p>
@@ -147,6 +148,7 @@ export default {
   grid-column-end: 5;
   grid-row: 1;
   aspect-ratio: 16 / 9;
+  background: rgba(0, 0, 0, 0.12);
 }
 
 .name {
@@ -158,15 +160,22 @@ export default {
 }
 
 .sitelogo {
-  width: 80%;
-  height: auto;
-  grid-area: 1/4;
-  justify-self: left;
-  align-self: top;
+  width: 50%;
+  height: 10%;
+  grid-area: 1/4/1/5;
+  justify-self: center;
   z-index: 10;
   background: white;
   border-radius: 0 0 5px 5px;
   padding: 5px;
+  display: flex;
+}
+
+.sitelogo img {
+  width: 100%;
+  place-self: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .carinfo {
