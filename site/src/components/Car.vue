@@ -60,7 +60,7 @@
         BESTILL
       </a>
       <router-link class="button"
-        :to="{ name: 'cardetails', params: { site: car.site, carname: car.name.replaceAll(' ', '-') + '-id-' + car.id } }"
+        :to="{ name: 'cardetails', params: { site: car.site, carname: car.name.trim().replaceAll(' ', '-').replaceAll('.', '') + '-id-' + car.id } }"
         :aria-label="'Les mer om ' + car.name">
         LES MER
       </router-link>
