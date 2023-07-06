@@ -40,7 +40,7 @@
     <div class="carinfo">
       <div class="cardetails">
         <p>Pris: {{ car.price }}/mnd</p>
-        <p>{{ car.drive }}</p>
+        <p>{{ $capitalize(car.drive) }}</p>
         <p v-if="car.includedkm">KM/mnd: {{ parseInt(car.includedkm) }}</p>
         <p v-if="car.kmMonth">KM/mnd: {{ car.kmMonth }}</p>
         <p v-if="car.delivery">{{ car.delivery }} levering</p>
