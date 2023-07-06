@@ -90,6 +90,22 @@
               "Care by Volvo" : car.site)
           }}</a>
         </section>
+        <section class="table">
+          <table>
+            <tr v-for="(item, key, index) in     car    " :key="index">
+              <td
+                v-if="item && !['details', 'id', 'img', 'order', 'site', 'description', 'carid', 'content', 'extra', 'from', 'to'].includes(key)">
+                {{
+                  $capitalize(key) }}:</td>
+              <td
+                v-if="item && !['details', 'id', 'img', 'order', 'site', 'description', 'carid', 'content', 'extra', 'from', 'to'].includes(key)">
+                {{
+                  $capitalize(item) }}</td>
+            </tr>
+          </table>
+
+        </section>
+
       </div>
 
       <div v-else class="nocar">
@@ -112,7 +128,7 @@
             >
             1) ? "tilgengelige biler" : "tilgengelig bil" }} fra {{ car.site }}</h3>
         <div class="carcontainer">
-          <article class="car" v-for="(car, index) in similarCars.sort(this.compare)" :key="index">
+          <article class="car" v-for="(    car, index    ) in     similarCars.sort(this.compare)    " :key="index">
             <Car class :car="car" />
           </article>
         </div>
@@ -177,7 +193,7 @@ export default {
         // })
       }
     },
-      addJsonld: function () {
+    addJsonld: function () {
       var Jsoninterval = setInterval(() => {
         if (this.loading === false) {
           if (!document.querySelector("#articledata")) {
@@ -431,6 +447,25 @@ export default {
   color: whitesmoke;
 }
 
+table {
+
+  border-collapse: collapse;
+  width: 100%;
+  color: #333;
+  font-size: 14px;
+  text-align: left;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+}
+
+td {
+  border-bottom: 1px solid var(--main-medium-light);
+}
+
 .header {
   position: relative;
 }
@@ -583,4 +618,10 @@ img.logo {
   padding-bottom: 30px;
   width: 100%;
 }
-</style>
+
+@media only screen and (min-width: 1100px) {
+  table {
+    font-size: 1rem;
+
+  }
+}</style>
