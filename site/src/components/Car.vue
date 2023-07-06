@@ -37,22 +37,23 @@
     <img class="sitelogo" :src="logo" :alt='"logo for " + car.site'>
 
     <div class="carinfo">
-      <div class="">
+      <div class="cardetails">
         <p>Pris: {{ car.price }}/mnd</p>
         <p>{{ car.drive }}</p>
         <p v-if="car.includedkm">KM/mnd: {{ parseInt(car.includedkm) }}</p>
         <p v-if="car.kmMonth">KM/mnd: {{ car.kmMonth }}</p>
         <p v-if="car.delivery">{{ car.delivery }} levering</p>
       </div>
+      <p v-if="car.site === 'volvo'" class="volvodetails">
+        <span v-if="car.enginDescription">Motor: {{ car.enginDescription }}</span>
+        <span v-if="car.fuelconsumption">Forbruk: {{ car.fuelconsumption }}</span>
+        <span v-if="car.co2">Utslipp: {{ car.co2 }}</span>
+        <span v-if="car.binding">Binding: {{ car.binding }}</span>
+      </p>
 
     </div>
 
-    <p v-if="car.site === 'volvo'" class="carfooter">
-      <span v-if="car.enginDescription">Motor: {{ car.enginDescription }}</span>
-      <span v-if="car.fuelconsumption">Forbruk: {{ car.fuelconsumption }}</span>
-      <span v-if="car.co2">Utslipp: {{ car.co2 }}</span>
-      <span v-if="car.binding">Binding: {{ car.binding }}</span>
-    </p>
+
     <div class=buttoncontainer>
       <a class="button left" :href="url" target="_blank" rel="nofollow noopener" :aria-label="'Bestill ' + car.name">
         BESTILL
@@ -157,23 +158,30 @@ export default {
 }
 
 .sitelogo {
-  width: 90%;
+  width: 80%;
   height: auto;
   grid-area: 1/4;
   justify-self: left;
   align-self: top;
   z-index: 10;
+  background: white;
+  border-radius: 0 0 5px 5px;
+  padding: 5px;
 }
 
 .carinfo {
   grid-row: 3;
   grid-column: 1 / 5;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+
   padding-left: 5%;
   padding-right: 5%;
+}
+
+.volvodetails {
+  align-self: start;
 }
 
 .buttoncontainer {
@@ -217,89 +225,17 @@ export default {
   width: 100%;
 }
 
+@media only screen and (min-width: 1100px) {
+  .name {
+    font-size: 1.5rem;
+  }
 
-/* .hello {
-  flex: 90%;
-  display: flex;
-  height: 100%;
-  overflow: hidden;
+  .cardetails {
+    display: flex;
+    font-size: 1.2rem;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+  }
 }
-
-.column {
-  flex: 50%;
-  max-width: 50%;
-  margin: auto;
-}
-
-.header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-h3 {
-  padding-left: 5%;
-  padding-bottom: 0;
-  margin-bottom: 0;
-}
-
-p {
-  padding-left: 10%;
-}
-
-a {
-  text-decoration: none;
-}
-
-
-img {
-  width: 100%;
-  height: auto;
-  padding-top: 3px;
-
-}
-
-img.logo {
-  width: 56px;
-  margin-right: 10px;
-  align-self: center;
-}
-
-svg {
-  width: 98%;
-  padding-top: 3px;
-  fill: var(--main-medium-dark);
-}
-
-.wrap {
-
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.location {
-  display: inline;
-  padding: 4px;
-  padding-top: 0px;
-   margin-bottom: 4px;
-}
-
-.label {
-  padding-left: 10%;
-  display: flex;
-}
-
-.location-container {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.carfooter {
-  font-size: 0.75rem;
-}
-
-p.carfooter {
-  padding-left: 5%;
-} */
 </style>
