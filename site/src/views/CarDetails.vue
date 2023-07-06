@@ -19,7 +19,7 @@
         <div class="loading__letter">.</div>
       </div>
 
-      <div v-else-if="this.namematch && car" class="bloggcontent">
+      <div v-else-if="this.idmatch && car" class="bloggcontent">
         <div class="header">
           <img v-if="car && car.img" class="headerimage" :src="headerImageTransformation" :alt="car.name">
           <img class="logo" :src="logo" :alt='"logo for " + car.site'>
@@ -129,7 +129,7 @@
             1) ? "tilgengelige biler" : "tilgengelig bil" }} fra {{ car.site }}</h3>
         <div class="carcontainer">
           <article class="car" v-for="(    car, index    ) in     similarCars.sort(this.compare)    " :key="index">
-            <Car class :car="car" />
+            <Car class :car="car" :id="index" />
           </article>
         </div>
       </section>
@@ -241,8 +241,8 @@ export default {
       }
     },
     id() { return this.$route.path.split('/')[2].split('-').reverse()[0] },
-    namematch: function () {
-      return decodeURI(this.urlname).includes(decodeURI(this.car?.name.replaceAll(" ", "-")))
+    idmatch: function () {
+      return decodeURI(this.urlname).includes(decodeURI(this.car?.id))
     },
     logo() {
       let logo = ""
@@ -624,4 +624,5 @@ img.logo {
     font-size: 1rem;
 
   }
-}</style>
+}
+</style>
