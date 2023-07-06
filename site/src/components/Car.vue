@@ -247,4 +247,9 @@ export default {
     justify-content: space-between;
   }
 }
+@media only screen and (max-width: 2400px) {
+  .carcontainer {
+    grid-template-columns: 30% 30% 30%;
+  }
+}
 </style>

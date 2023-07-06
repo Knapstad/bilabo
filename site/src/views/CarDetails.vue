@@ -18,7 +18,7 @@
         <div class="loading__letter">.</div>
       </div>
 
-      <div v-if="this.idmatch && car" class="bloggcontent">
+      <div v-else-if="this.idmatch && car" class="bloggcontent">
 
         <div class="header">
 
@@ -85,12 +85,6 @@
           <h3>{{ item.title }}</h3>
           <p>{{ item.byline }}</p>
         </div>
-        <section>
-          <a :href="url" target="_blank" rel="noopner nofollow">Bestill denne bilen hos {{
-            $capitalize(car.site == "volvo" ?
-              "Care by Volvo" : car.site)
-          }}</a>
-        </section>
         <section class="table">
           <table>
             <tr v-for="(item, key, index) in     car    " :key="index">
@@ -104,12 +98,18 @@
                   $capitalize(item) }}</td>
             </tr>
           </table>
+          <section>
+            <a :href="url" target="_blank" rel="noopner nofollow">Bestill denne bilen hos {{
+              $capitalize(car.site == "volvo" ?
+                "Care by Volvo" : car.site)
+            }}</a>
+          </section>
 
         </section>
 
       </div>
 
-      <div v-if="!car" class="nocar">
+      <div v-else class="nocar">
         <div class="bloggcontent nocar">
           <p>Beklager, vi finner ikke denne bilen.</p>
           <img src="/img/logo.990de79b.png">
@@ -645,6 +645,13 @@ img.logo {
   table {
     font-size: 1rem;
 
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .carcontainer {
+    grid-template-columns: 49% 49%;
+    padding: 0;
   }
 }
 </style>
