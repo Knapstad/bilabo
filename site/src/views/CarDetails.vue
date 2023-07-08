@@ -18,11 +18,11 @@
         <div class="loading__letter">.</div>
       </div>
 
-      <div v-else-if="this.idmatch && car" class="bloggcontent">
+      <div v-else-if="car" class="bloggcontent">
 
         <div class="header">
 
-          <img v-if="car && car.img" class="headerimage" :src="headerImageTransformation" :alt="car.name">
+          <img v-if="car && car.img" class="headerimage" :src="headerImageTransformation" :alt="car.name" :key="id">
           <img class="logo" :src="logo" :alt='"logo for " + car.site'>
         </div>
         <h2>Abonner på {{ car.name }} fra {{ $capitalize(car.site == "volvo" ? "Care by Volvo" : car.site) }}</h2>
@@ -161,6 +161,7 @@ export default {
     }
   },
   methods: {
+
     compare: function (a, b) {
       const carA = parseInt(a.price);
       const carB = parseInt(b.price);
