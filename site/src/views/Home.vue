@@ -195,7 +195,7 @@ h2 {
 
 .carcontainer {
   justify-content: center;
-  display: inline-grid;
+  display: grid;
   grid-template-columns: 23% 23% 23% 23%;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -330,4 +330,5 @@ a.skip:hover {
   .loading__letter {
     font-size: 40px;
   }
-}</style>
+}
+</style>
